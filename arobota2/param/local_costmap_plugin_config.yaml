@@ -1,0 +1,30 @@
+# Costmap Layering config
+# Detail on each costmap layer goes here!
+local_costmap:
+
+ # Layer 1 - Static
+  static_layer:
+    enabled:              true
+
+  # Layer 2 - Obstacle
+  obstacle_layer:
+    enabled:              true
+    obstacle_range:       5
+    raytrace_range:       5
+    observation_sources:  scan
+
+    # Observation Sources detail here
+    scan:
+      data_type:          LaserScan # From Sensor msgs
+      sensor_frame:       laser
+      topic:              /scan
+      marking:            true
+      clearing:           true
+  # Layer 3 - Inflation
+  inflation_layer:
+    enabled:              true
+    cost_scaling_factor:  5 # exponential rate at which the obstacle cost drops off (default: 10)
+    inflation_radius:     0.5 # max. distance from an obstacle at which costs are incurred for planning paths.
+ 
+    
+    

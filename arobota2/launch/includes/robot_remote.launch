@@ -1,0 +1,15 @@
+<launch>
+  
+  <include file="$(find arobota2)/param/robot.launch.xml"/>
+  <!-- <node pkg="tf" type="static_transform_publisher" name="tf_wolrdmap_robot" args="0 0 0 0 0 0 world map 100" /> -->
+
+  <node pkg="robot_state_publisher" type="robot_state_publisher" name="robot_state_publisher">
+    <param name="publish_frequency" type="double" value="50.0" />
+  </node>
+
+  <node pkg="joint_state_publisher" type="joint_state_publisher" name="joint_state_publisher">
+    <param name="use_gui" value="true"/>
+    <param name="rate" value="50"/>
+  </node>
+  
+</launch>
