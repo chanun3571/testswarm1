@@ -1,0 +1,31 @@
+<launch>
+  <!-- Arguments -->
+  <arg name="map_file" default="$(find arobota2)/map/hansroom.yaml"/>
+
+  <!-- Nodes -->
+  <node pkg="arobota2" type="Diff_tf.py" name="Diff_tf" output="screen"/>
+  <node pkg="arobota2" type="Recieve_STM.py" name="STM_Sub" output="screen"/>
+  <node pkg="arobota2" type="Publish_STM.py" name="STM_Pub" output="screen"/>
+  <node pkg="arobota2" type="Cmdveltf.py" name="Vel_tf" output="screen"/>
+
+  <!-- Lidar -->
+  <include file="$(find rplidar_ros)/launch/rplidar_s1.launch"/>
+
+  <!-- Robot state -->
+  <include file="$(find arobota2)/launch/includes/robot_remote.launch"/>
+  <!-- <node pkg="tf" type="static_transform_publisher" name="static_amcl" args="0 0 0 0 0 0 map odom 100" /> -->
+
+  <!-- Map server -->
+  <node pkg="map_server" name="map_server" type="map_server" args="$(arg map_file)"/>
+
+  <!-- AMCL -->
+  <include file="$(find arobota2)/launch/includes/amcl.launch"/>
+
+  <!-- move_base -->
+  <include file="$(find arobota2)/launch/includes/movebase.launch"/>
+
+  <!-- rviz -->
+  <node name="rviz" pkg="rviz" type="rviz" required="true" args="-d $(find arobota2)/rviz/navigation.rviz"/>
+  <!-- args="-d $(find kobuki_description)/rviz/model.rviz" -->
+
+</launch>
