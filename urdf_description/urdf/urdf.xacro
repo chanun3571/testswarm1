@@ -1,0 +1,139 @@
+<?xml version="1.0" ?>
+<robot name="urdf" xmlns:xacro="http://www.ros.org/wiki/xacro">
+
+<xacro:include filename="$(find urdf_description)/urdf/materials.xacro" />
+<xacro:include filename="$(find urdf_description)/urdf/urdf.trans" />
+<xacro:include filename="$(find urdf_description)/urdf/urdf.gazebo" />
+<link name="base_link">
+  <inertial>
+    <origin xyz="0.0014632405775191286 0.008789062002822465 0.009289667535659163" rpy="0 0 0"/>
+    <mass value="3.5754408520918015"/>
+    <inertia ixx="0.006432" iyy="0.008693" izz="0.012797" ixy="0.000357" iyz="1.7e-05" ixz="-0.000138"/>
+  </inertial>
+  <visual>
+    <origin xyz="0 0 0" rpy="0 0 0"/>
+    <geometry>
+      <mesh filename="package://urdf_description/meshes/base_link.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+    <material name="silver"/>
+  </visual>
+  <collision>
+    <origin xyz="0 0 0" rpy="0 0 0"/>
+    <geometry>
+      <mesh filename="package://urdf_description/meshes/base_link.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+  </collision>
+</link>
+
+<link name="wheel_2_1">
+  <inertial>
+    <origin xyz="0.00010755761556894396 -0.008110733716275756 1.1541361448375032e-05" rpy="0 0 0"/>
+    <mass value="0.18489052459734032"/>
+    <inertia ixx="3.4e-05" iyy="5.4e-05" izz="3.4e-05" ixy="0.0" iyz="-0.0" ixz="-0.0"/>
+  </inertial>
+  <visual>
+    <origin xyz="-0.0 0.09904 0.035" rpy="0 0 0"/>
+    <geometry>
+      <mesh filename="package://urdf_description/meshes/wheel_2_1.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+    <material name="silver"/>
+  </visual>
+  <collision>
+    <origin xyz="-0.0 0.09904 0.035" rpy="0 0 0"/>
+    <geometry>
+      <mesh filename="package://urdf_description/meshes/wheel_2_1.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+  </collision>
+</link>
+
+<link name="wheel_1_1">
+  <inertial>
+    <origin xyz="-0.00703002811317352 0.004045371745907196 -0.00010755761559414628" rpy="0 0 0"/>
+    <mass value="0.1848905245973405"/>
+    <inertia ixx="4.9e-05" iyy="3.9e-05" izz="3.4e-05" ixy="-8e-06" iyz="-0.0" ixz="-0.0"/>
+  </inertial>
+  <visual>
+    <origin xyz="0.085771 -0.04952 0.035" rpy="0 0 0"/>
+    <geometry>
+      <mesh filename="package://urdf_description/meshes/wheel_1_1.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+    <material name="silver"/>
+  </visual>
+  <collision>
+    <origin xyz="0.085771 -0.04952 0.035" rpy="0 0 0"/>
+    <geometry>
+      <mesh filename="package://urdf_description/meshes/wheel_1_1.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+  </collision>
+</link>
+
+<link name="wheel_3_1">
+  <inertial>
+    <origin xyz="0.007018486751699429 0.004065361970368803 -0.0001075576155941324" rpy="0 0 0"/>
+    <mass value="0.18489052459734032"/>
+    <inertia ixx="4.9e-05" iyy="3.9e-05" izz="3.4e-05" ixy="9e-06" iyz="0.0" ixz="0.0"/>
+  </inertial>
+  <visual>
+    <origin xyz="-0.085771 -0.04952 0.035" rpy="0 0 0"/>
+    <geometry>
+      <mesh filename="package://urdf_description/meshes/wheel_3_1.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+    <material name="silver"/>
+  </visual>
+  <collision>
+    <origin xyz="-0.085771 -0.04952 0.035" rpy="0 0 0"/>
+    <geometry>
+      <mesh filename="package://urdf_description/meshes/wheel_3_1.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+  </collision>
+</link>
+
+<link name="lidar_1">
+  <inertial>
+    <origin xyz="-0.029581681955466045 0.042548549097526214 0.028542673476791153" rpy="0 0 0"/>
+    <mass value="0.8868464662474358"/>
+    <inertia ixx="0.001061" iyy="0.000673" izz="0.001038" ixy="4e-06" iyz="0.00019" ixz="-1.1e-05"/>
+  </inertial>
+  <visual>
+    <origin xyz="-0.029369 0.014322 -0.048" rpy="0 0 0"/>
+    <geometry>
+      <mesh filename="package://urdf_description/meshes/lidar_1.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+    <material name="silver"/>
+  </visual>
+  <collision>
+    <origin xyz="-0.029369 0.014322 -0.048" rpy="0 0 0"/>
+    <geometry>
+      <mesh filename="package://urdf_description/meshes/lidar_1.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+  </collision>
+</link>
+
+<joint name="Rev17" type="continuous">
+  <origin xyz="0.0 -0.09904 -0.035" rpy="0 0 0"/>
+  <parent link="base_link"/>
+  <child link="wheel_2_1"/>
+  <axis xyz="0.0 -1.0 -0.0"/>
+</joint>
+
+<joint name="Rev18" type="continuous">
+  <origin xyz="-0.085771 0.04952 -0.035" rpy="0 0 0"/>
+  <parent link="base_link"/>
+  <child link="wheel_1_1"/>
+  <axis xyz="0.866025 -0.5 0.0"/>
+</joint>
+
+<joint name="Rev19" type="continuous">
+  <origin xyz="0.085771 0.04952 -0.035" rpy="0 0 0"/>
+  <parent link="base_link"/>
+  <child link="wheel_3_1"/>
+  <axis xyz="0.866025 0.5 -0.0"/>
+</joint>
+
+<joint name="Rigid20" type="fixed">
+  <origin xyz="0.029369 -0.014322 0.048" rpy="0 0 0"/>
+  <parent link="base_link"/>
+  <child link="lidar_1"/>
+</joint>
+
+</robot>
