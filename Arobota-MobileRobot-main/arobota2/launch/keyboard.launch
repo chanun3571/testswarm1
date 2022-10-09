@@ -1,4 +1,5 @@
 <launch>
   <node pkg="arobota2" type="Keyboardteleop_keyboard.py" name="Keyboard_input" output="screen"/>
   <!--node pkg="arobota2" type="Publish_STM_keyboard.py" name="STM_input" output="screen"/-->
+  <node name="joy" pkg="joy" type="joy_node" output="screen"/> 
 </launch>
