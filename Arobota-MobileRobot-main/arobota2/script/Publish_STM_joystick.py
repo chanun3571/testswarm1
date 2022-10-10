@@ -5,7 +5,7 @@ import rospy
 from geometry_msgs.msg import Twist, Vector3
 from std_msgs.msg import String, Float32
 
-ser = serial.Serial("/dev/ttyUSB0", 115200) #Open port with baud rate 
+#ser = serial.Serial("/dev/ttyUSB0", 115200) #Open port with baud rate 
 
 class STM_Connect():
     def __init__(self): 
@@ -30,7 +30,7 @@ class STM_Connect():
         self._right_wheel_power= msg.z * 10   
         #power command   
         speed_message = "M0"+"A"+str(int(self._right_wheel_power))+"B"+str(self._center_wheel_power)+"C"+str(self._left_wheel_power)+"\r\n"
-        ser.write(bytes(speed_message, 'utf-8'))
+        #ser.write(bytes(speed_message, 'utf-8'))
         rospy.loginfo(speed_message)
         #velocity command
         #velocity_message = "M2"+"A"+str(int(self._right_wheel_power))+"B"+str(self._center_wheel_power)+"C"+str(self._left_wheel_power)+"\r\n"
