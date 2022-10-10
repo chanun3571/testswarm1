@@ -1,11 +1,9 @@
 #!/usr/bin/env python
 
-import getch
 import rospy
 from sensor_msgs.msg import Joy
 from xbox_button import XBoxButton
 from geometry_msgs.msg import Pose,Twist,PoseStamped,Vector3
-
 
 #rom std_msgs.msg import String#String message 
 #from std_msgs.msg import Int8
@@ -15,7 +13,7 @@ pub = rospy.Publisher('joystick', Vector3, queue_size=1) # "key" is the publishe
 
 class Joystick_Input():
     def __init__(self):
-        rospy.init_node('joystickinput',anonymous=True)
+        rospy.init_node('joystickinput1',anonymous=True)
         self._uh = Twist()
         self._pub_uh = rospy.Publisher('uh',Twist, queue_size=1)
         self.x = 0
@@ -25,7 +23,7 @@ class Joystick_Input():
         rospy.Subscriber('/joy',Joy,self.joy_callback) #joy
 
     def joy_callback(self, msg):
-        joy_ux = -msg.axes[XBoxButton.LX]
+        joy_ux = msg.axes[XBoxButton.LX]
         joy_uy = msg.axes[XBoxButton.LY]
         joy_omega = msg.axes[XBoxButton.RX]
         self._uh.linear.x = joy_ux #(-1,1)
