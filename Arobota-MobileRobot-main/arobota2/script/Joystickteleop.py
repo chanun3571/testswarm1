@@ -11,7 +11,7 @@ from geometry_msgs.msg import Pose,Twist,PoseStamped,Vector3
 #from std_msgs.msg import Int8
 #from geometry_msgs.msg import Vector3
 
-#pub = rospy.Publisher('keyboard', Vector3, queue_size=1) # "key" is the publisher name
+pub = rospy.Publisher('joystick', Vector3, queue_size=1) # "key" is the publisher name
 
 class Joystick_Input():
     def __init__(self):
@@ -22,7 +22,7 @@ class Joystick_Input():
         self.y = 0
         self.omega = 0 
         self.button = ""
-        rospy.Subscriber('/joy',Joy,self.JoyCallback) #joy
+        rospy.Subscriber('/joy',Joy,self.joy_callback) #joy
 
     def joy_callback(self, msg):
         joy_ux = -msg.axes[XBoxButton.LX]
@@ -44,17 +44,19 @@ class Joystick_Input():
         ros_translation.y = u2
         ros_translation.z = u3
         pub.publish(ros_translation)
-        rospy.loginfo(ros_translation)
+        #rospy.loginfo(ros_translation)
 
     def spin(self):
+        r = rospy.Rate(100)
         # initialize message
         while not rospy.is_shutdown():
-            self.keys()
-            self.motion(self.omega,self.x,self.y)
+            self.motion(self._uh.angular.z,self._uh.linear.x,self._uh.linear.y)
+            r.sleep()
+            
 
 if __name__=='__main__':
     try:
-        agent=Keyboard_Input()
+        agent=Joystick_Input()
         agent.spin()
     except rospy.ROSInterruptException:
         pass
