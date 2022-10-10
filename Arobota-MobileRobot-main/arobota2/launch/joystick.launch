@@ -1,0 +1,6 @@
+<launch>
+  <node pkg="arobota2" type="Joystickteleop.py" name="Joystick_input" output="screen"/>
+  <node name="joy" pkg="joy" type="joy_node" output="screen"/> 
+  <node pkg="arobota2" type="Publish_STM_joystick.py" name="STM_input" output="screen"/>
+
+</launch>
