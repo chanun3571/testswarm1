@@ -9,17 +9,12 @@ from geometry_msgs.msg import Pose,Twist,PoseStamped,Vector3
 #from std_msgs.msg import Int8
 #from geometry_msgs.msg import Vector3
 
-pub = rospy.Publisher('joystick', Vector3, queue_size=1) # "key" is the publisher name
 
 class Joystick_Input():
     def __init__(self):
         rospy.init_node('joystickinput1',anonymous=True)
         self._uh = Twist()
-        self._pub_uh = rospy.Publisher('uh',Twist, queue_size=1)
-        self.x = 0
-        self.y = 0
-        self.omega = 0 
-        self.button = ""
+        self.pub = rospy.Publisher('joystick', Vector3, queue_size=1) 
         rospy.Subscriber('/joy',Joy,self.joy_callback) #joy
 
     def joy_callback(self, msg):
@@ -31,7 +26,7 @@ class Joystick_Input():
         self._uh.angular.z = joy_omega #(-1,1)
 
     def motion(self,w,vx,vy):
-        #rate = rospy.Rate(100)
+        rate = rospy.Rate(100)
         r = (45/2)/100 #m
         d = 60/100 #m
         #print(w,vx,vy)
@@ -42,16 +37,16 @@ class Joystick_Input():
         ros_translation.x = u1
         ros_translation.y = u2
         ros_translation.z = u3
-        pub.publish(ros_translation)
+        self.pub.publish(ros_translation)
         rospy.loginfo(ros_translation)
-        #rate.sleep()
+        rate.sleep()
 
     def spin(self):
         # initialize message
         while not rospy.is_shutdown():
-            rate = rospy.Rate(100)
+            #rate = rospy.Rate(100)
             self.motion(self._uh.angular.z,self._uh.linear.x,self._uh.linear.y)
-            rate.sleep()
+            #rate.sleep()
             
 
 if __name__=='__main__':

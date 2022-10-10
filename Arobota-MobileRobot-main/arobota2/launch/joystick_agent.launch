@@ -1,3 +1,3 @@
 <launch>
-    <node pkg="arobota2" type="Publish_STM_joystick.py" name="STM_input" output="screen"/>
+  <node pkg="arobota2" type="Publish_STM_joystick.py" name="STM_input" output="screen"/>
 </launch>
