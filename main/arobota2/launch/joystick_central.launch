@@ -1,4 +1,7 @@
 <launch>
   <node pkg="arobota2" type="Joystickteleop.py" name="Joystick_input" output="screen"/>
   <node name="joy" pkg="joy" type="joy_node" output="screen"/> 
+  <node name="image_view" pkg="image_view" type="image_view" respawn="false" output="screen">
+    <param name="image" value="/usb_cam/image_raw" />
+  </node>
 </launch>
