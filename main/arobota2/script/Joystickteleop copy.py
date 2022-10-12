@@ -14,7 +14,7 @@ class Joystick_Input():
     def __init__(self):
         rospy.init_node('joystickinput1',anonymous=True)
         self._uh = Twist()
-        self.pub = rospy.Publisher('joystick', Vector3, queue_size=1) 
+        self.pub = rospy.Publisher('joystick', Vector3, queue_size=10000) 
         rospy.Subscriber('/joy',Joy,self.joy_callback) #joy
 
     def joy_callback(self, msg):
@@ -26,7 +26,7 @@ class Joystick_Input():
         self._uh.angular.z = joy_omega #(-1,1)
 
     def motion(self,w,vx,vy):
-        rate = rospy.Rate(100)
+        rate = rospy.Rate(10)
         r = (45/2)/100 #m
         d = 60/100 #m
         #print(w,vx,vy)
@@ -44,9 +44,9 @@ class Joystick_Input():
     def spin(self):
         # initialize message
         while not rospy.is_shutdown():
-            #rate = rospy.Rate(100)
+            rate = rospy.Rate(100)
             self.motion(self._uh.angular.z,self._uh.linear.x,self._uh.linear.y)
-            #rate.sleep()
+            rate.sleep()
             
 
 if __name__=='__main__':
