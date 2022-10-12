@@ -29,10 +29,7 @@ class STM_Connect():
         self._right_wheel_power= msg.z * 10   
         #power command   
         speed_message = "M0"+"A"+str(int(self._left_wheel_power))+"B"+str(self._center_wheel_power)+"C"+str(self._right_wheel_power)+"\r\n"
-        ser.write(bytes(speed_message, 'utf-8'))
-
-    def spin(self):
-        
+        ser.write(bytes(speed_message, 'utf-8'))        
         
 if __name__ =='__main__':
 	try:
