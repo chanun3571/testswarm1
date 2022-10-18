@@ -14,7 +14,7 @@ from std_msgs.msg import Int16,Int32, Int64, Float32, String, Header, UInt64
 #     print (received_data)                   #print received data
 #     ser.write(received_data)    
 
-ser = serial.Serial ("/dev/ttyUSB1", 115200) #Open port with baud rate 
+ser = serial.Serial ("/dev/ttyUSB0", 115200) #Open port with baud rate 
 class STM_Connect():
     def __init__(self): 
         rospy.init_node('STM_Sub',anonymous=True)
