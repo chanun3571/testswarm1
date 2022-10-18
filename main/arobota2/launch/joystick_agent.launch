@@ -1,18 +1,5 @@
 <launch>
     <node pkg="arobota2" type="Publish_STM_joystick.py" name="STM_input" output="screen"/>
-
-
-    <!--node name="usb_cam" pkg="usb_cam" type="usb_cam_node" output="screen" >
-      <param name="video_device" value="/dev/video0" />
-      <param name="image_width" value="640" />
-      <param name="image_height" value="180" />
-      <param name="pixel_format" value="yuyv" />
-      <param name="camera_frame_id" value="usb_cam" />
-      <param name="io_method" value="mmap"/>
-    </node-->
-
-    <!--include file="$(find usb_cam_hardware)/example_yuyv.launch">
-    </include-->
     <include file="$(find usb_cam_hardware)/example_mjpeg.launch"/>
     <include file="$(find rplidar_ros)/launch/rplidar.launch"/>
 </launch>
