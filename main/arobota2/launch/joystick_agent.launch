@@ -13,7 +13,7 @@
 
     <!--include file="$(find usb_cam_hardware)/example_yuyv.launch">
     </include-->
-    <include file="$(find usb_cam_hardware)/example_h264.launch"/>
+    <include file="$(find usb_cam_hardware)/example_mjpeg.launch"/>
     <include file="$(find rplidar_ros)/launch/rplidar.launch"/>
 </launch>
 
