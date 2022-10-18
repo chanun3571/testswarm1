@@ -36,25 +36,37 @@ class STM_Connect():
         # self._SerialPublisher = rospy.Publisher('serial', String,queue_size=10) 
 
 
-    def Update_recieve_data(self):
+def Update_recieve_data(self):
 
-        rate = rospy.Rate(100)
+        rate = rospy.Rate(50)
         while not rospy.is_shutdown():
             if ser.in_waiting > 0:
                 recv = ser.read(ser.in_waiting)
                 msg = recv.decode('ascii')
-                # print(msg)
-                self.encoder_value = msg.split(",")
-                self.encoder_value2 = self.encoder_value[0].split("=")
-                # print(self.encoder_value[1]+","+self.encoder_value2[1])
-                self.left_encoder_value = self.encoder_value[1]
-                self.right_encoder_value = self.encoder_value2[1]
-                # print(self.left_encoder_value)
-                self._Left_Encoder.publish(int(self.left_encoder_value))
-                self._Right_Encoder.publish(int(self.right_encoder_value))
+                #rospy.loginfo(msg)
+                self.encoder_value = msg.split(", ")
+                #rospy.loginfo(self.encoder_value)
 
+                self.left_encoder_value = (self.encoder_value[0].split("="))
+                self.left_encoder_value = int(self.left_encoder_value[1])
+
+                self.right_encoder_value = int(self.encoder_value[1]) #ok
+                self.center_encoder_value = (self.encoder_value[2].split("\r"))
+                self.center_encoder_value = int(self.center_encoder_value[0])
+
+                #self._Left_Encoder.publish(int(self.left_encoder_value))
+                #self._Right_Encoder.publish(int(self.right_encoder_value))
+                #rospy.loginfo(self.center_encoder_value)
             rate.sleep()
                 # self._Right_Encoder.publish(msg)
+
+
+
+
+        # self._left_encoder_value = msg.data.split(",")
+        # self._right_encoder_value = msg.data.split(",")
+        # self._Left_Encoder.publish(self._left_encoder_value)
+        # self._Right_Encoder.publish(self._right_encoder_value)
 
 
 
