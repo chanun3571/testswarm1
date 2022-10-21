@@ -1,0 +1,26 @@
+<launch>
+    <arg name="cmd_vel_topic" default="/cmd_velocity"/>
+    <arg name="odom_topic" default="odom" />
+    <arg name="scan_topic" default="scan" />
+
+    <node pkg="move_base" type="move_base" respawn="false" name="move_base" output="screen">
+        <!-- local costmap -->
+        <rosparam file="$(find arobota2)/param/local_costmap_plugin_config.yaml" command="load" />
+        <rosparam file="$(find arobota2)/param/local_costmap_params.yaml" command="load"/>
+
+        <!-- global costmap -->
+        <rosparam file="$(find arobota2)/param/global_costmap_plugin_config.yaml" command="load" />  
+        <rosparam file="$(find arobota2)/param/global_costmap_params.yaml" command="load"/>
+       
+        <!-- Local planner -->
+        <rosparam file="$(find arobota2)/param/dwa_local_planner_params.yaml" command="load"/>  
+        <!-- global planner -->
+        <rosparam file="$(find arobota2)/param/movebase_params.yaml" command="load"/>
+        
+        <remap from="cmd_vel" to="$(arg cmd_vel_topic)"/>
+        <remap from="odom" to="$(arg odom_topic)"/>
+        
+        <!-- <remap from="map" to="/map"/> -->
+        
+    </node>
+</launch>

@@ -14,7 +14,7 @@ from std_msgs.msg import Int16,Int32, Int64, Float32, String, Header, UInt64
 #     print (received_data)                   #print received data
 #     ser.write(received_data)    
 
-ser = serial.Serial ("/dev/ttyUSB0", 115200) #Open port with baud rate 
+ser = serial.Serial ("/dev/ttyUSB1", 115200) #Open port with baud rate 
 class STM_Connect():
     def __init__(self): 
         rospy.init_node('STM_Sub',anonymous=True)
@@ -36,16 +36,16 @@ class STM_Connect():
         # self._SerialPublisher = rospy.Publisher('serial', String,queue_size=10) 
 
 
-def Update_recieve_data(self):
+    def Update_recieve_data(self):
 
         rate = rospy.Rate(50)
         while not rospy.is_shutdown():
             if ser.in_waiting > 0:
                 recv = ser.read(ser.in_waiting)
                 msg = recv.decode('ascii')
-                #rospy.loginfo(msg)
+                rospy.loginfo(msg)
                 self.encoder_value = msg.split(", ")
-                #rospy.loginfo(self.encoder_value)
+                rospy.loginfo(self.encoder_value)
 
                 self.left_encoder_value = (self.encoder_value[0].split("="))
                 self.left_encoder_value = int(self.left_encoder_value[1])

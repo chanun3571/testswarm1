@@ -1,0 +1,5 @@
+<launch>
+  <!-- turtlebot_teleop_key already has its own built in velocity smoother -->
+  <node pkg="arobota2" type="Keyboardteleop.py" name="teleop_keyboard"  output="screen">
+  </node>
+</launch>

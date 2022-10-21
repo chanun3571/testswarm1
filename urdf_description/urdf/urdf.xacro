@@ -4,6 +4,9 @@
 <xacro:include filename="$(find urdf_description)/urdf/materials.xacro" />
 <xacro:include filename="$(find urdf_description)/urdf/urdf.trans" />
 <xacro:include filename="$(find urdf_description)/urdf/urdf.gazebo" />
+
+<link name="base_footprint">
+  </link>
 <link name="base_link">
   <inertial>
     <origin xyz="0.0014632405775191286 0.008789062002822465 0.009289667535659163" rpy="0 0 0"/>
@@ -109,6 +112,25 @@
   </collision>
 </link>
 
+<link name="laser">
+    <inertial>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <mass value="0.125"/>
+      <inertia ixx="0.000"  ixy="0"  ixz="0" iyy="0.000" iyz="0" izz="0.001" />
+    </inertial>
+</link>
+
+<joint name="lidar_joint" type="fixed">
+  <parent link="base_link"/>
+  <child link="laser"/>
+  <origin xyz="0 -0.03 0.15" rpy="0 0 1.57"/>
+</joint>
+
+<joint name="dummy_joint" type="fixed">
+  <parent link="base_footprint"/>
+  <child link="base_link"/>
+</joint>
+  
 <joint name="Rev17" type="continuous">
   <origin xyz="0.0 -0.09904 -0.035" rpy="0 0 0"/>
   <parent link="base_link"/>
