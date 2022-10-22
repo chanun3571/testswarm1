@@ -8,8 +8,8 @@
   <!-- <node pkg="tf" type="static_transform_publisher" name="static_amcl" args="0 0 0 0 0 0 map odom 100" /> -->
 
   <!-- Map server -->
-  <node pkg="map_server" name="map_server" type="map_server" args="$(arg map_file)"/>
   <arg name="map_file" default="$(find arobota2)/map/mymap1.yaml"/>
+  <node pkg="map_server" name="map_server" type="map_server" args="$(arg map_file)"/>
 
   <!-- AMCL -->
   <include file="$(find arobota2)/launch/amcl.launch"/>
