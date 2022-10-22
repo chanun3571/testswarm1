@@ -14,7 +14,7 @@ from std_msgs.msg import Int16,Int32, Int64, Float32, String, Header, UInt64
 #     print (received_data)                   #print received data
 #     ser.write(received_data)    
 
-ser = serial.Serial ("/dev/ttyUSB1", 115200) #Open port with baud rate 
+ser = serial.Serial ("/dev/ttyUSB_DEVICE2", 115200)
 
 class STM_Connect():
     def __init__(self): 
@@ -36,6 +36,7 @@ class STM_Connect():
         self._Right_Encoder = rospy.Publisher('rwheel',Int64,queue_size=100)
         #self._Center_Encoder = rospy.Publisher('cwheel',Int64,queue_size=100)
 
+
         # #Publisher for entire serial data
         # self._SerialPublisher = rospy.Publisher('serial', String,queue_size=10) 
 
@@ -48,17 +49,21 @@ class STM_Connect():
                 recv = ser.read(ser.in_waiting)
                 msg = recv.decode('ascii')
                 # print(msg)
-                self.encoder_value = msg.split(",")
-                self.encoder_value2 = self.encoder_value[0].split("=")              
+                try:
+                    self.encoder_value = msg.split(",")
+                    self.encoder_value2 = self.encoder_value[0].split("=")              
                 #self.encoder_value3 = self.encoder_value[]
                 # print(self.encoder_value[1]+","+self.encoder_value2[1])
-                self.left_encoder_value = self.encoder_value[1]
-                self.right_encoder_value = self.encoder_value2[1]
+                    self.left_encoder_value = self.encoder_value[1]
+                    self.right_encoder_value = self.encoder_value2[1]
 
                 # self.center_encoder_value = self.encoder_value3[1]
-                #print(self.left_encoder_value)
-                self._Left_Encoder.publish(int(self.left_encoder_value))
-                self._Right_Encoder.publish(int(self.right_encoder_value))
+                    print(self.left_encoder_value)
+                    print(self.right_encoder_value)
+                    self._Left_Encoder.publish(int(self.left_encoder_value))
+                    self._Right_Encoder.publish(int(self.right_encoder_value))
+                except:
+                    print("no")
                 #self._Center_Encoder.publish(int(self.center_encoder_value))
                 #rospy.loginfo(msg)
                 

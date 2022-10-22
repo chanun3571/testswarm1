@@ -38,25 +38,26 @@ class STM_Connect():
 
     def Update_recieve_data(self):
 
-        rate = rospy.Rate(50)
+        rate = rospy.Rate(30)
         while not rospy.is_shutdown():
             if ser.in_waiting > 0:
                 recv = ser.read(ser.in_waiting)
                 msg = recv.decode('ascii')
-                rospy.loginfo(msg)
+                #rospy.loginfo(msg)
                 self.encoder_value = msg.split(", ")
-                rospy.loginfo(self.encoder_value)
+                #rospy.loginfo(self.encoder_value)
 
                 self.left_encoder_value = (self.encoder_value[0].split("="))
                 self.left_encoder_value = int(self.left_encoder_value[1])
 
                 self.right_encoder_value = int(self.encoder_value[1]) #ok
+
                 self.center_encoder_value = (self.encoder_value[2].split("\r"))
                 self.center_encoder_value = int(self.center_encoder_value[0])
 
                 #self._Left_Encoder.publish(int(self.left_encoder_value))
                 #self._Right_Encoder.publish(int(self.right_encoder_value))
-                #rospy.loginfo(self.center_encoder_value)
+                rospy.loginfo(self.center_encoder_value)
             rate.sleep()
                 # self._Right_Encoder.publish(msg)
 
@@ -88,11 +89,11 @@ def sendSerial(string):
     
 
 def streamEncoder():
+    sendSerial("R")
     sendSerial("S1")
 
 
 if __name__ =='__main__':
-	
 	try:
 		con = STM_Connect() 	
 		con.Update_recieve_data()
