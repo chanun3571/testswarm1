@@ -14,7 +14,8 @@ from std_msgs.msg import Int16,Int32, Int64, Float32, String, Header, UInt64
 #     print (received_data)                   #print received data
 #     ser.write(received_data)    
 
-ser = serial.Serial ("/dev/ttyUSB_DEVICE2", 115200)class STM_Connect():
+ser = serial.Serial ("/dev/ttyUSB_DEVICE2", 115200)
+class STM_Connect():
     def __init__(self): 
         rospy.init_node('STM_Sub',anonymous=True)
         self._left_encoder_value = 0
