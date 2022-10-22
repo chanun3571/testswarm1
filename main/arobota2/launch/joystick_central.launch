@@ -1,8 +1,6 @@
 <launch>
   <node pkg="arobota2" type="Joystickteleop.py" name="Joystick_input" output="screen"/>
   <node name="joy" pkg="joy" type="joy_node" output="screen"/> 
-  <!--include file="$(find hector_slam_launch)/launch/tutorial.launch">
-    </include-->
   <node name="image_view" pkg="image_view" type="image_view" respawn="true" output="screen">
     <remap from="image" to="/usb_cam/image"/>
     <param name="autosize" value="true" />

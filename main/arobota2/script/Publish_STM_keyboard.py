@@ -4,7 +4,7 @@ import rospy
 from geometry_msgs.msg import Twist
 from std_msgs.msg import String, Float32
 
-ser = serial.Serial ("/dev/ttyUSB1", 115200) #Open port with baud rate 
+ser = serial.Serial("/dev/ttyUSB1", 115200) # type: ignore #Open port with baud rate 
 
 class STM_Connect():
     def __init__(self): 
