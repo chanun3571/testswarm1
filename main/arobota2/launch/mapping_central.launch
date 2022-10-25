@@ -2,6 +2,9 @@
   <!-- Nodes -->
   <node pkg="arobota2" type="Diff_tf.py" name="Diff_tf" output="screen"/>
   <node pkg="arobota2" type="Cmdveltf.py" name="Vel_tf" output="screen"/>
+<!-- Joystick-->
+  <node pkg="arobota2" type="Joystickteleop.py" name="Joystick_input" output="screen"/>
+  <node name="joy" pkg="joy" type="joy_node" output="screen"/> 
 
   <!-- Robot state -->
   <include file="$(find arobota2)/launch/robot_remote.launch"/>
