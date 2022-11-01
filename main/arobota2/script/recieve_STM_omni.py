@@ -31,6 +31,7 @@ class STM_Connect():
         #Publisher for left and right wheel encoder values
         self._Left_Encoder = rospy.Publisher('lwheel',Int64,queue_size=100)		
         self._Right_Encoder = rospy.Publisher('rwheel',Int64,queue_size=100)
+        self._Center_Encoder = rospy.Publisher('cwheel',Int64,queue_size=100)
 
         # #Publisher for entire serial data
         # self._SerialPublisher = rospy.Publisher('serial', String,queue_size=10) 
@@ -55,38 +56,14 @@ class STM_Connect():
                 self.center_encoder_value = (self.encoder_value[2].split("\r"))
                 self.center_encoder_value = int(self.center_encoder_value[0])
 
-                #self._Left_Encoder.publish(int(self.left_encoder_value))
-                #self._Right_Encoder.publish(int(self.right_encoder_value))
-                rospy.loginfo(self.center_encoder_value)
+                self._Left_Encoder.publish(int(self.left_encoder_value))
+                self._Right_Encoder.publish(int(self.right_encoder_value))
+                self._Center_Encoder.publish(int(self.center_encoder_value))
             rate.sleep()
-                # self._Right_Encoder.publish(msg)
-
-
-
-
-        # self._left_encoder_value = msg.data.split(",")
-        # self._right_encoder_value = msg.data.split(",")
-        # self._Left_Encoder.publish(self._left_encoder_value)
-        # self._Right_Encoder.publish(self._right_encoder_value)
-
-
-
-
-        # self._left_encoder_value = msg.data.split(",")
-        # self._right_encoder_value = msg.data.split(",")
-        # self._Left_Encoder.publish(self._left_encoder_value)
-        # self._Right_Encoder.publish(self._right_encoder_value)
 
 def sendSerial(string):
     packet = bytes(string+"\r\n",'ascii')
     ser.write(packet)
-
-# def receiveSerial():
-#     if ser.in_waiting > 0:
-#         recv = ser.read(ser.in_waiting)
-#         msg = recv.decode('ascii')
-#         print(msg)
-    
 
 def streamEncoder():
     sendSerial("R")

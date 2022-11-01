@@ -18,15 +18,16 @@ class TwistToVel():
    
     def twistCallback(self,msg):
         self.dx = msg.linear.x
+        self.dy = msg.linear.y
         self.dr = msg.angular.z
         self.right = (2*self.dx-(self.dr*self.base))/(2*self.wheelrad)
         self.left = (2*self.dx+(self.dr*self.base))/(2*self.wheelrad)
+        self.center = (2*self.dx+(self.dr*self.base))/(2*self.wheelrad)
         # dx = (l + r) / 2
         # dr = (r - l) / w
         # self.right = 1.0 * self.dx + self.dr * self.w / 2 
         # self.left = 1.0 * self.dx - self.dr * self.w / 2
-        x = str(self.left)+","+str(self.right)
-        # print(x)
+        x = str(self.left)+","+str(self.right)+","+str(self.center)
         self.pub_motor.publish(x)
         # self.pub_lmotor.publish(self.left)
         # self.pub_rmotor.publish(self.right)
