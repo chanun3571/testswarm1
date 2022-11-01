@@ -1,0 +1,7 @@
+<launch>
+  <node pkg="arobota2" type="Recieve_STM_omni.py" name="recieve_data" output="screen"/>
+  <node pkg="arobota2" type=".py" name="recieve_data" output="screen"/>
+  <node pkg="arobota2" type="Joystickteleop.py" name="Joystick_input" output="screen"/>
+  <node name="joy" pkg="joy" type="joy_node" output="screen"/> 
+
+</launch>
