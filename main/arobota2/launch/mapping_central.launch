@@ -9,7 +9,7 @@
 
   <!-- Robot state -->
   <include file="$(find arobota2)/launch/robot_remote.launch"/>
-  <!-- <node pkg="tf" type="static_transform_publisher" name="static_amcl" args="0 0 0 0 0 0 map odom 100" /> -->
+  <!--node pkg="tf" type="static_transform_publisher" name="static_amcl" args="0 0 0 0 0 0 map odom 100" /-->
 
   <!-- Map server -->
   <arg name="map_file" default="$(find arobota2)/map/mymap2.yaml"/>
@@ -23,5 +23,4 @@
 
   <!-- rviz -->
   <node name="rviz" pkg="rviz" type="rviz" required="true" args="-d $(find arobota2)/rviz/navigation.rviz"/>
-  <!-- args="-d $(find kobuki_description)/rviz/model.rviz" -->
 </launch>
