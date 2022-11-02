@@ -23,9 +23,9 @@ class STM_Connect():
         #M0 = power command 
         #M1 = position command
         #M2 = velocity command
-        self._left_wheel_power = msg.x *0.1
-        self._center_wheel_power = msg.y *0.1
-        self._right_wheel_power= msg.z *0.1
+        self._left_wheel_power = msg.x 
+        self._center_wheel_power = msg.y 
+        self._right_wheel_power= msg.z 
         #power command   
         #speed_message = "M0"+"A"+str(int(self._right_wheel_power))+"B"+str(self._center_wheel_power)+"C"+str(self._left_wheel_power)+"\r\n"
         #ser.write(bytes(speed_message, 'utf-8'))
