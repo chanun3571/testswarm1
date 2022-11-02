@@ -23,8 +23,8 @@ class OmniTf:
 
         #### parameters #######
         self.rate = rospy.get_param('~rate',10.0)  # the rate at which to publish the transform
-        self.ticks_meter = (2**15)/(0.0048*pi) # The number of wheel encoder ticks per meter of travel # 1 round = 2^15
-        self.base_width = 0.206 # The wheel base width in meters
+        self.ticks_meter = (2**15)/(0.048*pi) # The number of wheel encoder ticks per meter of travel # 1 round = 2^15
+        self.base_width = 200*(10**-3) # The wheel base width in meters
         
         self.base_frame_id = rospy.get_param('~base_frame_id','base_footprint') # the name of the base frame of the robot
         self.odom_frame_id = rospy.get_param('~odom_frame_id', 'odom') # the name of the odometry reference frame
@@ -88,6 +88,7 @@ class OmniTf:
             if self.enc_left == None:
                 d_left = 0
                 d_right = 0
+                d_center = 0
             else: #distance traveled for each wheel
                 d_left = (self.left - self.enc_left) / self.ticks_meter 
                 d_right = (self.right - self.enc_right) / self.ticks_meter
@@ -97,8 +98,8 @@ class OmniTf:
             self.enc_center = self.center
            
             # distance traveled
-            dx = (cos(pi/3)*d_left + cos(pi/3)*d_right - d_center )
-            dy = (sin(pi/3*d_left) + sin(pi/3)*d_right)
+            dx = (cos(pi/3)*d_left + cos(pi/3)*d_right - d_center)
+            dy = (sin(pi/3*d_left) - sin(pi/3)*d_right)
             # this approximation works (in radians) for small angles
             th = -( d_right + d_left + d_center )/ (3*(self.base_width/2))
             # calculate velocities
@@ -142,7 +143,7 @@ class OmniTf:
             odom.twist.twist.linear.x = self.dx
             odom.twist.twist.linear.y = self.dy
             odom.twist.twist.angular.z = self.dr
-            rospy.loginfo(odom)
+            #rospy.loginfo(odom)
             self.odomPub.publish(odom)
             
             
@@ -195,5 +196,5 @@ class OmniTf:
 #############################################################################
 if __name__ == '__main__':
     """ main """
-    diffTf = OmniTf()
-    diffTf.spin()
+    omniTf = OmniTf()
+    omniTf.spin()
