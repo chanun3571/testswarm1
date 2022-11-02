@@ -17,12 +17,10 @@ class OmniTf:
     #############################################################################
     def __init__(self):
     #############################################################################
-        rospy.init_node("diff_tf")
+        rospy.init_node("omni_tf")
         self.nodename = rospy.get_name()
         rospy.loginfo("-I- %s started" % self.nodename)
-        self.odomPub = rospy.Publisher('odom',Int64,queue_size=100)		
 
-        
         #### parameters #######
         self.rate = rospy.get_param('~rate',10.0)  # the rate at which to publish the transform
         self.ticks_meter = (2**15)/(0.0048*pi) # The number of wheel encoder ticks per meter of travel # 1 round = 2^15
@@ -144,6 +142,7 @@ class OmniTf:
             odom.twist.twist.linear.x = self.dx
             odom.twist.twist.linear.y = self.dy
             odom.twist.twist.angular.z = self.dr
+            rospy.loginfo(odom)
             self.odomPub.publish(odom)
             
             
@@ -174,7 +173,6 @@ class OmniTf:
             self.lmult = self.lmult - 1
             
         self.left = 1.0 * (enc + self.lmult * (self.encoder_max - self.encoder_min)) 
-
 
         self.prev_lencoder = enc
         
