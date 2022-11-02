@@ -98,7 +98,7 @@ class OmniTf:
             self.enc_center = self.center
            
             # distance traveled
-            dx = (cos(pi/3)*d_left + cos(pi/3)*d_right - d_center)
+            dx = -(cos(pi/3)*d_left + cos(pi/3)*d_right - d_center)
             dy = (sin(pi/3*d_left) - sin(pi/3)*d_right)
             # this approximation works (in radians) for small angles
             th = -( d_right + d_left + d_center )/ (3*(self.base_width/2))
