@@ -10,7 +10,7 @@ class TwistToVel():
         # self.pub_rmotor = rospy.Publisher('rwheel_vtarget', Float32,queue_size=10)
         self.pub_motor = rospy.Publisher('wheel_vtarget', String,queue_size=10)
         rospy.Subscriber('/cmd_velocity', Twist, self.twistCallback)
-        self.center = 0
+        #self.center = 0
         self.left = 0
         self.right = 0 
         self.wheelrad = 24 * (10**-3) #wheelradius=24 mm

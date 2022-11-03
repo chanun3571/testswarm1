@@ -42,7 +42,7 @@ class STM_Connect():
         self.wheel = msg.data.split(',')
         # print ("M2A"+str(int(float(self.wheel[0])*1000000))+"B"+str(int(float(self.wheel[1])*1000000))+"\r\n")
         # rospy.loginfo(msg.data)
-        speed_message = "M0A"+str(int(float(self.wheel[0])*5000))+"B"+str(int(float(self.wheel[1])*5000))+"\r\n"
+        speed_message = "M2A"+str(int(float(self.wheel[0])*5000))+"B"+str(int(float(self.wheel[1])*5000))+"\r\n"
         print(speed_message)
         ser.write(bytes(speed_message, 'utf-8'))
         
