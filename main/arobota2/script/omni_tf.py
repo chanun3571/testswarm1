@@ -112,8 +112,8 @@ class OmniTf:
                 x = cos( th ) * dx
                 y = -sin( th ) * dy
                 # calculate the final position of the robot
-                self.x = self.x + ( cos( self.th ) * dx - sin( self.th ) * dy )
-                self.y = self.y + ( sin( self.th ) * dx + cos( self.th ) * dy )
+                self.x = self.x + ( cos( self.th ) * x - sin( self.th ) * y )
+                self.y = self.y + ( sin( self.th ) * x + cos( self.th ) * y )
             if( th != 0):
                 self.th = self.th + th
                 
