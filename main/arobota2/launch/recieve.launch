@@ -1,3 +1,0 @@
-<launch>
-  <node pkg="arobota2" type="Recieve_STM_omni.py" name="stm_input" output="screen"/>
-</launch>

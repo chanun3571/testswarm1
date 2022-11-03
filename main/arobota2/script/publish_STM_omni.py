@@ -40,11 +40,13 @@ class STM_Connect():
 
     def Update_Speed(self, msg):
         self.wheel = msg.data.split(',')
+        self.wheel[0] = self._right_wheel_power
+        self.wheel[1] = self._center_wheel_power
+        self.wheel[2] = self._left_wheel_power
         # print ("M2A"+str(int(float(self.wheel[0])*1000000))+"B"+str(int(float(self.wheel[1])*1000000))+"\r\n")
         # rospy.loginfo(msg.data)
-        speed_message = "M0A"+str(int(float(self.wheel[0])*5000))+"B"+str(int(float(self.wheel[1])*5000))+"\r\n"
-        print(speed_message)
-        ser.write(bytes(speed_message, 'utf-8'))
+        power_message = "M0"+"A"+str(int(self._right_wheel_power))+"B"+str(self._center_wheel_power)+"C"+str(self._left_wheel_power)+"\r\n"
+        ser.write(bytes(power_message, 'utf-8'))
         
 
 if __name__ =='__main__':

@@ -22,7 +22,7 @@ class TwistToVel():
         self.dr = msg.angular.z
         self.right = (2*self.dx-(self.dr*self.base))/(2*self.wheelrad)
         self.left = (2*self.dx+(self.dr*self.base))/(2*self.wheelrad)
-        self.center = (2*self.dx+(self.dr*self.base))/(2*self.wheelrad)
+        self.center = 0
         # dx = (l + r) / 2
         # dr = (r - l) / w
         # self.right = 1.0 * self.dx + self.dr * self.w / 2 
