@@ -39,7 +39,7 @@ DWAPlannerROS:
   sim_granularity: 0.025
   forward_point_distance: 0.07 #0.0
 
-  holonomic_robot: false # turtlebot2 is diff
+  holonomic_robot: true # turtlebot2 is diff
 
 
 
