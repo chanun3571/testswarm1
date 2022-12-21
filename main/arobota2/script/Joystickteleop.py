@@ -38,7 +38,7 @@ class Joystick_Input():
         ros_translation.y = u2 
         ros_translation.z = u3 
         self.pub.publish(ros_translation)
-        rospy.loginfo(ros_translation)
+        #rospy.loginfo(ros_translation)
         rate.sleep()
 
     def spin(self):
