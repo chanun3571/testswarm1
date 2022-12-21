@@ -5,15 +5,15 @@ urdf_controller:
     publish_rate: 50
 
   # Position Controllers --------------------------------------
-  Rev17_position_controller:
+  Rev3_position_controller:
     type: effort_controllers/JointPositionController
-    joint: Rev17
+    joint: Rev3
     pid: {p: 100.0, i: 0.01, d: 10.0}
-  Rev18_position_controller:
+  Rev4_position_controller:
     type: effort_controllers/JointPositionController
-    joint: Rev18
+    joint: Rev4
     pid: {p: 100.0, i: 0.01, d: 10.0}
-  Rev19_position_controller:
+  Rev5_position_controller:
     type: effort_controllers/JointPositionController
-    joint: Rev19
+    joint: Rev5
     pid: {p: 100.0, i: 0.01, d: 10.0}

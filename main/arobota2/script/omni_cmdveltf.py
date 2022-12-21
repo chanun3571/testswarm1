@@ -20,9 +20,12 @@ class TwistToVel():
         self.dx = msg.linear.x
         self.dy = msg.linear.y
         self.dr = msg.angular.z
-        self.right = (2*self.dx-(self.dr*self.base))/(2*self.wheelrad)
-        self.left = (2*self.dx+(self.dr*self.base))/(2*self.wheelrad)
-        self.center = 0
+        self.right= -(cos(pi/3)*(self.dx) + cos(pi/3)*(self.dy)- (self.dr))
+        self.left = (sin(pi/3*(self.dy)) - sin(pi/3)*d_right)
+        self.center = (-1/(self.base_width/2))*(d_left+d_right+d_center)
+        # self.right = (2*self.dx-(self.dr*self.base))/(2*self.wheelrad)
+        # self.left = (2*self.dx+(self.dr*self.base))/(2*self.wheelrad)
+        # self.center = 0
         # dx = (l + r) / 2
         # dr = (r - l) / w
         # self.right = 1.0 * self.dx + self.dr * self.w / 2 
