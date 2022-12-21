@@ -122,7 +122,7 @@
     </inertial>
 </link>
 
-<!--joint-->
+<!--base-lidar joint-->
 
 <joint name="lidar_joint" type="fixed">
   <parent link="base_link"/>
@@ -131,20 +131,14 @@
   <origin xyz="0 0 0.1" rpy="0 0 1.57"/>
 </joint>
 
-<joint name="Rigid1" type="fixed">
-  <origin xyz="0.029369 -0.014322 0.048" rpy="0 0 0"/>
+<joint name="lidar_joint" type="fixed">
   <parent link="base_link"/>
-  <child link="lidar_link"/>
+  <child link="laser"/>
+  <!--origin xyz="0 -0.03 0.15" rpy="0 0 1.57"/-->
+  <origin xyz="0 0 0.1" rpy="0 0 1.57"/>
 </joint>
 
-
-<joint name="Rigid2" type="fixed">
-  <origin xyz="0.029369 -0.014322 0.048" rpy="0 0 0"/>
-  <parent link="base_link"/>
-  <child link="lidar_1"/>
-</joint>
-
-<!--wheel joint-->
+<!--base-wheel joint-->
 
 <joint name="Rev3" type="continuous">
   <origin xyz="0.0 0.11454 0.02425" rpy="0 0 0"/>
