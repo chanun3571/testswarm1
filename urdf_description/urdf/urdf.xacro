@@ -125,6 +125,15 @@
     </inertial>
 </link>
 
+
+<!--base-footprint joint-->
+
+<joint name="dummy_joint" type="fixed">
+  <parent link="base_footprint"/>
+  <child link="base_link"/>
+  <origin xyz="0 0 0" rpy="0 0 1.57"/>
+</joint>
+
 <!--base-lidar joint-->
 
 <joint name="lidar_joint" type="fixed">
@@ -134,11 +143,6 @@
   <origin xyz="0 0 0.1" rpy="0 0 1.57"/>
 </joint>
 
-<joint name="dummy_joint" type="fixed">
-  <parent link="base_footprint"/>
-  <child link="base_link"/>
-  <origin xyz="0 0 0.048" rpy="0 0 1.57"/>
-</joint>
 
 <joint name="Rigid1" type="fixed">
   <origin xyz="0.029369 -0.014322 0.048" rpy="0 0 0"/>
