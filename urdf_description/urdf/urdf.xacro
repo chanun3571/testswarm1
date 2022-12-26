@@ -10,14 +10,11 @@
   </link>
   
 <link name="base_link">
-  <!--inertial>
-    <!origin xyz="-0.0009504107610491734 -0.009453690875261649 0.06855931514078502" rpy="0 0 0"/>
-    <mass value="3.4980631377264046"/>
-    <inertia ixx="0.005992" iyy="0.008369" izz="0.01248" ixy="0.000384" iyz="4.7e-05" ixz="0.000156"/>
-    <origin xyz="0 0 0" rpy="0 0 0"/>
-    <mass value="0"/>
-    <inertia ixx="0" iyy="0" izz="0" ixy="0" iyz="0" ixz="0"/>
-  </inertial!-->
+  <inertial>
+    <origin xyz="0.02041066771897629 -0.007575037833829778 0.06830931514078505" rpy="0 0 0"/>
+    <mass value="3.4980631377264046"/>ss
+    <inertia ixx="0.008369" iyy="0.005992" izz="0.01248" ixy="-0.000384" iyz="0.000156" ixz="-4.7e-05"/>
+  </inertial>
   <visual>
     <origin xyz="0 0 0" rpy="0 0 0"/>
     <geometry>
@@ -35,19 +32,19 @@
 
 <link name="wheel_link_1">
   <inertial>
-    <origin xyz="-9.278975567870437e-05 -0.007650950152439842 -2.8097213279051902e-05" rpy="0 0 0"/>
+    <origin xyz="0.007650926996154439 -6.583497840632717e-05 7.082305684349283e-05" rpy="0 0 0"/>
     <mass value="0.17051038938064"/>
-    <inertia ixx="3.2e-05" iyy="5e-05" izz="3.2e-05" ixy="0.0" iyz="0.0" ixz="0.0"/>
+    <inertia ixx="5e-05" iyy="3.2e-05" izz="3.2e-05" ixy="-0.0" iyz="-0.0" ixz="-0.0"/>
   </inertial>
   <visual>
-    <origin xyz="-0.0 -0.11454 -0.02425" rpy="0 0 0"/>
+    <origin xyz="0.103583 0.006625 -0.024" rpy="0 0 0"/>
     <geometry>
       <mesh filename="package://urdf_description/meshes/wheel_link_1.stl" scale="0.001 0.001 0.001"/>
     </geometry>
     <material name="silver"/>
   </visual>
   <collision>
-    <origin xyz="-0.0 -0.11454 -0.02425" rpy="0 0 0"/>
+    <origin xyz="0.103583 0.006625 -0.024" rpy="0 0 0"/>
     <geometry>
       <mesh filename="package://urdf_description/meshes/wheel_link_1.stl" scale="0.001 0.001 0.001"/>
     </geometry>
@@ -56,19 +53,19 @@
 
 <link name="wheel_link_2">
   <inertial>
-    <origin xyz="0.0066146071273707335 0.0038441124941529514 9.453176371182481e-05" rpy="0 0 0"/>
+    <origin xyz="-0.0039033081055799 0.006580816821685306 3.642650617940307e-05" rpy="0 0 0"/>
     <mass value="0.17051038938064"/>
-    <inertia ixx="4.6e-05" iyy="3.6e-05" izz="3.2e-05" ixy="8e-06" iyz="0.0" ixz="0.0"/>
+    <inertia ixx="3.7e-05" iyy="4.6e-05" izz="3.2e-05" ixy="-8e-06" iyz="0.0" ixz="-0.0"/>
   </inertial>
   <visual>
-    <origin xyz="0.099194 0.05727 -0.02425" rpy="0 0 0"/>
+    <origin xyz="-0.068227 0.105819 -0.024" rpy="0 0 0"/>
     <geometry>
       <mesh filename="package://urdf_description/meshes/wheel_link_2.stl" scale="0.001 0.001 0.001"/>
     </geometry>
     <material name="silver"/>
   </visual>
   <collision>
-    <origin xyz="0.099194 0.05727 -0.02425" rpy="0 0 0"/>
+    <origin xyz="-0.068227 0.105819 -0.024" rpy="0 0 0"/>
     <geometry>
       <mesh filename="package://urdf_description/meshes/wheel_link_2.stl" scale="0.001 0.001 0.001"/>
     </geometry>
@@ -77,19 +74,19 @@
 
 <link name="wheel_link_3">
   <inertial>
-    <origin xyz="-0.006606750578656451 0.003857720435697716 8.95155919554795e-05" rpy="0 0 0"/>
+    <origin xyz="-0.0037745189185399014 -0.006655427439052869 7.703379049328954e-05" rpy="0 0 0"/>
     <mass value="0.17051038938064"/>
-    <inertia ixx="4.5e-05" iyy="3.7e-05" izz="3.2e-05" ixy="-8e-06" iyz="0.0" ixz="0.0"/>
+    <inertia ixx="3.7e-05" iyy="4.6e-05" izz="3.2e-05" ixy="8e-06" iyz="-0.0" ixz="-0.0"/>
   </inertial>
   <visual>
-    <origin xyz="-0.099194 0.05727 -0.02425" rpy="0 0 0"/>
+    <origin xyz="-0.068227 -0.09257 -0.024" rpy="0 0 0"/>
     <geometry>
       <mesh filename="package://urdf_description/meshes/wheel_link_3.stl" scale="0.001 0.001 0.001"/>
     </geometry>
     <material name="silver"/>
   </visual>
   <collision>
-    <origin xyz="-0.099194 0.05727 -0.02425" rpy="0 0 0"/>
+    <origin xyz="-0.068227 -0.09257 -0.024" rpy="0 0 0"/>
     <geometry>
       <mesh filename="package://urdf_description/meshes/wheel_link_3.stl" scale="0.001 0.001 0.001"/>
     </geometry>
@@ -107,7 +104,7 @@
     <geometry>
       <mesh filename="package://urdf_description/meshes/lidar_link_1.stl" scale="0.001 0.001 0.001"/>
     </geometry>
-    <material name="silver"/>
+    <material name="black"/>
   </visual>
   <collision>
     <origin xyz="-0.029369 0.014322 -0.048" rpy="0 0 0"/>
@@ -119,7 +116,7 @@
 
 <link name="laser">
     <inertial>
-      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <origin xyz="0 0 0" rpy="0 0 3.14"/>
       <mass value="0.125"/>
       <inertia ixx="0.000"  ixy="0"  ixz="0" iyy="0.000" iyz="0" izz="0.001" />
     </inertial>
@@ -131,7 +128,7 @@
 <joint name="dummy_joint" type="fixed">
   <parent link="base_footprint"/>
   <child link="base_link"/>
-  <origin xyz="0 0 0" rpy="0 0 1.57"/>
+  <origin xyz="0 0 0" rpy="0 0 0"/>
 </joint>
 
 <!--base-lidar joint-->
@@ -140,39 +137,35 @@
   <parent link="base_link"/>
   <child link="laser"/>
   <!--origin xyz="0 -0.03 0.15" rpy="0 0 1.57"/-->
-  <origin xyz="0 0 0.1" rpy="0 0 1.57"/>
+  <origin xyz="0 0 0.1" rpy="0 0 0"/>
 </joint>
 
 
 <joint name="Rigid1" type="fixed">
-  <origin xyz="0.029369 -0.014322 0.048" rpy="0 0 0"/>
+  <origin xyz="0.029369 -0.014322 0.048" rpy="0 0 0 "/>
   <parent link="base_link"/>
   <child link="lidar_link"/>
 </joint>
 
-<!--base-wheel joint-->
-
 <joint name="Rev3" type="continuous">
-  <origin xyz="0.0 0.11454 0.02425" rpy="0 0 0"/>
+  <origin xyz="-0.103583 -0.006625 0.024" rpy="0 0 0"/>
   <parent link="base_link"/>
   <child link="wheel_link_1"/>
-  <axis xyz="0.0 1.0 -0.0"/>
+  <axis xyz="-1.0 -0.0 -0.0"/>
 </joint>
 
 <joint name="Rev4" type="continuous">
-  <origin xyz="-0.099194 -0.05727 0.02425" rpy="0 0 0"/>
+  <origin xyz="0.068227 -0.105819 0.024" rpy="0 0 0"/>
   <parent link="base_link"/>
   <child link="wheel_link_2"/>
-  <axis xyz="-0.866025 -0.5 -0.0"/>
+  <axis xyz="0.5 -0.866025 -0.0"/>
 </joint>
 
 <joint name="Rev5" type="continuous">
-  <origin xyz="0.099194 -0.05727 0.02425" rpy="0 0 0"/>
+  <origin xyz="0.068227 0.09257 0.024" rpy="0 0 0"/>
   <parent link="base_link"/>
   <child link="wheel_link_3"/>
-  <axis xyz="0.866025 -0.5 -0.0"/>
+  <axis xyz="0.5 0.866025 -0.0"/>
 </joint>
-
-
 
 </robot>
