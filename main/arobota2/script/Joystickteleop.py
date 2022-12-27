@@ -23,16 +23,19 @@ class Joystick_Input():
         joy_omega = msg.axes[XBoxButton.RX]
         self._uh.linear.x = joy_ux #(-1,1)
         self._uh.linear.y = joy_uy #(-1,1)
-        self._uh.angular.z = joy_omega*5 #(-1,1)
+        self._uh.angular.z = joy_omega #(-1,1)
 
     def motion(self,w,vx,vy):
         rate = rospy.Rate(10)
         r = (48/2)/1000 # m
-        d = 100/1000 #m
+        d = 200/1000 #m
         #print(w,vx,vy)
-        u1 = 1/r*(-d*w + vx)
-        u2 = 1/r*(-d*w -cos(pi/3)*vx -sin(pi/3)*vy)
-        u3 = 1/r*(-d*w -cos(pi/3)*vx + sin(pi/3)*vy)
+        #u1 = 1/r*(-d*w + vx)
+        #u2 = 1/r*(-d*w -cos(pi/3)*vx -sin(pi/3)*vy)
+        #u3 = 1/r*(-d*w -cos(pi/3)*vx + sin(pi/3)*vy)
+        u1 = (-d*w + vx)
+        u2 = (-d*w -cos(pi/3)*vx -sin(pi/3)*vy)
+        u3 = (-d*w -cos(pi/3)*vx + sin(pi/3)*vy)
         ros_translation = Vector3()
         ros_translation.x = u1 
         ros_translation.y = u2 

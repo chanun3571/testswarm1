@@ -98,11 +98,12 @@ class OmniTf:
             self.enc_center = self.center
            
             # distance traveled
-            dx = (cos(pi/3)*d_left + cos(pi/3)*d_right - d_center)
-            dy = ((sin(pi/3)*d_left) - (sin(pi/3)*d_right))
+            #dy = (cos(pi/3)*d_left + cos(pi/3)*d_right - d_center)
+            #dx = ((sin(pi/3)*d_left) - (sin(pi/3)*d_right))
+            dx = (cos(pi/6)*d_left - cos(pi/6)*d_right)
+            dy = -(sin(pi/6)*d_left + sin(pi/6)*d_right - d_center)
             # this approximation works (in radians) for small angles
-            th = ( d_right + d_left + d_center )/ (3*(self.base_width/2))
-            
+            th = -( d_right + d_left + d_center )/ (3*(self.base_width/2))
             # calculate velocities
             self.dx = dx / elapsed
             self.dy = dy / elapsed
@@ -110,11 +111,11 @@ class OmniTf:
              
             if (dx != 0 and dy != 0):
                 # calculate distance traveled in x and y
-                x = cos( th ) * dx
-                y = -sin( th ) * dy
+                #x = cos( th ) * dx
+                #y = -sin( th ) * dy
                 # calculate the final position of the robot
-                self.x = self.x + ( cos( self.th ) * x - sin( self.th ) * y )
-                self.y = self.y + ( sin( self.th ) * x + cos( self.th ) * y )
+                self.x = self.x + ( cos( self.th ) * dx - sin( self.th ) * dy )
+                self.y = self.y + ( sin( self.th ) * dx + cos( self.th ) * dy )
             if( th != 0):
                 self.th = self.th + th
                 
