@@ -14,7 +14,7 @@ class Joystick_Input():
     def __init__(self):
         rospy.init_node('joystickinput1',anonymous=True)
         self._uh = Twist()
-        self.pub = rospy.Publisher('joystick', Vector3, queue_size=10000) 
+        self.pub = rospy.Publisher('joystick', Vector3, queue_size=10) 
         rospy.Subscriber('/joy',Joy,self.joy_callback) #joy
 
     def joy_callback(self, msg):
@@ -23,23 +23,23 @@ class Joystick_Input():
         joy_omega = msg.axes[XBoxButton.RX]
         self._uh.linear.x = joy_ux #(-1,1)
         self._uh.linear.y = joy_uy #(-1,1)
-        self._uh.angular.z = joy_omega #(-1,1)
+        self._uh.angular.z = joy_omega*3 #(-1,1)
 
     def motion(self,w,vx,vy):
         rate = rospy.Rate(10)
         #r = (48/2)/1000 # m
         d = 200/1000 #m
-        #print(w,vx,vy)
+        #print(w,vx,vy)ss
         #u1 = 1/r*(-d*w + vx)
         #u2 = 1/r*(-d*w -cos(pi/3)*vx -sin(pi/3)*vy)
-        #u3 = 1/r*(-d*w -cos(pi/3)*vx + sin(pi/3)*vy)
+        #u3 = 1/r*(-d*w -cos(pi/ss3)*vx + sin(pi/3)*vy)
         u1 = (-d*w + vx)
         u2 = (-d*w -cos(pi/3)*vx -sin(pi/3)*vy)
         u3 = (-d*w -cos(pi/3)*vx + sin(pi/3)*vy)
         ros_translation = Vector3()
-        ros_translation.x = u1 
-        ros_translation.y = u2 
-        ros_translation.z = u3 
+        ros_translation.x = u1 *36
+        ros_translation.y = u2 *40
+        ros_translation.z = u3 *40
         self.pub.publish(ros_translation)
         rospy.loginfo(ros_translation)
         rate.sleep()
