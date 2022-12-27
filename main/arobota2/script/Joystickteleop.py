@@ -27,7 +27,7 @@ class Joystick_Input():
 
     def motion(self,w,vx,vy):
         rate = rospy.Rate(10)
-        r = (48/2)/1000 # m
+        #r = (48/2)/1000 # m
         d = 200/1000 #m
         #print(w,vx,vy)
         #u1 = 1/r*(-d*w + vx)
@@ -41,7 +41,7 @@ class Joystick_Input():
         ros_translation.y = u2 
         ros_translation.z = u3 
         self.pub.publish(ros_translation)
-        #rospy.loginfo(ros_translation)
+        rospy.loginfo(ros_translation)
         rate.sleep()
 
     def spin(self):
