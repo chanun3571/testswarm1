@@ -2,6 +2,7 @@
 import rospy
 from std_msgs.msg import Float32, String
 from geometry_msgs.msg import Twist 
+from math import sin, cos, pi
 
 class TwistToVel():
     def __init__(self):
@@ -20,9 +21,15 @@ class TwistToVel():
         self.dx = msg.linear.x
         self.dy = msg.linear.y
         self.dr = msg.angular.z
-        self.right= -(cos(pi/3)*(self.dx) + cos(pi/3)*(self.dy)- (self.dr))
-        self.left = (sin(pi/3*(self.dy)) - sin(pi/3)*d_right)
-        self.center = (-1/(self.base_width/2))*(d_left+d_right+d_center)
+        u1 = (-self.base*self.dr + self.dx)
+        u2 = (-self.base*self.dr -cos(pi/3)*self.dx -sin(pi/3)*self.dy)
+        u3 = (-self.base*self.dr -cos(pi/3)*self.dx + sin(pi/3)*self.dy)
+        self.center = u1 #*36
+        self.left = u2 #*40
+        self.right = u3 #*40
+        # self.right= -(cos(pi/3)*(self.dx) + cos(pi/3)*(self.dy)- (self.dr))
+        # self.left = (sin(pi/3*(self.dy)) - sin(pi/3)*d_right)
+        # self.center = (-1/(self.base_width/2))*(d_left+d_right+d_center)
         
         # self.right = (2*self.dx-(self.dr*self.base))/(2*self.wheelrad)
         # self.left = (2*self.dx+(self.dr*self.base))/(2*self.wheelrad)
