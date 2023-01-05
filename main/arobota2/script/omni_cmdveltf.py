@@ -24,8 +24,8 @@ class TwistToVel():
         u1 = (-self.base*self.dr + self.dx)
         u2 = (-self.base*self.dr -cos(pi/3)*self.dx -sin(pi/3)*self.dy)
         u3 = (-self.base*self.dr -cos(pi/3)*self.dx + sin(pi/3)*self.dy)
-        self.center = u1 #*36
-        self.left = u2 #*40
+        self.left = u1 #*36
+        self.center = u2 #*40
         self.right = u3 #*40
         # self.right= -(cos(pi/3)*(self.dx) + cos(pi/3)*(self.dy)- (self.dr))
         # self.left = (sin(pi/3*(self.dy)) - sin(pi/3)*d_right)
@@ -38,7 +38,7 @@ class TwistToVel():
         # dr = (r - l) / w
         # self.right = 1.0 * self.dx + self.dr * self.w / 2 
         # self.left = 1.0 * self.dx - self.dr * self.w / 2
-        x = str(self.left)+","+str(self.right)+","+str(self.center)
+        x = str(self.left)+","+str(self.center)+","+str(self.right)
         self.pub_motor.publish(x)
         # self.pub_lmotor.publish(self.left)
         # self.pub_rmotor.publish(self.right)
