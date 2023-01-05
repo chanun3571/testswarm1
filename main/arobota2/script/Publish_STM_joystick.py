@@ -5,7 +5,7 @@ import rospy
 from geometry_msgs.msg import Twist, Vector3
 from std_msgs.msg import String, Float32
 
-ser = serial.Serial ("/dev/ttyUSB_DEVICE2", 115200)
+ser = serial.Serial("/dev/ttyUSB_DEVICE2", 115200)
 class STM_Connect():
     def __init__(self): 
         rospy.init_node('STM_Pub',anonymous=True)
