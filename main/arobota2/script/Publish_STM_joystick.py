@@ -27,7 +27,7 @@ class STM_Connect():
         self._center_wheel_power = msg.y 
         self._right_wheel_power= msg.z
         #power command   
-        power_message = "M0"+"A"+str(int(self._right_wheel_power))+"B"+str(self._center_wheel_power)+"C"+str(self._left_wheel_power)+"\r\n"
+        power_message = "M0"+"A"+str(self._right_wheel_power)+"B"+str(self._center_wheel_power)+"C"+str(self._left_wheel_power)+"\r\n"
         ser.write(bytes(power_message, 'utf-8'))
         rospy.loginfo(power_message)
         #velocity command
