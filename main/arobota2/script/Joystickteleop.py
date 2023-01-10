@@ -22,8 +22,8 @@ class Joystick_Input():
         joy_ux = msg.axes[XBoxButton.LX]
         joy_uy = msg.axes[XBoxButton.LY]
         joy_omega = msg.axes[XBoxButton.RX]
-        self._uh.linear.x = -joy_uy #(-1,1)
-        self._uh.linear.y = -joy_ux #(-1,1)
+        self._uh.linear.x = joy_uy #(-1,1)
+        self._uh.linear.y = joy_ux #(-1,1)
         self._uh.angular.z = joy_omega*3 #(-1,1)
         self.pubvel.publish(self._uh)
 
