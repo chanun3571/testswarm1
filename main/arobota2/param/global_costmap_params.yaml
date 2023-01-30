@@ -12,7 +12,7 @@ global_costmap:
   transform_tolerance: 2.0
   rolling_window: false
   static_map: true
-  robot_radius: 0.125
+  robot_radius: 0.2
   resolution: 0.10
   obstacle_range:       5
   raytrace_range:       5

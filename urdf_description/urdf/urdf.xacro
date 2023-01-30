@@ -238,9 +238,8 @@
       <commandTopic>joystickvelocity</commandTopic>
       <odometryTopic>odom</odometryTopic>
       <odometryFrame>odom</odometryFrame>
-      <odometryRate>20.0</odometryRate>
+      <odometryRate>40.0</odometryRate>
       <robotBaseFrame>base_footprint</robotBaseFrame>
-      <publishTF>false</publishTF>
     </plugin>
 </gazebo>
 
