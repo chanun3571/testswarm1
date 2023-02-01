@@ -179,7 +179,40 @@
   <gravity>true</gravity>
 </gazebo>
 
-<gazebo reference="laser">
+ <gazebo reference="laser">
+    <material>${body_color2}</material>
+    <sensor type="ray" name="lds_lfcd_sensor">
+      <pose>0 0 0 0 0 0</pose>
+      <visualize>true</visualize>
+      <update_rate>5</update_rate>
+      <ray>
+        <scan>
+          <horizontal>
+            <samples>360</samples>
+            <resolution>1</resolution>
+              <min_angle>-3.12413</min_angle>
+              <max_angle>3.14159</max_angle>
+          </horizontal>
+        </scan>
+        <range>
+          <min>0.120</min>
+          <max>10</max>
+          <resolution>0.01</resolution>
+        </range>
+        <noise>
+          <type>gaussian</type>
+          <mean>0.0</mean>
+          <stddev>0.01</stddev>
+        </noise>
+      </ray>
+      <plugin name="gazebo_ros_lds_lfcd_controller" filename="libgazebo_ros_laser.so">
+        <topicName>scan</topicName>
+        <frameName>laser</frameName>
+      </plugin>
+    </sensor>
+ </gazebo>
+  
+<!--gazebo reference="laser">
   <material>${body_color2}</material>
         <sensor name="laser" type="ray">
             <pose> 0 0 0 0 0 0 </pose>
@@ -210,7 +243,7 @@
   <mu2>0.2</mu2>
   <selfCollide>true</selfCollide>
   <gravity>true</gravity>
-</gazebo>
+</gazebo!-->
 
 <gazebo reference="wheel_link_1">
   <material>${body_color1}</material>
@@ -235,7 +268,7 @@
 
 <gazebo>
     <plugin name="object_controller" filename="libgazebo_ros_planar_move.so">
-      <commandTopic>joystickvelocity</commandTopic>
+      <commandTopic>cmd_vel</commandTopic>
       <odometryTopic>odom</odometryTopic>
       <odometryFrame>odom</odometryFrame>
       <odometryRate>40.0</odometryRate>

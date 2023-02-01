@@ -13,6 +13,6 @@ local_costmap:
   static_map: false
   width: 1.5
   height: 1.5
-  robot_radius: 0.11
+  robot_radius: 0.2
   obstacle_range: 5
   raytrace_range:  5
