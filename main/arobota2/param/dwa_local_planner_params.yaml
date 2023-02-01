@@ -1,47 +1,48 @@
 DWAPlannerROS:
-  acc_lim_x: 2.5 
-  acc_lim_theta: 2.5
-  acc_lim_trans: 3.2
+  #Robot config parameters
+  acc_lim_x: 2.5
+  acc_lim_y: 2.5
+  acc_lim_th: 3.2
+  max_trans_vel: 0.55
+  min_trans_vel: 0.1
+  max_vel_x: 0.55
+  min_vel_x: -0.1
+  max_vel_Y: 0.55
+  min_vel_x: -0.1
+  max_vel_theta: 0.5
+  min_vel_theta: -0.075
+  min_in_place_vel_theta: 0.05
+  escape_vel: -0.25
+  holonomic_robot: true
+  y_vels: [-0.5, -0.1, 0.1, 0.5]
 
-  max_vel_trans: 
-  min_vel_trans: 0.01
-  max_vel_x:  3 #0.5
-  min_vel_x: 0
-  max_vel_theta: 0 #2
-  min_vel_theta: 0
+  #Goal tolerance parameters
+  yaw_goal_tolerance: 0.0872664626
+  xy_goal_tolerance: 0.1524 
+  latch_xy_goal_tolerance: false
 
-  acc_lim_y: 2.5 #0.5
-  max_vel_y: 3
-  min_vel_y: 0.3
-
-  # min_in_place_vel_theta: 1.5
-  # escape_vel: -0.5
-  prune_plan: true
-
-  # Goal Tolerance Parameters
-  xy_goal_tolerance: 0.12 #0.12
-  yaw_goal_tolerance: 0.02
-  latch_xy_goal: true
-  meter_scoring: true
-
-  path_distance_bias: 25 #54.0
-  goal_distance_bias: 5.0 #32.0
-  occdist_scale: 0.015
-
-  # Osc reset
-  oscillation_reset_dist: 0.75
-  oscillation_reset_angle: 0.25
-
-  # Forward Simulation Parameters
-  sim_time: 2.0 #1.7 longer for passing narrow space
-  vx_samples: 20
-  vy_samples: 20
-  vtheta_samples: 40
+  #forward simulation parameters
+  sim_time: 1.7 
   sim_granularity: 0.025
-  forward_point_distance: 0.07 #0.0
+  angular_sim_granularity: 0.025
+  vx_samples: 10
+  vtheta_samples: 20 
+  controller_frequency: 20.0
 
-  holonomic_robot: true # turtlebot2 is diff
+  #trajectory scoring parameters
+  meter_scoring: false
+  pdist_scale: 0.7
+  gdist_scale: 0.8 
+  occdist_scale: 0.01
+  heading_lookahead: 0.325
+  heading_scoring: false
+  heading_scoring_timestep: 0.8
+  dwa: false
+  publish_cost_grid_pc: false
+  global_frame_id: /odom
 
+  #Oscillation prevention parameters
+  oscillation_reset_dist: 0.05
 
-
-
+  #Global plan parameters
+  prune_plan: true
