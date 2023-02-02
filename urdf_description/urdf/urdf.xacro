@@ -271,7 +271,7 @@
       <commandTopic>cmd_vel</commandTopic>
       <odometryTopic>odom</odometryTopic>
       <odometryFrame>odom</odometryFrame>
-      <odometryRate>40.0</odometryRate>
+      <odometryRate>5</odometryRate>
       <robotBaseFrame>base_footprint</robotBaseFrame>
     </plugin>
 </gazebo>

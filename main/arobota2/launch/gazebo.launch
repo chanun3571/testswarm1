@@ -2,7 +2,7 @@
   <!-- these are the arguments you can pass this launch file, for example paused:=true -->
   <arg name="paused" default="false"/>
   <arg name="use_sim_time" default="true"/>
-  <arg name="gui" default="true"/>
+  <arg name="gui" default="false"/>
   <arg name="headless" default="false"/>
   <arg name="debug" default="false"/>
   <arg name="worldname" default= "$(find arobota2)/world/my_first_world.world"/>
@@ -23,11 +23,11 @@
   <node name="urdf_spawner" pkg="gazebo_ros" type="spawn_model"
         args="-z 0 -unpause -urdf -model robot -param robot_description" respawn="false" output="screen" />
   <node pkg="robot_state_publisher" type="robot_state_publisher" name="robot_state_publisher">
-    <param name="publish_frequency" type="double" value="10.0" />
+    <param name="publish_frequency" type="double" value="50.0" />
   </node>
   <node pkg="joint_state_publisher" type="joint_state_publisher" name="joint_state_publisher">
     <param name="use_gui" value="true"/>
-    <param name="rate" value="10"/>
+    <param name="rate" value="50"/>
   </node>
   <!--node pkg="tf" type="static_transform_publisher" name="tf_wolrdmap_robot" args="0 0 0 0 0 0 world map 100" /!--> 
     <!--node pkg="tf" type="static_transform_publisher" name="tf_mapbaselink_robot" args="0 0 0 0 0 0 map base_link 100" /!--> 
