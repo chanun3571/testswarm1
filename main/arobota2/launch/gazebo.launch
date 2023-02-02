@@ -19,20 +19,16 @@
 
   <param name="robot_description" command="$(find xacro)/xacro $(find urdf_description)/urdf/urdf.xacro"/>" />
 
-  <!-- push robot_description to factory ssand spawn robot in gazebo -->
+  <!-- push robot_description to factory and spawn robot in gazebo -->
   <node name="urdf_spawner" pkg="gazebo_ros" type="spawn_model"
         args="-z 0 -unpause -urdf -model robot -param robot_description" respawn="false" output="screen" />
   <node pkg="robot_state_publisher" type="robot_state_publisher" name="robot_state_publisher">
-    <param name="publish_frequency" type="double" value="50.0" />
-  </node>
+    <param name="publish_frequency" type="double" value="30.0" />
+  </node>ss
   <node pkg="joint_state_publisher" type="joint_state_publisher" name="joint_state_publisher">
     <param name="use_gui" value="true"/>
-    <param name="rate" value="50"/>
+    <param name="rate" value="30.0"/>
   </node>
-  <!--node pkg="tf" type="static_transform_publisher" name="tf_wolrdmap_robot" args="0 0 0 0 0 0 world map 100" /!--> 
-    <!--node pkg="tf" type="static_transform_publisher" name="tf_mapbaselink_robot" args="0 0 0 0 0 0 map base_link 100" /!--> 
-        <!--node pkg="tf" type="static_transform_publisher" name="tf_base_world" args="0 0 0 0 0 0 base_footprint world 100"/!--> 
-
 
   <node pkg="arobota2" type="Joystickteleop.py" name="Joystick_input" output="screen"/>
   <node name="joy" pkg="joy" type="joy_node" output="screen"/> 
