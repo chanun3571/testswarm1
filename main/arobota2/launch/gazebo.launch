@@ -24,7 +24,7 @@
         args="-z 0 -unpause -urdf -model robot -param robot_description" respawn="false" output="screen" />
   <node pkg="robot_state_publisher" type="robot_state_publisher" name="robot_state_publisher">
     <param name="publish_frequency" type="double" value="30.0" />
-  </node>ss
+  </node>
   <node pkg="joint_state_publisher" type="joint_state_publisher" name="joint_state_publisher">
     <param name="use_gui" value="true"/>
     <param name="rate" value="30.0"/>
