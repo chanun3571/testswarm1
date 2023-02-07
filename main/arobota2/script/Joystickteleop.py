@@ -15,7 +15,7 @@ class Joystick_Input():
         rospy.init_node('joystickinput1',anonymous=True)
         self._uh = Twist()
         self.pub = rospy.Publisher('joystick', Vector3, queue_size=10) 
-        self.pubvel = rospy.Publisher('joystickvelocity',Twist, queue_size=10)
+        self.pubvel = rospy.Publisher('cmd_vel',Twist, queue_size=10)
         rospy.Subscriber('/joy',Joy,self.joy_callback) #joy
 
     def joy_callback(self, msg):

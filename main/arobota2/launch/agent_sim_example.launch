@@ -1,0 +1,14 @@
+<?xml version="1.0"?>
+<launch>
+    <arg name="number" default=""/>
+    
+    <group ns="robot$(arg number)">
+        <param name="tf_prefix" value="robot$(arg number)_tf" />
+        <rosparam file="$(find arobota2)/config/robot$(arg number).yaml" command="load" ns="" />
+        <param name="agentID" value="$(arg number)"/>
+          <include file="$(find arobota2)/launch/gazebo_multi.launch">
+            <remap from="cmd_vel" to="robot$(arg number)/cmd_vel"/>
+          </include>
+    </group>
+    
+</launch>

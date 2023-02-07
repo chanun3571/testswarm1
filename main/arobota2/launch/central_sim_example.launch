@@ -1,0 +1,13 @@
+<?xml version="1.0"?>
+<launch>
+    <arg name="agentNum" default=""/>
+    <rosparam file="$(find bebop_formation)/config/central.yaml" command="load" ns="" />
+
+    <include file="$(find bebop_hatanaka_util)/launch/central.launch">
+        <arg name="agentNum" value="$(arg agentNum)"/>
+        <arg name="rviz_file" value="$(find bebop_formation)/config/sim.rviz"/>
+    </include>
+
+
+
+</launch>

@@ -7,8 +7,8 @@
   <group ns="robot1">
     <param name="tf_prefix" value="robot1_tf" />
     <include file="$(find arobota2)/launch/one_robot.launch" >
-      <arg name="init_pose" value="-x 1 -y 1 -z 0" />
-      <arg name="robot_name"  value="Robot1" />
+      <arg name="init_pose" value="-x 0.4 -y 0.4 -z 0" />
+      <arg name="robot_name"  value="robot1" />
     </include>
   </group>
 
@@ -16,8 +16,8 @@
   <group ns="robot2">
     <param name="tf_prefix" value="robot2_tf" />
     <include file="$(find arobota2)/launch/one_robot.launch" >
-      <arg name="init_pose" value="-x -1 -y 1 -z 0" />
-      <arg name="robot_name"  value="Robot2" />
+      <arg name="init_pose" value="-x -0.4 -y 0.4 -z 0" />
+      <arg name="robot_name"  value="robot2" />
     </include>
   </group>
 
@@ -25,8 +25,8 @@
   <group ns="robot3">
     <param name="tf_prefix" value="robot3_tf" />
     <include file="$(find arobota2)/launch/one_robot.launch" >
-      <arg name="init_pose" value="-x -1 -y 0 -z 0" />
-      <arg name="robot_name"  value="Robot3" />
+      <arg name="init_pose" value="-x -0 -y 0 -z 0" />
+      <arg name="robot_name"  value="robot3" />
     </include>
   </group>
 

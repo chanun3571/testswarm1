@@ -1,0 +1,12 @@
+pose_collector:
+  clock: 100
+takeoff_z: 1.0
+agent_manager_clock: 20
+virtual_drone_clock: 50
+CBF:
+  d_ca: 0.9
+  u_max: 0.3
+  x_min: -1.25
+  x_max: 1.25
+  y_min: -1.25
+  y_max: 1.25
