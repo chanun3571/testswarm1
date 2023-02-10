@@ -15,10 +15,8 @@ class Joystick_Input():
         rospy.init_node('joystickinput1',anonymous=True)
         self._uh = Twist()
         self.pub = rospy.Publisher('joystick', Vector3, queue_size=10) 
-        self.pubvel1 = rospy.Publisher('robot1/cmd_vel',Twist, queue_size=10)
-        self.pubvel2 = rospy.Publisher('robot2/cmd_vel',Twist, queue_size=10)
-        self.pubvel3 = rospy.Publisher('robot3/cmd_vel',Twist, queue_size=10)
-
+        self.pubvel = rospy.Publisher('cmd_vel',Twist, queue_size=10)
+        
         rospy.Subscriber('/joy',Joy,self.joy_callback) #joy
 
     def joy_callback(self, msg):
@@ -27,10 +25,8 @@ class Joystick_Input():
         joy_omega = msg.axes[XBoxButton.RX]
         self._uh.linear.x = joy_uy #(-1,1)
         self._uh.linear.y = joy_ux #(-1,1)
-        self._uh.angular.z = joy_omega*7 #(-1,1)
-        self.pubvel1.publish(self._uh)
-        self.pubvel2.publish(self._uh)
-        self.pubvel3.publish(self._uh)
+        self._uh.angular.z = joy_omega*3 #(-1,1)
+        self.pubvel.publish(self._uh)
 
     def motion(self,w,vx,vy):
         rate = rospy.Rate(10)
