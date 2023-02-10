@@ -3,6 +3,9 @@
     <arg name="odom_topic" default="odom" />
     <arg name="scan_topic" default="scan" />
 
+    <!-- AMCL -->
+        <include file="$(find arobota2)/launch/amcl_gazebo.launch"/>
+
     <node pkg="move_base" type="move_base" respawn="false" name="move_base" output="screen">
         <!-- local costmap -->
         <rosparam file="$(find arobota2)/param/local_costmap_plugin_config.yaml" command="load" />
