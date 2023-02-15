@@ -1,34 +1,44 @@
 <launch> 
  <param name="/use_sim_time" value="true"/>
   <!-- Map server -->
-  <arg name="map_file" default="$(find arobota2)/map/mymap5.yaml"/>
-  <node pkg="map_server" name="map_server" type="map_server" args="$(arg map_file)">
-    <param name="frame_id" value="/map" />
-  </node>
+
+
+  <!--node pkg="tf" type="static_transform_publisher" name="static_amcl" args="0 0 0 0 0 0 base_footprint map 100" /--> 
 
   <!-- move_base of multiple robot-->
-
   <!-- BEGIN ROBOT 1-->
   <group ns="robot1">
-    <param name="tf_prefix" value="robot1_tf" />
+    <!--param name="tf_prefix" value="robot1" /-->
     <param name="amcl/initial_pose_x" value="0.4" />
     <param name="amcl/initial_pose_y" value="0.4" />
-    <include file="$(find arobota2)/launch/movebase_gazebo.launch"/>
+    <include file="$(find arobota2)/launch/movebase_gazebo_1.launch"/>
+    <include file="$(find arobota2)/launch/amcl_gazebo_multi_1.launch"/>  
+    <node pkg="map_server" name="map_server" type="map_server" args="$(find arobota2)/map/mymap5.yaml">
+    <param name="global_frame_id" value="/map" />
+    </node>
   </group>
   <!-- BEGIN ROBOT 2-->
   <group ns="robot2">
-    <param name="tf_prefix" value="robot2_tf" />
+    <!--param name="tf_prefix" value="robot2" /-->
     <param name="amcl/initial_pose_x" value="-0.4" />
     <param name="amcl/initial_pose_y" value="0.4" />
-    <include file="$(find arobota2)/launch/movebase_gazebo.launch"/>
+    <include file="$(find arobota2)/launch/movebase_gazebo_2.launch"/>
+    <include file="$(find arobota2)/launch/amcsl_gazebo_multi_2.launch"/> 
+    <node pkg="map_server" name="map_server" type="map_server" args="$(find arobota2)/map/mymap5.yaml">
+    <param name="global_frame_id" value="/map" />
+    </node> 
   </group>
   <!-- BEGIN ROBOT 3-->
-    <group ns="robot3">
-    <param name="tf_prefix" value="robot3_tf" />
+  <group ns="robot3">
+    <!--param name="tf_prefix" value="robot3" /-->
     <param name="amcl/initial_pose_x" value="0" />
     <param name="amcl/initial_pose_y" value="0" />
-    <include file="$(find arobota2)/launch/movebase_gazebo.launch"/>
+    <include file="$(find arobota2)/launch/movebase_gazebo_3.launch"/>
+    <include file="$(find arobota2)/launch/amcl_gazebo_multi_3.launch"/>
+    <node pkg="map_server" name="map_server" type="map_server" args="$(find arobota2)/map/mymap5.yaml">
+    <param name="global_frame_id" value="/map" />
+    </node>
   </group>
   <!-- rviz -->
-  <node name="rviz" pkg="rviz" type="rviz" required="true" args="-d $(find arobota2)/rviz/navigation.rviz"/>
+  <node name="rviz" pkg="rviz" type="rviz" required="true" args="-d $(find arobota2)/rviz/navigation_multi.rviz"/>
 </launch>

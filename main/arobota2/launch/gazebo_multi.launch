@@ -7,7 +7,7 @@
   <arg name="debug" default="false"/>
   <arg name="worldname" default= "$(find arobota2)/world/my_first_world.world"/>
   <arg name="number" default=""/>
-  <remap from="cmd_vel" to="robot1/cmd_vel"/>
+  <!--remap from="cmd_vel" to="robot1/cmd_vel"/-->
   
   <!-- We resume the logic in empty_world.launch, changing only the name of the world to be launched -->
   <include file="$(find gazebo_ros)/launch/empty_world.launch">
