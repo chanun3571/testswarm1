@@ -27,7 +27,7 @@
   <param name="update_min_a" value="0.5"/>
   <param name="odom_frame_id" value="robot1/odom"/>
   <param name="base_frame_id" value="robot1/base_footprint"/>
-  <param name="global_frame_id" value="/map"/>
+  <!--param name="global_frame_id" value="/map"/-->
   <param name="use_map_topic" value="true"/>
   <param name="resample_interval" value="1"/>
   <param name="transform_tolerance" value="0.1"/>
