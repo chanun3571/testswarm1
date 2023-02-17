@@ -8,8 +8,13 @@
     <param name="tf_prefix" value="robot1_tf" />
     <include file="$(find arobota2)/launch/one_robot.launch" >
       <arg name="init_pose" value="-x 0.4 -y 0.4 -z 0" />
-      <arg name="robot_name"  value="Robot1" />
+      <arg name="robot_name"  value="ROBOT1" />
     </include>
+    <node pkg="robot_state_publisher" type="robot_state_publisher" name="robot_state_publisher">
+      <param name="publish_frequency" type="double" value="30.0" />
+      <param name="tf_prefix" value="robot1_tf" />
+    </node>
+    <node pkg="tf" type="static_transform_publisher" name="static_amcl" args="0 0 0 0 0 0 map robot1_tf/odom 100" />
   </group>
 
   <!-- BEGIN ROBOT 2-->
@@ -17,8 +22,12 @@
     <param name="tf_prefix" value="robot2_tf" />
     <include file="$(find arobota2)/launch/one_robot.launch" >
       <arg name="init_pose" value="-x -0.4 -y 0.4 -z 0" />
-      <arg name="robot_name"  value="Robot2" />
+      <arg name="robot_name"  value="ROBOT2" />
     </include>
+    <node pkg="robot_state_publisher" type="robot_state_publisher" name="robot_state_publisher">
+    <param name="publish_frequency" type="double" value="30.0" />
+    </node>
+    <node pkg="tf" type="static_transform_publisher" name="static_amcl" args="0 0 0 0 0 0 map robot2_tf/odom 100" />
   </group>
 
   <!-- BEGIN ROBOT 3-->
@@ -26,8 +35,13 @@
     <param name="tf_prefix" value="robot3_tf" />
     <include file="$(find arobota2)/launch/one_robot.launch" >
       <arg name="init_pose" value="-x -0 -y 0 -z 0" />
-      <arg name="robot_name"  value="Robot3" />
+      <arg name="robot_name"  value="ROBOT3" />
     </include>
+    <node pkg="robot_state_publisher" type="robot_state_publisher" name="robot_state_publisher">
+    <param name="publish_frequency" type="double" value="30.0" />
+    <param name="tf_prefix" value="robot3_tf" />
+    </node>
+    <node pkg="tf" type="static_transform_publisher" name="static_amcl" args="0 0 0 0 0 0 map robot3_tf/odom  100" />
   </group>
 
 

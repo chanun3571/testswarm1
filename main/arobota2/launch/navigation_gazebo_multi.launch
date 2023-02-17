@@ -14,8 +14,7 @@
     <param name="amcl/initial_pose_x" value="0.4" />
     <param name="amcl/initial_pose_y" value="0.4" />
     <include file="$(find arobota2)/launch/movebase_gazebo_1.launch"/>
-    <include file="$(find arobota2)/launch/amcl_gazebo_multi_1.launch"/>  
-
+    <include file="$(find arobota2)/launch/amcl_gazebo_multi_1.launch"/> 
   </group>
   <!-- BEGIN ROBOT 2-->
   <group ns="robot2">
