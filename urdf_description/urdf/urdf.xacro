@@ -173,7 +173,7 @@
 <xacro:property name="body_color1" value="Gazebo/Silver" />
 <xacro:property name="body_color2" value="Gazebo/Yellow" />
 <gazebo reference="base_link">
-  <material>${body_color}</material>
+  <material>${body_color1}</material>
   <mu1>0.2</mu1>
   <mu2>0.2</mu2>
   <selfCollide>true</selfCollide>
@@ -181,7 +181,7 @@
 </gazebo>
 
  <gazebo reference="laser">
-    <material>${body_color2}</material>
+    <material>${body_color}</material>
     <sensor type="ray" name="lds_lfcd_sensor">
       <pose>0 0 0 0 0 0</pose>
       <visualize>false</visualize>
@@ -212,6 +212,13 @@
       </plugin>
     </sensor>
  </gazebo>
+  
+<gazebo reference="lidar_link">
+  <material>${body_color}</material>
+  <mu1>0.2</mu1>
+  <mu2>0.2</mu2>
+  <selfCollide>true</selfCollide>
+</gazebo>
   
 <gazebo reference="wheel_link_1">
   <material>${body_color1}</material>
