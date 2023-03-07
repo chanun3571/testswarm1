@@ -8,6 +8,9 @@
     <include file="$(find arobota2)/launch/amcl_gazebo_multi_1.launch"/> 
     <include file="$(find arobota2)/launch/amcl_gazebo_multi_2.launch"/> 
     <include file="$(find arobota2)/launch/amcl_gazebo_multi_3.launch"/>
+    <include file="$(find arobota2)/launch/movebase_gazebo_1.launch"/> 
+    <include file="$(find arobota2)/launch/movebase_gazebo_2.launch"/> 
+    <include file="$(find arobota2)/launch/movebase_gazebo_3.launch"/> 
 
   <!-- rviz -->
   <node name="rviz" pkg="rviz" type="rviz" required="true" args="-d $(find arobota2)/rviz/navigation_multi.rviz"/>
