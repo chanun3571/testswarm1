@@ -27,7 +27,7 @@ class Joystick_Input():
         joy_omega = msg.axes[XBoxButton.RX]
         self._uh.linear.x = joy_uy #(-1,1)
         self._uh.linear.y = joy_ux #(-1,1)
-        self._uh.angular.z = joy_omega*7 #(-1,1)
+        self._uh.angular.z = joy_omega*4 #(-1,1)
         self.pubvel1.publish(self._uh)
         self.pubvel2.publish(self._uh)
         self.pubvel3.publish(self._uh)
@@ -40,9 +40,9 @@ class Joystick_Input():
         #u1 = 1/r*(-d*w + vx)
         #u2 = 1/r*(-d*w -cos(pi/3)*vx -sin(pi/3)*vy)
         #u3 = 1/r*(-d*w -cos(pi/ss3)*vx + sin(pi/3)*vy)
-        u1 = (-d*w + vx)
-        u2 = (-d*w -cos(pi/3)*vx -sin(pi/3)*vy)
-        u3 = (-d*w -cos(pi/3)*vx + sin(pi/3)*vy)
+        u1 = (-d*w + vy)
+        u2 = (-d*w -cos(pi/3)*vy -sin(pi/3)*vx)
+        u3 = (-d*w -cos(pi/3)*vy + sin(pi/3)*vx)
         ros_translation = Vector3()
         ros_translation.x = u1 *36
         ros_translation.y = u2 *40
