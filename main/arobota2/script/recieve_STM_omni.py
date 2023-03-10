@@ -21,8 +21,6 @@ class STM_Connect():
         self._left_encoder_value = 0
         self._right_encoder_value = 0
         self._center_encoder_value = 0
-        self._left_wheel_speed_ = 0
-        self._right_wheel_speed_ = 0
         rospy.loginfo("Receive Data from STM")
         streamEncoder()
         # serialReadThread = threading.Thread(target=receiveSerial)
@@ -30,9 +28,9 @@ class STM_Connect():
         
         
         #Publisher for left and right wheel encoder values
-        self._Left_Encoder = rospy.Publisher('lwheel',Int64,queue_size=100)		
-        self._Right_Encoder = rospy.Publisher('rwheel',Int64,queue_size=100)
-        self._Center_Encoder = rospy.Publisher('cwheel',Int64,queue_size=100)
+        self._Left_Encoder = rospy.Publisher('lwheel',Int64,queue_size=10)		
+        self._Right_Encoder = rospy.Publisher('rwheel',Int64,queue_size=10)
+        self._Center_Encoder = rospy.Publisher('cwheel',Int64,queue_size=10)
 
         # #Publisher for entire serial data
         # self._SerialPublisher = rospy.Publisher('serial', String,queue_size=10) 
@@ -46,6 +44,7 @@ class STM_Connect():
                 try:
                     recv = ser.read(ser.in_waiting)
                     msg = recv.decode('ascii')
+                    print(msg)
                     #rospy.loginfo(msg)
                     self.encoder_value = msg.split(", ")
                     #rospy.loginfo(self.encoder_value)
