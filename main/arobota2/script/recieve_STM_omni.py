@@ -20,9 +20,10 @@ class STM_Connect():
         rospy.init_node('STM_Sub',anonymous=True)
         self._left_encoder_value = 0
         self._right_encoder_value = 0
+        self._center_encoder_value = 0
         self._left_wheel_speed_ = 0
         self._right_wheel_speed_ = 0
-        rospy.loginfo("STM Receive data")
+        rospy.loginfo("Receive Data from STM")
         streamEncoder()
         # serialReadThread = threading.Thread(target=receiveSerial)
         # serialReadThread.start()
