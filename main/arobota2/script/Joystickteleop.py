@@ -25,8 +25,8 @@ class Joystick_Input():
         joy_ux = msg.axes[XBoxButton.LX]
         joy_uy = msg.axes[XBoxButton.LY]
         joy_omega = msg.axes[XBoxButton.RX]
-        self._uh.linear.x = joy_uy #(-1,1)
-        self._uh.linear.y = joy_ux #(-1,1)
+        self._uh.linear.x = joy_ux #(-1,1)
+        self._uh.linear.y = joy_uy #(-1,1)
         self._uh.angular.z = joy_omega*4 #(-1,1)
         self.pubvel1.publish(self._uh)
         self.pubvel2.publish(self._uh)
@@ -40,13 +40,16 @@ class Joystick_Input():
         #u1 = 1/r*(-d*w + vx)
         #u2 = 1/r*(-d*w -cos(pi/3)*vx -sin(pi/3)*vy)
         #u3 = 1/r*(-d*w -cos(pi/ss3)*vx + sin(pi/3)*vy)
-        u1 = (-d*w + vy)
-        u2 = (-d*w -cos(pi/3)*vy -sin(pi/3)*vx)
-        u3 = (-d*w -cos(pi/3)*vy + sin(pi/3)*vx)
+        #u1 = (-d*w + vx)
+        #u2 = (-d*w -cos(pi/3)*vx -sin(pi/3)*vy)
+        #u3 = (-d*w -cos(pi/3)*vx + sin(pi/3)*vy)
+        v_center = (d*w - vy)
+        v_right = (d*w +cos(pi/3)*vx +sin(pi/3)*vy)
+        v_left = (d*w -cos(pi/3)*vx + sin(pi/3)*vy)
         ros_translation = Vector3()
-        ros_translation.x = u1 *36
-        ros_translation.y = u2 *40
-        ros_translation.z = u3 *40
+        ros_translation.x = v_center *36
+        ros_translation.y = v_right *40
+        ros_translation.z = v_left *40
         self.pub.publish(ros_translation)
         #rospy.loginfo(ros_translation)
         rate.sleep()

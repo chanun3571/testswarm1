@@ -4,8 +4,8 @@
 class XBoxButton:
     # X mode and Mode light off
     # Axes
-    LX = 0
-    LY = 1
+    LX = 1
+    LY = 0
     LT = 2
     RX = 3
     RY = 4
