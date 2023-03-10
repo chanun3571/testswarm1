@@ -44,7 +44,6 @@ class STM_Connect():
                 try:
                     recv = ser.read(ser.in_waiting)
                     msg = recv.decode('ascii')
-                    print(msg)
                     #rospy.loginfo(msg)
                     self.encoder_value = msg.split(", ")
                     #rospy.loginfo(self.encoder_value)
