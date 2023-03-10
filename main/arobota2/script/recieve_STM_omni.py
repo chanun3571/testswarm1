@@ -49,12 +49,12 @@ class STM_Connect():
                     #rospy.loginfo(self.encoder_value)
 
                     self.left_encoder_value = (self.encoder_value[0].split("="))
-                    self.left_encoder_value = int(self.left_encoder_value[1])
+                    self.left_encoder_value = -int(self.left_encoder_value[1])
 
-                    self.right_encoder_value = int(self.encoder_value[1]) #ok
+                    self.right_encoder_value = -int(self.encoder_value[1]) #ok
 
                     self.center_encoder_value = (self.encoder_value[2].split("\r"))
-                    self.center_encoder_value = int(self.center_encoder_value[0])
+                    self.center_encoder_value = -int(self.center_encoder_value[0])
 
                     self._Left_Encoder.publish(int(self.left_encoder_value))
                     self._Right_Encoder.publish(int(self.right_encoder_value))
