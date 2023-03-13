@@ -13,7 +13,6 @@ from std_msgs.msg import Int16, Int64
 #############################################################################
 class OmniTf:
     def __init__(self):
-    #############################################################################
         rospy.init_node("omni_tf")
         self.nodename = rospy.get_name()
         rospy.loginfo("-I- %s started" % self.nodename)
@@ -63,18 +62,13 @@ class OmniTf:
         self.odomPub = rospy.Publisher("odom", Odometry,queue_size=10)
         self.odomBroadcaster = TransformBroadcaster()
         
-    #############################################################################
     def spin(self):
-    #############################################################################
         r = rospy.Rate(self.rate)
         while not rospy.is_shutdown():
             self.update()
             r.sleep()
        
-     
-    #############################################################################
     def update(self):
-    #############################################################################
         now = rospy.Time.now()
         if now > self.t_next:
             elapsed = now - self.then
@@ -94,51 +88,24 @@ class OmniTf:
             self.enc_right = self.right
             self.enc_center = self.center
            
-            # distance traveled
-            # version 1 
-            # dy = (cos(pi/3)*d_left + cos(pi/3)*d_right - d_center)
-            # dx = ((sin(pi/3)*d_left) - (sin(pi/3)*d_right))
-            # version 2
-            # dx = (cos(pi/6)*d_left - cos(pi/6)*d_right)
-            # dy = -(sin(pi/6)*d_left + sin(pi/6)*d_right - d_center)
-            # this approximation works (in radians) for small angles
-            # th = -( d_right + d_left + d_center )/ (3*(self.base_width/2))
-            # version 3
+            # distance traveled 
             dx = (cos(pi/6)*d_right - cos(pi/6)*d_left)
             dy =  sin(pi/6)*d_right + sin(pi/6)*d_left - d_center
             th = (d_right + d_left + d_center )/ (self.base_width/2)
 
-            # calculate velocities
+            # calculate velocities (twist)
             self.vx = dx / elapsed
             self.vy = dy / elapsed
             self.vr = th / elapsed
             
-            #if (d != 0):
-                # calculate distance traveled in x and y
-                #x = cos( th ) * d
-                #y = -sin( th ) * d
-                # calculate the final position of the robot
+            # calculate current position
             self.x = self.x + ( cos( self.th ) * dx - sin( self.th ) * dy )
             self.y = self.y + ( sin( self.th ) * dx + cos( self.th ) * dy )
             if( th != 0):
                 self.th = self.th + th
-            # if (dx != 0 and dy != 0):
-            #     # calculate distance traveled in x and y
-            #     #x = cos ) * dx
-            #     #y = -sin( th ) * dy
-            #     # calculate the final position of the robot
-                # self.x = self.x + ( cos( self.th ) * dx - sin( self.th ) * dy )
-                # self.y = self.y + ( sin( self.th ) * dx + cos( self.th ) * dy )
-            # if( th != 0):
-            #     self.th = self.th + th
             odom_quat = tf.transformations.quaternion_from_euler(0,0,self.th)
-            # publish the odom information
-            # quaternion = Quaternion()
             
-            # quaternion.x = 0.0
-            # quaternion.y = 0.0
-            # quaternion.z = sin( self.th / 2 )
-            # quaternion.w = cos( self.th / 2 )
+            # publish the odom information
             self.odomBroadcaster.sendTransform(
                 (self.x, self.y, 0),
                 odom_quat,
@@ -160,10 +127,8 @@ class OmniTf:
             odom.twist.twist.linear.y = self.vy
             odom.twist.twist.angular.z = self.vr
             self.odomPub.publish(odom)
-            
-            
 
-    #############################################################################
+    #############################################################################        
     def cwheelCallback(self, msg):
     #############################################################################
         enc = msg.data
@@ -174,7 +139,6 @@ class OmniTf:
             self.cmult = self.cmult - 1
             
         self.center = 1.0 * (enc + self.cmult * (self.encoder_max - self.encoder_min)) 
-
 
         self.prev_cencoder = enc
 
@@ -204,10 +168,8 @@ class OmniTf:
             
         self.right = 1.0 * (enc + self.rmult * (self.encoder_max - self.encoder_min))
 
-
         self.prev_rencoder = enc
-
-#############################################################################
+        
 #############################################################################
 if __name__ == '__main__':
     """ main """
