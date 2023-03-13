@@ -121,11 +121,18 @@ class OmniTf:
             odom.pose.pose.position.y = self.y
             odom.pose.pose.position.z = 0
             odom.pose.pose.orientation = Quaternion(*odom_quat)
+            odom.pose.covariance[0] = 0.00001
+            odom.pose.covariance[7] = 0.00001
+            odom.pose.covariance[14] = 1000000000000.0
+            odom.pose.covariance[21] = 1000000000000.0
+            odom.pose.covariance[28] = 1000000000000.0
+            odom.pose.covariance[35] = 0.001
             odom.child_frame_id = self.base_frame_id
 
             odom.twist.twist.linear.x = self.vx
             odom.twist.twist.linear.y = self.vy
             odom.twist.twist.angular.z = self.vr
+            
             self.odomPub.publish(odom)
 
     #############################################################################        
@@ -169,7 +176,7 @@ class OmniTf:
         self.right = 1.0 * (enc + self.rmult * (self.encoder_max - self.encoder_min))
 
         self.prev_rencoder = enc
-        
+
 #############################################################################
 if __name__ == '__main__':
     """ main """
