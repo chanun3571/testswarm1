@@ -3,7 +3,7 @@ import rospy
 #import roslib
 #roslib.load_manifest('differential_drive')
 from math import sin, cos, pi
-
+import tf
 from geometry_msgs.msg import Quaternion
 from geometry_msgs.msg import Twist
 from nav_msgs.msg import Odometry
@@ -12,9 +12,6 @@ from std_msgs.msg import Int16, Int64
 
 #############################################################################
 class OmniTf:
-#############################################################################
-
-    #############################################################################
     def __init__(self):
     #############################################################################
         rospy.init_node("omni_tf")
@@ -24,7 +21,7 @@ class OmniTf:
         #### parameters #######
         self.rate = rospy.get_param('~rate',10.0)  # the rate at which to publish the transform
         self.ticks_meter = (2**15)/(0.048*pi) # The number of wheel encoder ticks per meter of travel # 1 round = 2^15
-        self.base_width = 200*(10**-3) # The wheel base width in meters
+        self.base_width = 0.2 # The wheel base width in meters
         
         self.base_frame_id = rospy.get_param('~base_frame_id','base_footprint') # the name of the base frame of the robot
         self.odom_frame_id = rospy.get_param('~odom_frame_id', 'odom') # the name of the odometry reference frame
@@ -98,36 +95,53 @@ class OmniTf:
             self.enc_center = self.center
            
             # distance traveled
-            #dy = (cos(pi/3)*d_left + cos(pi/3)*d_right - d_center)
-            #dx = ((sin(pi/3)*d_left) - (sin(pi/3)*d_right))
-            dx = (cos(pi/6)*d_left - cos(pi/6)*d_right)
-            dy = -(sin(pi/6)*d_left + sin(pi/6)*d_right - d_center)
+            # version 1 
+            # dy = (cos(pi/3)*d_left + cos(pi/3)*d_right - d_center)
+            # dx = ((sin(pi/3)*d_left) - (sin(pi/3)*d_right))
+            # version 2
+            # dx = (cos(pi/6)*d_left - cos(pi/6)*d_right)
+            # dy = -(sin(pi/6)*d_left + sin(pi/6)*d_right - d_center)
             # this approximation works (in radians) for small angles
-            th = -( d_right + d_left + d_center )/ (3*(self.base_width/2))
+            # th = -( d_right + d_left + d_center )/ (3*(self.base_width/2))
+            # version 3
+            dx = (cos(pi/6)*d_right - cos(pi/6)*d_left)
+            dy =  sin(pi/6)*d_right + sin(pi/6)*d_left - d_center
+            th = (d_right + d_left + d_center )/ (self.base_width/2)
+
             # calculate velocities
-            self.dx = dx / elapsed
-            self.dy = dy / elapsed
-            self.dr = th / elapsed
-             
-            if (dx != 0 and dy != 0):
+            self.vx = dx / elapsed
+            self.vy = dy / elapsed
+            self.vr = th / elapsed
+            
+            #if (d != 0):
                 # calculate distance traveled in x and y
-                #x = cos( th ) * dx
-                #y = -sin( th ) * dy
+                #x = cos( th ) * d
+                #y = -sin( th ) * d
                 # calculate the final position of the robot
-                self.x = self.x + ( cos( self.th ) * dx - sin( self.th ) * dy )
-                self.y = self.y + ( sin( self.th ) * dx + cos( self.th ) * dy )
+            self.x = self.x + ( cos( self.th ) * dx - sin( self.th ) * dy )
+            self.y = self.y + ( sin( self.th ) * dx + cos( self.th ) * dy )
             if( th != 0):
                 self.th = self.th + th
-                
+            # if (dx != 0 and dy != 0):
+            #     # calculate distance traveled in x and y
+            #     #x = cos ) * dx
+            #     #y = -sin( th ) * dy
+            #     # calculate the final position of the robot
+                # self.x = self.x + ( cos( self.th ) * dx - sin( self.th ) * dy )
+                # self.y = self.y + ( sin( self.th ) * dx + cos( self.th ) * dy )
+            # if( th != 0):
+            #     self.th = self.th + th
+            odom_quat = tf.transformations.quaternion_from_euler(0,0,self.th)
             # publish the odom information
-            quaternion = Quaternion()
-            quaternion.x = 0.0
-            quaternion.y = 0.0
-            quaternion.z = sin( self.th / 2 )
-            quaternion.w = cos( self.th / 2 )
+            # quaternion = Quaternion()
+            
+            # quaternion.x = 0.0
+            # quaternion.y = 0.0
+            # quaternion.z = sin( self.th / 2 )
+            # quaternion.w = cos( self.th / 2 )
             self.odomBroadcaster.sendTransform(
                 (self.x, self.y, 0),
-                (quaternion.x, quaternion.y, quaternion.z, quaternion.w),
+                odom_quat,
                 rospy.Time.now(),
                 self.base_frame_id,
                 self.odom_frame_id
@@ -139,13 +153,12 @@ class OmniTf:
             odom.pose.pose.position.x = self.x
             odom.pose.pose.position.y = self.y
             odom.pose.pose.position.z = 0
-            odom.pose.pose.orientation = quaternion
+            odom.pose.pose.orientation = Quaternion(*odom_quat)
             odom.child_frame_id = self.base_frame_id
 
-            odom.twist.twist.linear.x = self.dx
-            odom.twist.twist.linear.y = self.dy
-            odom.twist.twist.angular.z = self.dr
-            #rospy.loginfo(odom)
+            odom.twist.twist.linear.x = self.vx
+            odom.twist.twist.linear.y = self.vy
+            odom.twist.twist.angular.z = self.vr
             self.odomPub.publish(odom)
             
             
