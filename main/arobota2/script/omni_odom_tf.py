@@ -99,10 +99,11 @@ class OmniTf:
             self.vr = th / elapsed
             
             # calculate current position
-            self.x = self.x + ( cos( self.th ) * dx - sin( self.th ) * dy )
-            self.y = self.y + ( sin( self.th ) * dx + cos( self.th ) * dy )
-            if( th != 0):
-                self.th = self.th + th
+            #self.x = self.x + ( cos( self.th ) * dx - sin( self.th ) * dy )
+            #self.y = self.y + ( sin( self.th ) * dx + cos( self.th ) * dy )
+            self.x = self.x + dy
+            self.y = self.y + dx
+            self.th = self.th + th
             odom_quat = tf.transformations.quaternion_from_euler(0,0,self.th)
             
             # publish the odom information

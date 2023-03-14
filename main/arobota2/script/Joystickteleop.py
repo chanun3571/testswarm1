@@ -35,7 +35,7 @@ class Joystick_Input():
     def motion(self,w,vx,vy):
         rate = rospy.Rate(10)
         #r = (48/2)/1000 # m
-        d = 200/1000 #m
+        r = 100/1000 #m
         #print(w,vx,vy)ss
         #u1 = 1/r*(-d*w + vx)
         #u2 = 1/r*(-d*w -cos(pi/3)*vx -sin(pi/3)*vy)
@@ -43,9 +43,9 @@ class Joystick_Input():
         #u1 = (-d*w + vx)
         #u2 = (-d*w -cos(pi/3)*vx -sin(pi/3)*vy)
         #u3 = (-d*w -cos(pi/3)*vx + sin(pi/3)*vy)
-        v_center = (d*w - vy)
-        v_right = (d*w +cos(pi/6)*vx +sin(pi/6)*vy)
-        v_left = (d*w -cos(pi/6)*vx + sin(pi/6)*vy)
+        v_center = (r*w - vy)
+        v_right = (r*w +cos(pi/6)*vx +sin(pi/6)*vy)
+        v_left = (r*w -cos(pi/6)*vx + sin(pi/6)*vy)
         ros_translation = Vector3()
         ros_translation.x = v_center *36
         ros_translation.y = v_right *40
