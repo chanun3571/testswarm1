@@ -89,12 +89,12 @@ class OmniTf:
             self.enc_center = self.center
            
             # distance traveled 
-            dx = 0.57736*d_right - -0.57736*d_left
-            dy =  0.3333*d_right + 0.3333*d_left - 0.6666*d_center
-            th = (d_right + d_left + d_center )/ (3*self.base_width/2)
-            # dx = (cos(pi/6)*d_right - cos(pi/6)*d_left)
-            # dy =  sin(pi/6)*d_right + sin(pi/6)*d_left - d_center
-            # th = (d_right + d_left + d_center )/ (3*self.base_width/2)
+            # dx = 0.57736*d_right -0.57736*d_left
+            # dy =  0.3333*d_right + 0.3333*d_left - 0.6666*d_center
+            # th = (0.3333*d_right + 0.3333*d_left + 0.3333*d_center )/ (self.base_width/2)
+            dx = (cos(pi/6)*d_right - cos(pi/6)*d_left)
+            dy =  sin(pi/6)*d_right + sin(pi/6)*d_left - d_center
+            th = (d_right + d_left + d_center )/ (self.base_width/2)
 
             # calculate velocities (twist)
             self.vx = dx / elapsed
@@ -104,8 +104,8 @@ class OmniTf:
             # calculate current position
             #self.x = self.x + ( cos( self.th ) * dx - sin( self.th ) * dy )
             #self.y = self.y + ( sin( self.th ) * dx + cos( self.th ) * dy )
-            self.x = self.x + dy
-            self.y = self.y + dx
+            self.x = self.x + dx
+            self.y = self.y + dy
             self.th = self.th + th
             odom_quat = tf.transformations.quaternion_from_euler(0,0,self.th)
             

@@ -4,7 +4,7 @@ import rospy
 from sensor_msgs.msg import Joy
 from xbox_button import XBoxButton
 from geometry_msgs.msg import Pose,Twist,PoseStamped,Vector3
-from math import sin, cos, pi
+from math import sin, cos, pi, sqrt
 #rom std_msgs.msg import String#String message 
 #from std_msgs.msg import Int8
 #from geometry_msgs.msg import Vector3
@@ -27,7 +27,7 @@ class Joystick_Input():
         joy_omega = msg.axes[XBoxButton.RX]
         self._uh.linear.x = joy_ux #(-1,1)
         self._uh.linear.y = joy_uy #(-1,1)
-        self._uh.angular.z = joy_omega*4 #(-1,1)
+        self._uh.angular.z = joy_omega*8 #(-1,1)
         self.pubvel1.publish(self._uh)
         self.pubvel2.publish(self._uh)
         self.pubvel3.publish(self._uh)
@@ -43,9 +43,9 @@ class Joystick_Input():
         #u1 = (-d*w + vx)
         #u2 = (-d*w -cos(pi/3)*vx -sin(pi/3)*vy)
         #u3 = (-d*w -cos(pi/3)*vx + sin(pi/3)*vy)
-        v_center = (r*w - vy)
-        v_right = (r*w +cos(pi/6)*vx + sin(pi/6)*vy)
-        v_left = (r*w -cos(pi/6)*vx + sin(pi/6)*vy)
+        v_center = ((1/3)*r*w - (2/3)*vy)
+        v_right = ((1/3)*r*w +(sqrt(3)/3)*vx + (1/3)*vy)
+        v_left = ((1/3)*r*w -(sqrt(3)/3)*vx + (1/3)*vy)
         # v_center = (r*w - vy)
         # v_right = (r*w +(1/cos(pi/6))*vx +(1/sin(pi/6))*vy)
         # v_left = (r*w -(1/cos(pi/6))*vx + (1/sin(pi/6))*vy)
