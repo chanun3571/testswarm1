@@ -43,12 +43,12 @@ class Joystick_Input():
         #u1 = (-d*w + vx)
         #u2 = (-d*w -cos(pi/3)*vx -sin(pi/3)*vy)
         #u3 = (-d*w -cos(pi/3)*vx + sin(pi/3)*vy)
-        # v_center = (r*w - vy)
-        # v_right = (r*w +cos(pi/6)*vx +sin(pi/6)*vy)
-        # v_left = (r*w -cos(pi/6)*vx + sin(pi/6)*vy)
         v_center = (r*w - vy)
-        v_right = (r*w +(1/cos(pi/6))*vx +(1/sin(pi/6))*vy)
-        v_left = (r*w -(1/cos(pi/6))*vx + (1/sin(pi/6))*vy)
+        v_right = (r*w +cos(pi/6)*vx + sin(pi/6)*vy)
+        v_left = (r*w -cos(pi/6)*vx + sin(pi/6)*vy)
+        # v_center = (r*w - vy)
+        # v_right = (r*w +(1/cos(pi/6))*vx +(1/sin(pi/6))*vy)
+        # v_left = (r*w -(1/cos(pi/6))*vx + (1/sin(pi/6))*vy)
         ros_translation = Vector3()
         ros_translation.x = v_center *40
         ros_translation.y = v_right *40
