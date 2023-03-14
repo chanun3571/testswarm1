@@ -94,25 +94,26 @@ class OmniTf:
             # th = (0.3333*d_right + 0.3333*d_left + 0.3333*d_center )/ (self.base_width/2)
             dx = (cos(pi/6)*d_right - cos(pi/6)*d_left)
             dy =  sin(pi/6)*d_right + sin(pi/6)*d_left - d_center
-            th = (d_right + d_left + d_center )/ (self.base_width/2)
-
+            th = (d_right + d_left + d_center )/ (4*(self.base_width/2))
             # calculate velocities (twist)
             self.vx = dx / elapsed
             self.vy = dy / elapsed
             self.vr = th / elapsed
-            
             # calculate current position
-            #self.x = self.x + ( cos( self.th ) * dx - sin( self.th ) * dy )
-            #self.y = self.y + ( sin( self.th ) * dx + cos( self.th ) * dy )
-            self.x = self.x + dx
-            self.y = self.y + dy
-            self.th = self.th + th
-            odom_quat = tf.transformations.quaternion_from_euler(0,0,self.th)
-            
+            self.x = self.x + ( cos( self.th ) * dx - sin( self.th ) * dy )
+            self.y = self.y + ( sin( self.th ) * dx + cos( self.th ) * dy )
+            #self.x = self.x + dx
+            #self.y = self.y + dy
+            self.th = self.th + th            
             # publish the odom information
+            quaternion = Quaternion()
+            quaternion.x = 0.0
+            quaternion.y = 0.0
+            quaternion.z = sin( self.th / 2 )
+            quaternion.w = cos( self.th / 2 )
             self.odomBroadcaster.sendTransform(
                 (self.x, self.y, 0),
-                odom_quat,
+                (quaternion.x, quaternion.y, quaternion.z, quaternion.w),
                 rospy.Time.now(),
                 self.base_frame_id,
                 self.odom_frame_id
@@ -124,13 +125,7 @@ class OmniTf:
             odom.pose.pose.position.x = self.x
             odom.pose.pose.position.y = self.y
             odom.pose.pose.position.z = 0
-            odom.pose.pose.orientation = Quaternion(*odom_quat)
-            odom.pose.covariance[0] = 0.00001
-            odom.pose.covariance[7] = 0.00001
-            odom.pose.covariance[14] = 1000000000000.0
-            odom.pose.covariance[21] = 1000000000000.0
-            odom.pose.covariance[28] = 1000000000000.0
-            odom.pose.covariance[35] = 0.001
+            odom.pose.pose.orientation = quaternion
             odom.child_frame_id = self.base_frame_id
 
             odom.twist.twist.linear.x = self.vx
