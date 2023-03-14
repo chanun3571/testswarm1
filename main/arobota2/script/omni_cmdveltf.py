@@ -2,7 +2,7 @@
 import rospy
 from std_msgs.msg import Float32, String
 from geometry_msgs.msg import Twist 
-from math import sin, cos, pi
+from math import sin, cos, pi, sqrt
 
 class TwistToVel():
     def __init__(self):
@@ -13,7 +13,7 @@ class TwistToVel():
         rospy.Subscriber('cmd_vel', Twist, self.twistCallback)
         self.v_center = 0
         self.v_left = 0
-        self.v_right = 0 
+        self.v_right = 0
         #self.wheelrad = 24 * (10**-3) #wheelradius=24 mm
         #self.base = rospy.get_param("~base_width", 200*(10^-3)) #radius=100 mm
    
@@ -22,10 +22,13 @@ class TwistToVel():
         self.vx = msg.linear.x
         self.vy = msg.linear.y
         self.vr = msg.angular.z
-        self.v_center = (self.r*self.vr - self.vy)
-        self.v_right = (self.r*self.vr +cos(pi/6)*self.vx +sin(pi/6)*self.vy)
-        self.v_left = (self.r*self.vr -cos(pi/6)*self.vx + sin(pi/6)*self.vy)
-        x = str(self.left)+","+str(self.center)+","+str(self.right)
+        self.v_center = ((1/3)*self.r*self.vr - (2/3)*self.vy)
+        self.v_right = ((1/3)*self.r*self.vr +(sqrt(3)/3)*self.vx + (1/3)*self.vy)
+        self.v_left = ((1/3)*self.r*self.vr -(sqrt(3)/3)*self.vx + (1/3)*self.vy)
+        # self.v_center = (self.r*self.vr - self.vy)
+        # self.v_right = (self.r*self.vr +cos(pi/6)*self.vx +sin(pi/6)*self.vy)
+        # self.v_left = (self.r*self.vr -cos(pi/6)*self.vx + sin(pi/6)*self.vy)
+        x = str(self.v_left)+","+str(self.v_center)+","+str(self.v_right)
         self.pub_motor.publish(x)
 
         # u1 = (-self.base*self.dr + self.dx)
