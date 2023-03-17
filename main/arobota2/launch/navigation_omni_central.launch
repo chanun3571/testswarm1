@@ -18,4 +18,8 @@
 
   <!-- rviz -->
   <node name="rviz" pkg="rviz" type="rviz" required="true" args="-d $(find arobota2)/rviz/navigation.rviz"/>
+
+  <!--add joystick -->
+  <node pkg="arobota2" type="Joystickteleop.py" name="Joystick_input" output="screen"/>
+  <node name="joy" pkg="joy" type="joy_node" output="screen"/> 
 </launch>

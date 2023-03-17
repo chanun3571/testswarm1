@@ -94,7 +94,7 @@ class OmniTf:
             # th = (0.3333*d_right + 0.3333*d_left + 0.3333*d_center )/ (self.base_width/2)
             dx = (cos(pi/6)*d_right - cos(pi/6)*d_left)
             dy =  sin(pi/6)*d_right + sin(pi/6)*d_left - d_center
-            th = (d_right + d_left + d_center )/ (4*(self.base_width/2))
+            th = (d_right + d_left + d_center )/ ((self.base_width/2))
             # calculate velocities (twist)
             self.vx = dx / elapsed
             self.vy = dy / elapsed
