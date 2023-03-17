@@ -10,14 +10,14 @@ class STM_Connect():
         rospy.init_node('STM_Pub',anonymous=True)
         self.left_wheel_speed_ = 0
         self.right_wheel_speed_ = 0
-        self.center_wheel_speed_ = 0
-        self.wheel_speed = []        
+        self.center_wheel_speed_ = 0     
         rospy.loginfo("Publish data to STM")
         rospy.Subscriber('wheel_vtarget',String,self.Update_Speed)
         
     def Update_Speed(self, msg):
         r = rospy.Rate(20)
         self.wheel = msg.data.split(',')
+        print(self.wheel)
         self.left_wheel_power = int(float(self.wheel[0]))*200
         self.center_wheel_power = int(float(self.wheel[1]))*200
         self.right_wheel_power = int(float(self.wheel[2]))*200
