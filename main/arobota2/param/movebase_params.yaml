@@ -19,6 +19,6 @@ oscillation_distance: 0.5
 base_local_planner: "dwa_local_planner/DWAPlannerROS"
 base_global_planner: "navfn/NavfnROS"
 
-#recovery_behaviors:
+# recovery_behaviors:
 #    - name: 'backoff_recovery'
 #      type: 'backoff_recovery/BackoffRecovery'
