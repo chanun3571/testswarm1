@@ -14,5 +14,5 @@ local_costmap:
   width: 1.5
   height: 1.5
   robot_radius: 0.2
-  obstacle_range: 5
-  raytrace_range:  5
+  obstacle_range: 3 #5
+  raytrace_range:  3 #5

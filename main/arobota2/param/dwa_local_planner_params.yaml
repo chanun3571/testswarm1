@@ -1,22 +1,22 @@
 DWAPlannerROS:
   holonomic_robot: true
 # Robot Configuration Parameters
-  max_vel_x: 2.22
-  min_vel_x: -2.22
+  max_vel_x: 7.22
+  min_vel_x: -7.22
 
-  max_vel_y: 2.22
-  min_vel_y: -2.22
+  max_vel_y: 7.22
+  min_vel_y: -7.22
 
 # The velocity when robot is moving in a straight line
-  max_vel_trans:  2.22
-  min_vel_trans:  -2.11
+  max_vel_trans:  5.22
+  min_vel_trans:  -5.11
 
-  max_vel_theta: 3.75
-  min_vel_theta: -2.37
+  max_vel_theta: 4.75
+  min_vel_theta: -3.37
 
-  acc_lim_x: 2.5
-  acc_lim_y: 2.5
-  acc_lim_theta: 3.2 
+  acc_lim_x: 7.5
+  acc_lim_y: 7.5
+  acc_lim_theta: 5.2 
 
 # Goal Tolerance Parametes
   xy_goal_tolerance: 0.05
