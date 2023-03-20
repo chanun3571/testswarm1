@@ -1,6 +1,6 @@
 <launch>
   <!-- Nodes -->
-  <node pkg="arobota2" type="omni_tf.py" name="Omni_tf" output="screen"/>
+  <node pkg="arobota2" type="omni_odom_tf.py" name="Omni_tf" output="screen"/>
   <node pkg="arobota2" type="omni_cmdveltf.py" name="cmd_vel_tf" output="screen"/>
 
   <!-- Robot state -->
