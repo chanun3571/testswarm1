@@ -16,6 +16,7 @@
     <rosparam file="$(find arobota2)/param/dwa_local_planner_params.yaml" command="load" />
     <rosparam file="$(find arobota2)/param/global_costmap_plugin_config.yaml" command="load" /> 
     <rosparam file="$(find arobota2)/param/local_costmap_plugin_config.yaml" command="load" />
+    <rosparam file="$(find arobota2)/param/recovery_behaviors.yaml" command="load" />
 
 
     <remap from="cmd_vel" to="$(arg cmd_vel_topic)"/>

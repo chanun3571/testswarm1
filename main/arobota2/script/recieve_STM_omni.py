@@ -70,6 +70,7 @@ def sendSerial(string):
 def streamEncoder():
     sendSerial("R")
     sendSerial("S1")
+    sendSerial("M0A0B0C0")
 
 
 if __name__ =='__main__':
