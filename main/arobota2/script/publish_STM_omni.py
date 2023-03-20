@@ -21,12 +21,19 @@ class STM_Connect():
         self.center_wheel_power = -int(float(self.wheel[1])*100)
         self.right_wheel_power = -int(float(self.wheel[2])*100)
         #dead zone
-        # if self.left_wheel_power<10:
-        #     self.left_wheel_power = self.left_wheel_power * 2 
-        # if self.right_wheel_power<10:
-        #     self.right_wheel_power = self.right_wheel_power * 2 
-        # if self.center_wheel_power<10:
-        #     self.center_wheel_power = self.center_wheel_power * 2 
+        if 0<abs(self.left_wheel_power)<10 and 0<abs(self.right_wheel_power)<10 and 0<abs(self.center_wheel_power)<10:
+            if self.left_wheel_powera<0:
+                self.left_wheel_power = self.left_wheel_power - 10
+            if self.left_wheel_powera<0:
+                self.right_wheel_power = self.right_wheel_power -10 
+            if self.center_wheel_powera<0:
+                self.center_wheel_power = self.center_wheel_power -10 
+            if self.left_wheel_powera>0:
+                self.left_wheel_power = self.left_wheel_power + 10
+            if self.left_wheel_powera>0:
+                self.right_wheel_power = self.right_wheel_power +10 
+            if self.center_wheel_powera>0:
+                self.center_wheel_power = self.center_wheel_power +10 
                
         # print ("M2A"+str(int(float(self.wheel[0])*1000000))+"B"+str(int(float(self.wheel[1])*1000000))+"\r\n")
         # rospy.loginfo(msg.data)

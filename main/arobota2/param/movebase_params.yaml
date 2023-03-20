@@ -1,4 +1,4 @@
-recovery_behavior_enabled: true
+recovery_behavior_enabled: false
 learing_rotation_allowed: false
 shutdown_costmaps: false
 

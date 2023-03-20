@@ -1,4 +1,4 @@
-recovery_behavior_enabled: true
+recovery_behavior_enabled: false
 recovery_behaviors:
   - name: 'conservative_reset'
     type: 'clear_costmap_recovery/ClearCostmapRecovery'
@@ -46,7 +46,7 @@ move_slow_and_clear:
 TrajectoryPlannerROS:
   yaw_goal_tolerance: 0.17  # 10 deg
   acc_lim_theta: 2.0
-  max_rotational_vel: 3.05  # 60 deg/s
-  min_in_place_rotational_vel: 3.05  # 10 deg. This name will be deprecated in the future.
+  max_vel_theta: 3.05  # 60 deg/s
+  min_in_place_vel_theta: 3.05  # 10 deg. This name will be deprecated in the future.
 
 max_planning_retries: 2  # To enable recovery behavior, set to positive value.
