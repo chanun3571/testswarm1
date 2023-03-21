@@ -18,7 +18,7 @@ class TwistToVel():
         #self.base = rospy.get_param("~base_width", 200*(10^-3)) #radius=100 mm
    
     def twistCallback(self,msg):
-        self.r = 100/1000 #m
+        self.r = 125/1000 #m
         self.vx = msg.linear.x
         self.vy = msg.linear.y
         self.vr = msg.angular.z

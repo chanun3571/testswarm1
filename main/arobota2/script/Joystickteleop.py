@@ -35,7 +35,7 @@ class Joystick_Input():
     def motion(self,w,vx,vy):
         rate = rospy.Rate(10)
         #r = (48/2)/1000 # m
-        r = 100/1000 #m
+        r = 125/1000 #m
         #print(w,vx,vy)ss
         #u1 = 1/r*(-d*w + vx)
         #u2 = 1/r*(-d*w -cos(pi/3)*vx -sin(pi/3)*vy)

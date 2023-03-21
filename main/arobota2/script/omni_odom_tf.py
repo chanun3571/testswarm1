@@ -20,7 +20,7 @@ class OmniTf:
         #### parameters #######
         self.rate = rospy.get_param('~rate',10.0)  # the rate at which to publish the transform
         self.ticks_meter = (2**15)/(0.048*pi) # The number of wheel encoder ticks per meter of travel # 1 round = 2^15
-        self.base_width = 0.2 # The wheel base width in meters
+        self.base_width = 0.250 # The wheel base width in meters
         
         self.base_frame_id = rospy.get_param('~base_frame_id','base_footprint') # the name of the base frame of the robot
         self.odom_frame_id = rospy.get_param('~odom_frame_id', 'odom') # the name of the odometry reference frame
@@ -91,7 +91,7 @@ class OmniTf:
             # distance traveled 
             dx = 0.57736*d_right -0.57736*d_left
             dy =  0.3333*d_right + 0.3333*d_left - 0.6666*d_center
-            th = (0.3333*d_right + 0.3333*d_left + 0.3333*d_center )/ (1.25*self.base_width/2)
+            th = (0.3333*d_right + 0.3333*d_left + 0.3333*d_center )/ (self.base_width/2)
             # dx = (cos(pi/6)*d_right - cos(pi/6)*d_left)
             # dy =  sin(pi/6)*d_right + sin(pi/6)*d_left - d_center
             # th = (d_right + d_left + d_center )/ ((self.base_width/2))
