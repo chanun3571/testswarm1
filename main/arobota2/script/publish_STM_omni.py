@@ -24,7 +24,7 @@ class STM_Connect():
         if self.left_wheel_power==0 and self.right_wheel_power==0 and self.center_wheel_power==0:
             print("no motion")
         else:
-            if 0<=abs(self.left_wheel_power)<13 and 0<=abs(self.right_wheel_power)<13 and 0<=abs(self.center_wheel_power)<13:
+            if 0<=abs(self.left_wheel_power)<9 and 0<=abs(self.right_wheel_power)<9 and 0<=abs(self.center_wheel_power)<9:
                 if self.left_wheel_power<0:
                     self.left_wheel_power = self.left_wheel_power - 10
                 if self.right_wheel_power<0:
