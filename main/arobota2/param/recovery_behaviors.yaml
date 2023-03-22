@@ -1,4 +1,4 @@
-recovery_behavior_enabled: false
+recovery_behavior_enabled: true
 recovery_behaviors:
   - name: 'conservative_reset'
     type: 'clear_costmap_recovery/ClearCostmapRecovery'
@@ -19,14 +19,14 @@ conservative_reset:
   reset_distance: 2.0
 
 rotate_recovery0:
-  frequency: 20.0
+  frequency: 10.0
   sim_granularity: 0.017
 
 aggressive_reset:
   reset_distance: 1.2  # diameter of bounding circle of footprint polygon is 0.98
 
 rotate_recovery1:
-  frequency: 20.0
+  frequency: 10.0
   sim_granularity: 0.017
 
 all_reset:
