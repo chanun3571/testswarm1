@@ -9,7 +9,7 @@ global_costmap:
   robot_base_frame: base_footprint
   update_frequency: 3.0
   publich_frequency: 0.5
-  transform_tolerance: 2.0
+  transform_tolerance: 0.3
   rolling_window: false
   static_map: false #true
   robot_radius: 0.2
