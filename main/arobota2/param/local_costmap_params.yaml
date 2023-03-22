@@ -8,11 +8,11 @@ local_costmap:
   robot_base_frame: base_footprint
   update_frequency: 1.0
   publish_frequency: 5.0
-  transform_tolerance: 1.0
+  transform_tolerance: 0.3
   rolling_window: true
   static_map: false
   width: 1.5
   height: 1.5
-  robot_radius: 0.2
+  robot_radius: 0.1
   obstacle_range: 3 #5
   raytrace_range:  3 #5
