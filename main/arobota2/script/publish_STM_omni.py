@@ -27,13 +27,13 @@ class STM_Connect():
             if 0<=abs(self.left_wheel_power)<10 and 0<=abs(self.right_wheel_power)<10 and 0<=abs(self.center_wheel_power)<10:
                 if self.left_wheel_power<0:
                     self.left_wheel_power = self.left_wheel_power - 10
-                if self.left_wheel_power<0:
+                if self.right_wheel_power<0:
                     self.right_wheel_power = self.right_wheel_power -10 
                 if self.center_wheel_power<0:
                     self.center_wheel_power = self.center_wheel_power -10 
                 if self.left_wheel_power>0:
                     self.left_wheel_power = self.left_wheel_power + 10
-                if self.left_wheel_power>0:
+                if self.right_wheel_power>0:
                     self.right_wheel_power = self.right_wheel_power +10 
                 if self.center_wheel_power>0:
                     self.center_wheel_power = self.center_wheel_power +10 
