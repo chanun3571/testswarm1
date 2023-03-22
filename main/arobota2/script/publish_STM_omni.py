@@ -17,9 +17,9 @@ class STM_Connect():
     def Update_Speed(self, msg):
         r = rospy.Rate(20)
         self.wheel = msg.data.split(',')
-        self.left_wheel_power = -int(float(self.wheel[0])*300)
-        self.center_wheel_power = -int(float(self.wheel[1])*300)
-        self.right_wheel_power = -int(float(self.wheel[2])*300)
+        self.left_wheel_power = -int(float(self.wheel[0])*100)
+        self.center_wheel_power = -int(float(self.wheel[1])*100)
+        self.right_wheel_power = -int(float(self.wheel[2])*100)
         #dead zone
         # if self.left_wheel_power==0 and self.right_wheel_power==0 and self.center_wheel_power==0:
         #     print("no motion")
