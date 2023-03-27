@@ -17,4 +17,7 @@
 
   <!-- rviz -->
   <node name="rviz" pkg="rviz" type="rviz" required="true" args="-d $(find arobota2)/rviz/navigation.rviz"/>
+
+  <!-- service -->
+  <node pkg="rosservice" type="rosservice" name="global_loc" arg="call /global_localization"/>
 </launch>

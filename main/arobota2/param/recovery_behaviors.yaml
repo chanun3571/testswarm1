@@ -4,16 +4,16 @@ recovery_behaviors:
     type: 'clear_costmap_recovery/ClearCostmapRecovery'
   - name: 'rotate_recovery0'
     type: 'rotate_recovery/RotateRecovery'
-  # - name: 'aggressive_reset'
-  #   type: 'clear_costmap_recovery/ClearCostmapRecovery'
-  # - name: 'rotate_recovery1'
-  #   type: 'rotate_recovery/RotateRecovery'
-  # - name: 'all_reset'
-  #   type: 'clear_costmap_recovery/ClearCostmapRecovery'
-  # - name: 'rotate_recovery2'
-  #   type: 'rotate_recovery/RotateRecovery'
-  # - name: 'move_slow_and_clear'
-  #   type: 'move_slow_and_clear/MoveSlowAndClear'
+  - name: 'aggressive_reset'
+    type: 'clear_costmap_recovery/ClearCostmapRecovery'
+  - name: 'rotate_recovery1'
+    type: 'rotate_recovery/RotateRecovery'
+  - name: 'all_reset'
+    type: 'clear_costmap_recovery/ClearCostmapRecovery'
+  - name: 'rotate_recovery2'
+    type: 'rotate_recovery/RotateRecovery'
+  - name: 'move_slow_and_clear'
+    type: 'move_slow_and_clear/MoveSlowAndClear'
 
 conservative_reset:
   reset_distance: 2.0
@@ -38,8 +38,8 @@ rotate_recovery2:
 
 move_slow_and_clear:
   clearing_distance: 3.0
-  max_vel_trans: 0.17
-  max_vel_theta: 0.52  # 30 deg/s
+  limited_trans_speed: 0.25
+  limited_rot_speed: 0.25  # 30 deg/s
   limited_distance: 0.3
 
 # For rotate_recovery with local planner other than TrajectoryPlannerROS
