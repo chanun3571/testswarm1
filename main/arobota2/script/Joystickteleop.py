@@ -5,7 +5,7 @@ from sensor_msgs.msg import Joy
 from xbox_button import XBoxButton
 from geometry_msgs.msg import Pose,Twist,PoseStamped,Vector3
 from math import sin, cos, pi, sqrt
-#rom std_msgs.msg import String#String message 
+#from std_msgs.msg import String#String message 
 #from std_msgs.msg import Int8
 #from geometry_msgs.msg import Vector3
 
