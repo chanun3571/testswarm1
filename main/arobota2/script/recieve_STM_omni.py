@@ -71,6 +71,8 @@ def streamEncoder():
     sendSerial("R")
     sendSerial("S1")
     sendSerial("M0A0B0C0")
+    sendSerial("M0A20B20C20")
+    rospy.sleep(3)
 
 
 if __name__ =='__main__':
