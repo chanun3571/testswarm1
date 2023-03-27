@@ -20,6 +20,12 @@
   <node name="rviz" pkg="rviz" type="rviz" required="true" args="-d $(find arobota2)/rviz/navigation.rviz"/>
   <node pkg="rosservice" type="rosservice" name="global_loc" args="call --wait /global_localization" />
 
+  <node name="image_view" pkg="image_view" type="image_view" respawn="true" output="screen">
+    <remap from="image" to="/usb_cam/image"/>
+    <param name="autosize" value="true" />
+  </node>
+
+
   <!--add joystick -->
   <!-- <node pkg="arobota2" type="Joystickteleop.py" name="Joystick_input" output="screen"/>
   <node name="joy" pkg="joy" type="joy_node" output="screen"/>  -->
