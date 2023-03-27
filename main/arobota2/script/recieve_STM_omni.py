@@ -72,7 +72,7 @@ def streamEncoder():
     sendSerial("S1")
     sendSerial("M0A0B0C0")
     sendSerial("M0A20B20C20")
-    rospy.sleep(10)
+    ros::Duration(6).sleep()
     sendSerial("M0A0B0C0")
 
 
