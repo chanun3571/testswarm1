@@ -148,7 +148,7 @@ Visualization Manager:
       Value: true
     - Class: rviz/Image
       Enabled: false
-      Image Topic: /raspicam_node/image
+      Image Topic: /usb_cam/image
       Max Value: 1
       Median window: 5
       Min Value: 0
@@ -333,9 +333,9 @@ Visualization Manager:
         Value: false
       Field of View: 0.7853981852531433
       Focal Point:
-        X: -1.3930836915969849
-        Y: -0.1409768909215927
-        Z: 0.22684969007968903
+        X: 0
+        Y: 0
+        Z: 0
       Focal Shape Fixed Size: true
       Focal Shape Size: 0.05000000074505806
       Invert Z Axis: false
