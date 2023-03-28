@@ -12,9 +12,6 @@ class STM_Connect():
         self._left_wheel_power = 0
         self._right_wheel_power = 0
         self._center_wheel_power = 0
-        #self._left_wheel_speed = 0
-        #self._right_wheel_speed = 0
-        #self._center_wheel_speed = 0
         rospy.Subscriber('/joystick', Vector3, self.joystickCallback)
         #rospy.loginfo("Publish data to STM")
 
@@ -23,9 +20,6 @@ class STM_Connect():
         #M0 = power command 
         #M1 = position command
         #M2 = velocity command
-        # self._left_wheel_power = int(msg.x)
-        # self._center_wheel_power = int(msg.y)
-        # self._right_wheel_power= int(msg.z)
         self._left_wheel_power = -int(msg.z) 
         self._center_wheel_power = -int(msg.x)
         self._right_wheel_power= -int(msg.y)
@@ -33,14 +27,7 @@ class STM_Connect():
         power_message = "M0"+"A"+str(self._left_wheel_power)+"B"+str(self._right_wheel_power)+"C"+str(self._center_wheel_power)+"\r\n"
         ser.write(bytes(power_message, 'utf-8'))
         rospy.loginfo(power_message)
-        #velocity command
-        #velocity_message = "M2"+"A"+str(int(self._right_wheel_power))+"B"+str(self._center_wheel_power)+"C"+str(self._left_wheel_power)+"\r\n"
-        #ser.write(bytes(velocity_message, 'utf-8'))
-        #rospy.loginfo(speed_message)
         r.sleep()
-        #velocity command
-        #velocity_message = "M2"+"A"+str(int(self._right_wheel_power))+"B"+str(self._center_wheel_power)+"C"+str(self._left_wheel_power)+"\r\n"
-        #rospy.loginfo(velocity_message)
 
         
 if __name__ =='__main__':
