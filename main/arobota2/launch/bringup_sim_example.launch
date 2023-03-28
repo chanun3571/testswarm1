@@ -1,0 +1,20 @@
+<?xml version="1.0"?>
+<launch>
+    <!--include file="$(find bebop_formation)/launch/central_sim_example.launch">
+        <arg name="agentNum" value="3"/>
+    </include-->
+    <!-- <include file="$(find arobota2)/launch/gazebo_multi.launch">
+        <remap from="cmd_vel" to="robot$(arg number)/cmd_vel"/> -->
+
+        
+    </include>
+    <include file="$(find arobota2)/launch/agent_sim_example.launch">
+        <arg name="number" value="1"/>
+    </include>
+    <include file="$(find arobota2)/launch/agent_sim_example.launch">
+        <arg name="number" value="2"/>
+    </include>
+    <include file="$(find arobota2)/launch/agent_sim_example.launch">
+        <arg name="number" value="3"/>
+    </include>
+</launch>
