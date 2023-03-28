@@ -3,7 +3,7 @@
   <machine name="scamper204" address="192.168.208.204" env-loader="/home/revast-user/workspace/kinetic/devel/env.sh" user="revast-user" password="temppwd"/>
   <machine name="scamper205" address="192.168.208.205" env-loader="/home/revast-user/workspace/kinetic/devel/env.sh" user="revast-user" password="temppwd"/>
 <node name="joy" pkg="joy" type="joy_node" output="screen"/> 
-<node name="jref" pkg="scamper_ota" type="joycon145.py" output="screen"/> 
+<!-- <node name="jref" pkg="scamper_ota" type="joycon145.py" output="screen"/> 
   <node pkg="vrpn_client_ros" type="vrpn_client_node" name="vrpn_client_node" output="screen">
     <rosparam subst_value="true">
       server: 192.168.208.10
@@ -19,7 +19,7 @@
       # Must either specify refresh frequency > 0.0, or a list of trackers to create
       refresh_tracker_frequency: 10.0
     </rosparam>
-  </node>
+  </node> -->
   
   <group ns="scamper201">
   
