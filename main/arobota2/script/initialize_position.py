@@ -21,18 +21,18 @@ class Initialize_Pos():
         # self.t_delta = rospy.Duration(1.0/100)
         # self.t_next = rospy.Time.now() + self.t_delta
         # self.then = rospy.Time.now()
+        rospy.Rate(20).sleep()
         self.now = rospy.Time.now()
         self.then = rospy.Time.now()
         rospy.loginfo("Current time %i %i", self.now.secs, self.now.nsecs)
-
-        
+        rospy.loginfo("Current time %i %i", self.then.secs, self.then.nsecs)
 
     def rotate(self):
         self.then = rospy.Time.now()
-        rospy.loginfo("Current time %i %i", self.then.secs, self.then.nsecs)
+        rospy.loginfo("Current time %i", self.then.secs)
         self.joy_ux = 0
         self.joy_uy = 0
-        self.joy_omega = 1
+        self.joy_omega = 4
         self._uh.linear.x = self.joy_ux #(-1,1)
         self._uh.linear.y = self.joy_uy #(-1,1)
         self._uh.angular.z = self.joy_omega #(-1,1)
@@ -56,12 +56,13 @@ class Initialize_Pos():
     def spin(self):
         # initialize message
         while not rospy.is_shutdown():
-            rate = rospy.Rate(100)
+            rate = rospy.Rate(10)
             self.time=self.then.secs-self.now.secs
-            if int(self.time)<10:
+            rospy.loginfo(self.time)
+            self.rotate()
+            if self.time>10:
                 rospy.loginfo(self.time)
-                self.rotate()
-            else:
+                rospy.loginfo("DONE")
                 self.stoprotate()
                 break
             rate.sleep()
