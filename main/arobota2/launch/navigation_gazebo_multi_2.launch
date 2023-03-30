@@ -1,5 +1,4 @@
 <launch> 
-  <node pkg="rosservice" type="rosservice" name="global_loc_2" args="call --wait /global_localization" />
   <include file="$(find arobota2)/launch/amcl_gazebo_multi_2.launch"/> 
   <include file="$(find arobota2)/launch/movebase_gazebo_2.launch"/> 
   <!--initialize localization-->

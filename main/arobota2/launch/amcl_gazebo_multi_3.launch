@@ -9,8 +9,9 @@
   <arg name="initial_pose_y"  default="0"/>
   <arg name="initial_pose_a"  default="0"/> -->
   <arg name="global_frame_id" default="map"/>
+  <arg name="node_start_delay" default="2"/>
   <!-- AMCL -->
-  <node pkg="amcl" type="amcl" name="robot3_amcl">
+  <node pkg="amcl" type="amcl" name="robot3_amcl" launch-prefix="bash -c 'sleep $(arg node_start_delay); $0 $@' ">
 
     <param name="use_map_topic"             value="$(arg use_map_topic)"/>
     <param name="global_frame_id"           value="$(arg global_frame_id)"/>
@@ -52,4 +53,5 @@
     <remap from="amcl_pose"                 to="/robot3/amcl_pose"/>
     <remap from="particlecloud"             to="/robot3/particlecloud"/>
   </node>
+  <node pkg="rosservice" type="rosservice" name="global_loc_3" args="call --wait /global_localization" launch-prefix="bash -c 'sleep $(arg node_start_delay); $0 $@'"/>
 </launch>
