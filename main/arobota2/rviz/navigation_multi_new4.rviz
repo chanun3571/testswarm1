@@ -7,7 +7,6 @@ Panels:
         - /Global Options1
         - /Status1
         - /GlobalMap1/GlobalMap21/CostMap21
-        - /LocalMap1/LocalMap11/Polygon11/Status1
         - /LocalMap1/LocalMap31/Polygon31
       Splitter Ratio: 0.5
     Tree Height: 690
@@ -649,7 +648,7 @@ Visualization Manager:
   Views:
     Current:
       Class: rviz/Orbit
-      Distance: 2.2790164947509766
+      Distance: 4.433598041534424
       Enable Stereo Rendering:
         Stereo Eye Separation: 0.05999999865889549
         Stereo Focal Distance: 1
@@ -657,17 +656,17 @@ Visualization Manager:
         Value: false
       Field of View: 0.7853981852531433
       Focal Point:
-        X: -0.6884198188781738
-        Y: 0.3038330674171448
-        Z: -0.30841007828712463
+        X: -0.3634064495563507
+        Y: -0.18353168666362762
+        Z: 0.013656098395586014
       Focal Shape Fixed Size: true
       Focal Shape Size: 0.05000000074505806
       Invert Z Axis: false
       Name: Current View
       Near Clip Distance: 0.009999999776482582
-      Pitch: 1.0747966766357422
+      Pitch: 0.9247968196868896
       Target Frame: <Fixed Frame>
-      Yaw: 1.6366955041885376
+      Yaw: 2.991694927215576
     Saved: ~
 Window Geometry:
   Displays:

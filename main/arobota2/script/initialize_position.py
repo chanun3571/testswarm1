@@ -24,8 +24,8 @@ class Initialize_Pos():
         rospy.Rate(20).sleep()
         self.now = rospy.Time.now()
         self.then = rospy.Time.now()
-        rospy.loginfo("Current time %i %i", self.now.secs, self.now.nsecs)
-        rospy.loginfo("Current time %i %i", self.then.secs, self.then.nsecs)
+        # rospy.loginfo("Current time %i %i", self.now.secs, self.now.nsecs)
+        # rospy.loginfo("Current time %i %i", self.then.secs, self.then.nsecs)
 
     def rotate(self):
         self.then = rospy.Time.now()
@@ -58,10 +58,10 @@ class Initialize_Pos():
         while not rospy.is_shutdown():
             rate = rospy.Rate(10)
             self.time=self.then.secs-self.now.secs
-            rospy.loginfo(self.time)
+            # rospy.loginfo(self.time)
             self.rotate()
-            if self.time>5:
-                rospy.loginfo(self.time)
+            if self.time>3:
+                # rospy.loginfo(self.time)
                 rospy.loginfo("DONE")
                 self.stoprotate()
                 break
