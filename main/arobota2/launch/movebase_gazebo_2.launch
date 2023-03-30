@@ -12,12 +12,12 @@
     <param name="base_local_planner" value="dwa_local_planner/DWAPlannerROS" />
     <!-- <rosparam file="$(find arobota2)/param/common_costmap.yaml" command="load" ns="global_costmap" />
     <rosparam file="$(find arobota2)/param/common_costmap.yaml" command="load" ns="local_costmap" /> -->
-    <rosparam file="$(find arobota2)/param/local_costmap_params.yaml" command="load" />
-    <rosparam file="$(find arobota2)/param/global_costmap_params.yaml" command="load" />
-    <rosparam file="$(find arobota2)/param/movebase_params.yaml" command="load" />
-    <rosparam file="$(find arobota2)/param/dwa_local_planner_params.yaml" command="load" />
-    <rosparam file="$(find arobota2)/param/global_costmap_plugin_config.yaml" command="load" /> 
-    <rosparam file="$(find arobota2)/param/local_costmap_plugin_config.yaml" command="load" />
+    <rosparam file="$(find arobota2)/param/multi_param/multi_param2/local_costmap_params.yaml" command="load" />
+    <rosparam file="$(find arobota2)/param/multi_param/multi_param2/global_costmap_params.yaml" command="load" />
+    <rosparam file="$(find arobota2)/param/multi_param/multi_param2/movebase_params.yaml" command="load" />
+    <rosparam file="$(find arobota2)/param/multi_param/multi_param2/dwa_local_planner_params.yaml" command="load" />
+    <rosparam file="$(find arobota2)/param/multi_param/multi_param2/global_costmap_plugin_config.yaml" command="load" /> 
+    <rosparam file="$(find arobota2)/param/multi_param/multi_param2/local_costmap_plugin_config.yaml" command="load" />
     <remap from="cmd_vel" to="$(arg cmd_vel_topic)"/>
     <remap from="odom" to="$(arg odom_topic)"/>
 

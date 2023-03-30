@@ -12,12 +12,12 @@
     <param name="base_local_planner" value="dwa_local_planner/DWAPlannerROS" />
     <!-- <rosparam file="$(find arobota2)/param/common_costmap.yaml" command="load" ns="global_costmap" />
     <rosparam file="$(find arobota2)/param/common_costmap.yaml" command="load" ns="local_costmap" /> -->
-    <rosparam file="$(find arobota2)/param/local_costmap_params.yaml" command="load" />
-    <rosparam file="$(find arobota2)/param/global_costmap_params.yaml" command="load" />
-    <rosparam file="$(find arobota2)/param/movebase_params.yaml" command="load" />
-    <rosparam file="$(find arobota2)/param/dwa_local_planner_params.yaml" command="load" />
-    <rosparam file="$(find arobota2)/param/global_costmap_plugin_config.yaml" command="load" /> 
-    <rosparam file="$(find arobota2)/param/local_costmap_plugin_config.yaml" command="load" />
+    <rosparam file="$(find arobota2)/param/multi_param/multi_param1/local_costmap_params.yaml" command="load" />
+    <rosparam file="$(find arobota2)/param/multi_param/multi_param1/global_costmap_params.yaml" command="load" />
+    <rosparam file="$(find arobota2)/param/multi_param/multi_param1/movebase_params.yaml" command="load" />
+    <rosparam file="$(find arobota2)/param/multi_param/multi_param1/dwa_local_planner_params.yaml" command="load" />
+    <rosparam file="$(find arobota2)/param/multi_param/multi_param1/global_costmap_plugin_config.yaml" command="load" /> 
+    <rosparam file="$(find arobota2)/param/multi_param/multi_param1/local_costmap_plugin_config.yaml" command="load" />
     <remap from="cmd_vel" to="$(arg cmd_vel_topic)"/>
     <remap from="odom" to="$(arg odom_topic)"/>
 
@@ -73,8 +73,5 @@
     <remap from="/move_base/parameter_updates"                                                  to="/robot1/move_base/parameter_updates"                                     />
     <remap from="/move_base/result"                                                             to="/robot1/move_base/result"                                                />
     <remap from="/move_base/status"                                                             to="/robot1/move_base/status"                                                />
-
-
-
   </node>
 </launch>
