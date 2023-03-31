@@ -7,8 +7,8 @@ global_costmap:
    
   global_frame: map
   robot_base_frame: robot3_tf/base_footprint
-  update_frequency: 3.0
-  publich_frequency: 0.5
+  update_frequency: 10
+  publich_frequency: 5
   transform_tolerance: 0.3
   rolling_window: false
   static_map: false #true
