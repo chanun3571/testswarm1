@@ -953,39 +953,9 @@
     </model>
     <state world_name='default'>
       <sim_time>0 0</sim_time>
-      <real_time>377 571281687</real_time>
-      <wall_time>1680177397 588683170</wall_time>
-      <iterations>98878</iterations>
-      <model name='ROBOT1'>
-        <pose>0.222467 0.146851 -0.000281 0.000162 0.000327 -0.928808</pose>
-        <scale>1 1 1</scale>
-        <link name='base_footprint'>
-          <pose>0.222467 0.146851 -0.000281 0.000162 0.000327 -0.928808</pose>
-          <velocity>0.001431 0.00674 0.00328 0.136046 -0.057965 0.009305</velocity>
-          <acceleration>-2.35236 -2.35236 1.9618 1.54395 0.627955 2.88296</acceleration>
-          <wrench>-11.8122 -11.8122 9.85107 0 -0 0</wrench>
-        </link>
-      </model>
-      <model name='ROBOT2'>
-        <pose>-1.23319 -0.324729 -0.000283 -2.4e-05 0.000335 0.373425</pose>
-        <scale>1 1 1</scale>
-        <link name='base_footprint'>
-          <pose>-1.23319 -0.324729 -0.000283 -2.4e-05 0.000335 0.373425</pose>
-          <velocity>-0.000458 -0.008978 0.000975 -0.160277 0.0221 0.006432</velocity>
-          <acceleration>1.0006 1.92841 -0.157965 -2.27723 -1.553 -2.80111</acceleration>
-          <wrench>5.02443 9.68338 -0.793213 0 -0 0</wrench>
-        </link>
-      </model>
-      <model name='ROBOT3'>
-        <pose>-0.848413 1.03431 -0.000283 -2.5e-05 0.000335 -2.37257</pose>
-        <scale>1 1 1</scale>
-        <link name='base_footprint'>
-          <pose>-0.848413 1.03431 -0.000283 -2.5e-05 0.000335 -2.37257</pose>
-          <velocity>-0.000833 0.008252 0.001141 0.153483 0.040679 -0.010831</velocity>
-          <acceleration>1.79635 -1.96599 0.029967 -1.04696 -0.467395 2.15965</acceleration>
-          <wrench>9.02027 -9.87212 0.150477 0 -0 0</wrench>
-        </link>
-      </model>
+      <real_time>0 0</real_time>
+      <wall_time>0 0</wall_time>
+      <iterations>0</iterations>
       <model name='Untitled1'>
         <pose>0.171796 -0.246021 0 0 -0 0</pose>
         <scale>1 1 1</scale>
