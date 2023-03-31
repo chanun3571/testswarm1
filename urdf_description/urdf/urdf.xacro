@@ -33,7 +33,7 @@
 <link name="wheel_link_1">
   <inertial>
     <origin xyz="0.007650926996154439 -6.583497840632717e-05 7.082305684349283e-05" rpy="0 0 0"/>
-    <mass value="0.17051038938064"/>
+    <mass value="10.17051038938064"/>
     <inertia ixx="5e-05" iyy="3.2e-05" izz="3.2e-05" ixy="-0.0" iyz="-0.0" ixz="-0.0"/>
   </inertial>
   <visual>
@@ -54,7 +54,7 @@
 <link name="wheel_link_2">
   <inertial>
     <origin xyz="-0.0039033081055799 0.006580816821685306 3.642650617940307e-05" rpy="0 0 0"/>
-    <mass value="0.17051038938064"/>
+    <mass value="10.17051038938064"/>
     <inertia ixx="3.7e-05" iyy="4.6e-05" izz="3.2e-05" ixy="-8e-06" iyz="0.0" ixz="-0.0"/>
   </inertial>
   <visual>
@@ -75,7 +75,7 @@
 <link name="wheel_link_3">
   <inertial>
     <origin xyz="-0.0037745189185399014 -0.006655427439052869 7.703379049328954e-05" rpy="0 0 0"/>
-    <mass value="0.17051038938064"/>
+    <mass value="10.17051038938064"/>
     <inertia ixx="3.7e-05" iyy="4.6e-05" izz="3.2e-05" ixy="8e-06" iyz="-0.0" ixz="-0.0"/>
   </inertial>
   <visual>
@@ -222,22 +222,22 @@
   
 <gazebo reference="wheel_link_1">
   <material>${body_color1}</material>
-  <mu1>0.6</mu1>
-  <mu2>0.6</mu2>
+  <mu1>0.5</mu1>
+  <mu2>0.5</mu2>
   <selfCollide>true</selfCollide>
 </gazebo>
 
 <gazebo reference="wheel_link_2">
   <material>${body_color1}</material>
-  <mu1>0.6</mu1>
-  <mu2>0.6</mu2>
+  <mu1>0.5</mu1>
+  <mu2>0.5</mu2>
   <selfCollide>true</selfCollide>
 </gazebo>
 
 <gazebo reference="wheel_link_3">
   <material>${body_color1}</material>
-  <mu1>0.6</mu1>
-  <mu2>0.6</mu2>
+  <mu1>0.5</mu1>
+  <mu2>0.5</mu2>
   <selfCollide>true</selfCollide>
 </gazebo>
 
