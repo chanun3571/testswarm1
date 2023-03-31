@@ -2,35 +2,35 @@ recovery_behavior_enabled: false
 recovery_behaviors:
   - name: 'conservative_reset'
     type: 'clear_costmap_recovery/ClearCostmapRecovery'
-  - name: 'rotate_recovery0'
-    type: 'rotate_recovery/RotateRecovery'
+  # - name: 'rotate_recovery0'
+  #   type: 'rotate_recovery/RotateRecovery'
   - name: 'aggressive_reset'
     type: 'clear_costmap_recovery/ClearCostmapRecovery'
-  - name: 'rotate_recovery1'
-    type: 'rotate_recovery/RotateRecovery'
+  # - name: 'rotate_recovery1'
+  #   type: 'rotate_recovery/RotateRecovery'
   - name: 'all_reset'
     type: 'clear_costmap_recovery/ClearCostmapRecovery'
-  - name: 'rotate_recovery2'
-    type: 'rotate_recovery/RotateRecovery'
+  # - name: 'rotate_recovery2'
+  #   type: 'rotate_recovery/RotateRecovery'
   # - name: 'move_slow_and_clear'
   #   type: 'move_slow_and_clear/MoveSlowAndClear'
 
 conservative_reset:
-  reset_distance: 2.0
+  reset_distance: 10 #2.0
 
 rotate_recovery0:
   frequency: 10.0
   sim_granularity: 0.017
 
 aggressive_reset:
-  reset_distance: 1.2  # diameter of bounding circle of footprint polygon is 0.98
+  reset_distance: 10 #2.0 # diameter of bounding circle of footprint polygon is 0.98
 
 rotate_recovery1:
   frequency: 10.0
   sim_granularity: 0.017
 
 all_reset:
-  reset_distance: 0.0  # diameter of bounding circle of footprint polygon is 0.98
+  reset_distance: 10 #0  # diameter of bounding circle of footprint polygon is 0.98
 
 rotate_recovery2:
   frequency: 20.0

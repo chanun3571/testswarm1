@@ -29,7 +29,7 @@ class Initialize_Pos():
 
     def rotate(self):
         self.then = rospy.Time.now()
-        rospy.loginfo("Current time %i", self.then.secs)
+        # rospy.loginfo("Current time %i", self.then.secs)
         self.joy_ux = 0
         self.joy_uy = 0
         self.joy_omega = 4
@@ -61,6 +61,7 @@ class Initialize_Pos():
             # rospy.loginfo(self.time)
             self.rotate()
             if self.time>3:
+                rospy.Rate(10).sleep()
                 # rospy.loginfo(self.time)
                 rospy.loginfo("DONE")
                 self.stoprotate()
