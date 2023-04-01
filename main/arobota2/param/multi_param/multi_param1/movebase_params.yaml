@@ -1,9 +1,9 @@
 learing_rotation_allowed: false
 shutdown_costmaps: false
 
-#make_plan_add_unreachable_goal: true
-#make_plan_clear_costmap: true
-#max_planning_retries: 1
+make_plan_add_unreachable_goal: true
+make_plan_clear_costmap: true
+max_planning_retries: 5
 
 controller_frequency: 10
 controller_patience: 5
