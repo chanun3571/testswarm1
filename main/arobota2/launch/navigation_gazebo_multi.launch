@@ -17,6 +17,6 @@
   <!--initialize localization-->
   <node pkg="arobota2" type="initialize_position.py" name="initialize_localize" output="screen" launch-prefix="bash -c 'sleep $(arg node_start_delay); $0 $@'"/>
   <node pkg="arobota2" type="ensure_goal_pos.py" name="ensure_command" output="screen" />
-  <node pkg="arobota2" type="pose_collector.py" name="pose_collector" output="screen" />
+  <node pkg="arobota2" type="pose_collector_array.py" name="pose_collector_array" output="screen" />
 
 </launch>

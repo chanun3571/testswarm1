@@ -22,7 +22,7 @@ class PoseCollector:
     def allpose2_callback(self, msg):
         msg.pose.pose = self.pose[1]
 
-    def allpose2_callback(self, msg):
+    def allpose3_callback(self, msg):
         msg.pose.pose = self.pose[2]
 
 
@@ -30,10 +30,10 @@ class PoseCollector:
     def spin(self):
         while not rospy.is_shutdown():
             self.pub_allPose.publish(self.pose)
-            self.Rate(10).sleep()
+            rospy.Rate(10).sleep()
 
 if __name__ == "__main__":
-    rospy.init_node("poseCollector", anonymous=True)
+    rospy.init_node("PoseCollector", anonymous=True)
     try:
         posecollector = PoseCollector()
         posecollector.spin()
