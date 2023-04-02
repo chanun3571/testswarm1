@@ -5,30 +5,6 @@ import rospy
 from geometry_msgs.msg import Pose, PoseStamped, PoseWithCovarianceStamped
 from geometry_msgs.msg import PoseArray
 
-class Collector:
-    def __init__(self, agentName):
-        self.ready = False
-        topicName = rospy.get_param("~posestampedTopic")
-        preTopicName = rospy.get_param("~preTopicName", "/")
-        subTopic = preTopicName + agentName + topicName
-        rospy.loginfo("topicName:" + subTopic)
-        # subscriber for each agent's region
-        rospy.Subscriber(subTopic, PoseStamped, self.poseStampedCallback, queue_size=1)
-        # initialze with zeros
-        self.pose = Pose()
-
-    def poseStampedCallback(self, msg_data):
-        if self.ready == False:
-            self.ready = True
-        self.pose = msg_data.pose
-
-    def getPose(self):
-        return self.pose
-
-    def getReady(self):
-        return self.ready
-
-
 class PoseCollector:
     def __init__(self):
         # ROS Initialize
