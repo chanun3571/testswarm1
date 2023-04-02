@@ -24,15 +24,15 @@ class PoseCollector:
         msg.pose.pose.orientation.z=self.CollectorOrien[0][0]
         msg.pose.pose.orientation.w=self.CollectorOrien[0][1]
     def allpose2_callback(self, msg):
-            msg.pose.pose.position.x=self.CollectorPosi[1][0]
-            msg.pose.pose.position.y=self.CollectorPosi[1][1]
-            msg.pose.pose.orientation.z=self.CollectorOrien[1][0]
-            msg.pose.pose.orientation.w=self.CollectorOrien[1][1]
-        def allpose2_callback(self, msg):
-            msg.pose.pose.position.x=self.CollectorPosi[2][0]
-            msg.pose.pose.position.y=self.CollectorPosi[2][1]
-            msg.pose.pose.orientation.z=self.CollectorOrien[2][0]
-            msg.pose.pose.orientation.w=self.CollectorOrien[2][1]
+        msg.pose.pose.position.x=self.CollectorPosi[1][0]
+        msg.pose.pose.position.y=self.CollectorPosi[1][1]
+        msg.pose.pose.orientation.z=self.CollectorOrien[1][0]
+        msg.pose.pose.orientation.w=self.CollectorOrien[1][1]
+    def allpose2_callback(self, msg):
+        msg.pose.pose.position.x=self.CollectorPosi[2][0]
+        msg.pose.pose.position.y=self.CollectorPosi[2][1]
+        msg.pose.pose.orientation.z=self.CollectorOrien[2][0]
+        msg.pose.pose.orientation.w=self.CollectorOrien[2][1]
 
     def spin(self):
         while not rospy.is_shutdown():
