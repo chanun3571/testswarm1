@@ -14,22 +14,20 @@ class PoseCollector:
         rospy.Subscriber("/robot2/amcl_pose", PoseWithCovarianceStamped, self.allpose2_callback)
         rospy.Subscriber("/robot3/amcl_pose", PoseWithCovarianceStamped, self.allpose3_callback)
         self.pub_allPose = rospy.Publisher("/allPose", PoseArray, queue_size=1)
-        self.pose=PoseArray()
+        self.pose=Pose()
 
     def allpose1_callback(self, msg):
-        msg.pose.pose = self.pose[0]
-        
+        self.pose.append(msg.pose.pose)        
     def allpose2_callback(self, msg):
-        msg.pose.pose = self.pose[1]
-
+        self.pose.append(msg.pose.pose)
     def allpose3_callback(self, msg):
-        msg.pose.pose = self.pose[2]
+        self.pose.append(msg.pose.pose)
 
 
 
     def spin(self):
         while not rospy.is_shutdown():
-            self.pub_allPose.publish(self.pose)
+            self.pub_allPose.publish(PoseArray(self.pose))
             rospy.Rate(10).sleep()
 
 if __name__ == "__main__":
