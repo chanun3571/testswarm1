@@ -18,17 +18,17 @@ class PoseCollector:
         self.CollectorPosi = [[0,0],[0,0],[0,0]]
         self.CollectorOrien =[[0,0],[0,0],[0,0]]
         
-        def allpose1_calllback(self, msg):
-            msg.pose.pose.position.x=self.CollectorPosi[0][0]
-            msg.pose.pose.position.y=self.CollectorPosi[0][1]
-            msg.pose.pose.orientation.z=self.CollectorOrien[0][0]
-            msg.pose.pose.orientation.w=self.CollectorOrien[0][1]
-        def allpose2_calllback(self, msg):
+    def allpose1_callback(self, msg):
+        msg.pose.pose.position.x=self.CollectorPosi[0][0]
+        msg.pose.pose.position.y=self.CollectorPosi[0][1]
+        msg.pose.pose.orientation.z=self.CollectorOrien[0][0]
+        msg.pose.pose.orientation.w=self.CollectorOrien[0][1]
+    def allpose2_callback(self, msg):
             msg.pose.pose.position.x=self.CollectorPosi[1][0]
             msg.pose.pose.position.y=self.CollectorPosi[1][1]
             msg.pose.pose.orientation.z=self.CollectorOrien[1][0]
             msg.pose.pose.orientation.w=self.CollectorOrien[1][1]
-        def allpose2_calllback(self, msg):
+        def allpose2_callback(self, msg):
             msg.pose.pose.position.x=self.CollectorPosi[2][0]
             msg.pose.pose.position.y=self.CollectorPosi[2][1]
             msg.pose.pose.orientation.z=self.CollectorOrien[2][0]
