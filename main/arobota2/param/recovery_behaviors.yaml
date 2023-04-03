@@ -1,19 +1,19 @@
-recovery_behavior_enabled: true
+recovery_behavior_enabled: false
 recovery_behaviors:
   - name: 'conservative_reset'
     type: 'clear_costmap_recovery/ClearCostmapRecovery'
-  - name: 'rotate_recovery0'
-    type: 'rotate_recovery/RotateRecovery'
+  # - name: 'rotate_recovery0'
+  #   type: 'rotate_recovery/RotateRecovery'
   - name: 'aggressive_reset'
     type: 'clear_costmap_recovery/ClearCostmapRecovery'
-  - name: 'rotate_recovery1'
-    type: 'rotate_recovery/RotateRecovery'
+  # - name: 'rotate_recovery1'
+  #   type: 'rotate_recovery/RotateRecovery'
   - name: 'all_reset'
     type: 'clear_costmap_recovery/ClearCostmapRecovery'
-  - name: 'rotate_recovery2'
-    type: 'rotate_recovery/RotateRecovery'
-  - name: 'move_slow_and_clear'
-    type: 'move_slow_and_clear/MoveSlowAndClear'
+  # - name: 'rotate_recovery2'
+  #   type: 'rotate_recovery/RotateRecovery'
+  # - name: 'move_slow_and_clear'
+  #   type: 'move_slow_and_clear/MoveSlowAndClear'
 
 conservative_reset:
   reset_distance: 2.0

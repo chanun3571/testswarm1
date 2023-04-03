@@ -29,12 +29,12 @@ global_costmap:
       marking:            true
       clearing:           true
       inf_is_valid:       true
-      observation_persistence: 10 #Secs
+      observation_persistence: 1 #Secs
 
   # Layer 3 - Inflation
   inflation_layer:
     enabled:              true
     cost_scaling_factor:  5 # exponential rate at which the obstacle cost drops off (default: 10)
-    inflation_radius:     0.15 # max. distance from an obstacle at which costs are incurred for planning paths.
+    inflation_radius:     0.1 # max. distance from an obstacle at which costs are incurred for planning paths.
  
     
