@@ -54,16 +54,7 @@ class AgentManagerExample:
     ### start main
 
     def main_control(self):
-        '''
-        Returns
-        ----------
-        ux : float
-        uy : float
-        uz : float
-        omega_z : float
-        '''
-
-        ### you can use drone's position to design the input ###
+        ##use drone's position to design the input ###
         myid = self._agent_util.get_my_id()
         my_position, my_orientation = self._agent_util.get_my_pose()
         all_positions = self._agent_util.get_all_positions()
@@ -110,7 +101,7 @@ class AgentManagerExample:
         world_ux, world_uy, world_uz = world[0]+joy_ux+ worldPI[0], world[1]+joy_uy+worldPI[1], world[2] + worldPI[2]
 
         ## x y field limitation and collision avoidance with CBF
-        #### x, y, z, free 3 column
+        #### x, y, z free 3 column
         neighbor_positions = self._agent_util.get_neighbor_positions()
         u_nom = np.array([world_ux, world_uy, world_uz,0,0,0])
         u_opt, w, status =self._cbf.solve(u_nom, my_position, neighbor_positions)

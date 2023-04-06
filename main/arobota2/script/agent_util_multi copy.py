@@ -22,8 +22,7 @@ class AgentUtil(object):
         self.allOrientations = np.zeros((self.agentNum, 4))
 
         # publisher for agent control
-        self.pub_twist = rospy.Publisher("cmd_input", Twist, queue_size=1)
-        self.pub_takeoffland = rospy.Publisher("cmd_takeoffland", String, queue_size=1)
+        self.pub_twist = rospy.Publisher("cmd_vel", Twist, queue_size=10)
 
         self.checkNeighborStart  = False
 
@@ -64,20 +63,7 @@ class AgentUtil(object):
     
     def is_neighbor_started(self):
         return self.checkNeighborStart
-
-    def publish_takeoff(self):
-        pubString = String("takeoff")
-        self.pub_takeoffland.publish(pubString)
-    
-    def publish_land(self):
-        pubString = String("land")
-        self.pub_takeoffland.publish(pubString)
-    
-    def stop_takeoff(self):
-        pubString = String('')
-        self.pub_takeoffland.publish(pubString)
-    
-    
+       
     def publish_command(self, ux, uy, uz, omega_z):
         twist = Twist()
         twist.linear.x = ux

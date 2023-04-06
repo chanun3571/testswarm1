@@ -7,7 +7,7 @@ from move_base_msgs.msg import MoveBaseAction, MoveBaseGoal
 class myrobot_goal():
     def __init__(self):
         rospy.init_node('move_my_robot')
-        self.goal = [(1.5,-0.9,-1),(0.8,2.2,0.3),(-4,1.3,-1)]
+        self.goal = [(1.1,-0.9,1),(-0.8,-0.1,1)]
         self.count = 0
         self.client = actionlib.SimpleActionClient('move_base',MoveBaseAction)
         rospy.loginfo("Waiting for move_base action server...")
