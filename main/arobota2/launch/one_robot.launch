@@ -4,8 +4,4 @@
 
   <node name="urdf_spawner" pkg="gazebo_ros" type="spawn_model"
         args="$(arg init_pose) -urdf -param /robot_description -model $(arg robot_name)" respawn="false" output="screen" />
-  <!-- <node pkg="joint_state_publisher" type="joint_state_publisher" name="joint_state_publisher">
-    <param name="use_gui" value="true"/>
-    <param name="rate" value="30.0"/>
-  </node> -->
 </launch>
