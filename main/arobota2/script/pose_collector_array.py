@@ -17,6 +17,7 @@ class PoseCollector:
         self.pose=Pose()
 
     def allpose1_callback(self, msg):
+        print(msg.pos)
         self.pose.append(msg.pose.pose)        
     def allpose2_callback(self, msg):
         self.pose.append(msg.pose.pose)
