@@ -54,7 +54,7 @@
     <remap from="/move_base/TebLocalPlannerROS/parameter_updates"                               to="/robot3/move_base/TebLocalPlannerROS/parameter_updates"                  />
     <remap from="/move_base/cancel"                                                             to="/robot3/move_base/cancel"                                                />
     <remap from="/move_base/current_goal"                                                       to="/robot3/move_base/current_goal"                                          />
-    <remap from="/move_basefeedback"                                                            to="/robot3/move_basefeedback"                                               />
+    <remap from="/move_base/feedback"                                                            to="/robot3/move_base/feedback"                                               />
     <remap from="/move_base/global_costmap/footprint"                                           to="/robot3/move_base/global_costmap/footprint"                              />
     <remap from="/move_base/global_costmap/inflation_layer/parameter_descriptions"              to="/robot3/move_base/global_costmap/inflation_layer/parameter_descriptions" />
     <remap from="/move_base/global_costmap/inflation_layer/parameter_updates"                   to="/robot3/move_base/global_costmap/inflation_layer/parameter_updates"      />
