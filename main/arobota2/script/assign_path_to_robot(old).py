@@ -1,63 +1,63 @@
-#!/usr/bin/env python3
-import time
-import rospy
-import actionlib
+#!/usr/bin/env python
+
+import actionlib, rospy
 from move_base_msgs.msg import MoveBaseAction, MoveBaseGoal
+from geometry_msgs.msg import PoseWithCovarianceStamped, PoseArray,Pose,Quaternion,Twist,Point
 
-class myrobot_goal():
-    def __init__(self):
-        rospy.init_node('move_my_robot')
-        self.goal = [(1.1,-0.9,1),(-0.8,-0.1,1)]
-        self.count = 0
-        self.client = actionlib.SimpleActionClient('move_base',MoveBaseAction)
-        rospy.loginfo("Waiting for move_base action server...")
-        wait = self.client.wait_for_server(rospy.Duration(5.0))
-        if not wait:
-            rospy.logerr("Action server not available!")
-            rospy.signal_shutdown("Action server not available!")
-            return 
-        rospy.loginfo("Connected to server")
-        self.movebase_client()
+rospy.init_node('custom_waypoints2')
+rospy.Subscriber('/robot2_formation_pos', Point, CustomWayPoints2)
 
-    def movebase_client(self):
+
+def CustomWayPoints2(msg):
+    # Create the dictionary 
+    locations = dict()
+    # add our waypoint names and values. 
+    # locations['waypoint1'] = Pose(Point(0, 0, 0.000), Quaternion(0.000, 0.000, -0.717, 0.697))
+    # locations['waypoint2'] = Pose(Point(1.1, -0.827, 0.000),Quaternion(0.000, 0.000, -0.707, 0.708))
+    # locations['waypoint3'] = Pose(Point(-1.2, -0.3, 0.000), Quaternion(0.000, 0.000, -0.016, 1.000))   
+    locations['waypoint1'] = Pose(msg, Quaternion(0.000, 0.000, -0.717, 0.697))
+    return locations
+    
+# create a function that represnt posearray in Rviz so we could visualize the waypoints 
+def wayPointsRviz(waypointsList):
+    poseArrayPub= rospy.Publisher('/waypoints', PoseArray, queue_size=1)
+    waypoints = PoseArray()
+    waypoints.header.frame_id = 'map'
+    waypointPoses = []
+    for key, value in waypointsList.items():
+        waypointPoses.append(waypointsList[key])
+
+    waypoints.poses = waypointPoses
+    poseArrayPub.publish(waypoints)
+    return waypoints
+
+
+def sendGoals(waypoints):
+    # subscribe to action server 
+    client = actionlib.SimpleActionClient('robot2/move_base', MoveBaseAction)
+    # this command to wait for the server to start listening for goals.
+    client.wait_for_server()
+    
+    # Iterate over all the waypoits, follow the path 
+    for key, value in waypoints.items():
         goal = MoveBaseGoal()
         goal.target_pose.header.frame_id = "map"
-        goal.target_pose.pose.position.x = self.goal[self.count][0]
-        goal.target_pose.pose.position.y = self.goal[self.count][1]
-        goal.target_pose.pose.orientation.w = self.goal[self.count][2]
-        rospy.loginfo("Sending goal pose "+str(self.count+1)+" to Action Server")
-        self.client.send_goal(goal,self.movebase_check) #,self.done_cb,self.active_cb, self.feedback_cb)
-        rospy.spin()
-    
-    def movebase_check(self,y,w):
-        self.count += 1
-        rospy.loginfo("Goal pose "+str(self.count)+" reached") 
-        #rospy.loginfo("Position"+"is"+[self.goal][self.count][0]+","+[self.goal][self.count][0]) 
-        if self.count < len(self.goal):
-            goal = MoveBaseGoal()
-            goal.target_pose.header.frame_id = "map"
-            goal.target_pose.pose.position.x = self.goal[self.count][0]
-            goal.target_pose.pose.position.y = self.goal[self.count][1]
-            goal.target_pose.pose.orientation.w = self.goal[self.count][2]
-            rospy.loginfo("Sending goal pose "+str(self.count+1)+" to Action Server")
-            self.client.send_goal(goal,self.movebase_check)
-        else :
-            rospy.loginfo("Final goal reached")
-            self.movebase_back()
+        goal.target_pose.header.stamp = rospy.Time.now()
 
-    def movebase_back(self):
-        home = MoveBaseGoal()
-        home.target_pose.header.frame_id = "map"
-        home.target_pose.pose.position.x = 0
-        home.target_pose.pose.position.y = 0
-        home.target_pose.pose.orientation.w = 1
-        self.client.send_goal(home)
-        time.sleep(5.0)
-        rospy.loginfo("Robot is going back to starting point")
-        rospy.signal_shutdown("reason")
-        
-if __name__ == '__main__':
-    try:
-        myrobot_goal()
-    except rospy.ROSInterruptException:
-        rospy.loginfo("Navigation finished")
+        goal.target_pose.pose.position.x = waypoints[key].position.x
+        goal.target_pose.pose.position.y = waypoints[key].position.y
+        goal.target_pose.pose.position.z = waypoints[key].position.z
+        # Goal Orientation
+        goal.target_pose.pose.orientation.x = waypoints[key].orientation.x
+        goal.target_pose.pose.orientation.y = waypoints[key].orientation.y
+        goal.target_pose.pose.orientation.w = waypoints[key].orientation.z
+        goal.target_pose.pose.orientation.z = waypoints[key].orientation.w
+
+        client.send_goal(goal)
+        wait = client.wait_for_result()
+    rospy.loginfo('The waypoints path is complete')
+
+ss = CustomWayPoints2()
+
+send = sendGoals(ss)
+print(wayPointsRviz(ss))
