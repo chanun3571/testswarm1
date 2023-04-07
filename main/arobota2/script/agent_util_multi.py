@@ -3,20 +3,15 @@
 import numpy as np
 import rospy
 from geometry_msgs.msg import PoseArray
-
-
+from numpy_ros import to_numpy, to_message
 
 class allPosi_allOrien():
     def __init__(self):
-        rospy.init_node('allPosi_allOrien') 
-        self.allPositions = np.zeros((3, 3))
-        self.allOrientations = np.zeros((3, 4))
-
+        # rospy.init_node('allPosi_allOrien') 
         # subscriber to all pose
         rospy.Subscriber('/allpose', PoseArray, self.poseArrayCallback)
-
-
-
+        self.allPositions = np.zeros((3, 3))
+        self.allOrientations = np.zeros((3, 4))
     def poseArrayCallback(self, msg):
         # subscriber to get every agent's position
         arraynum = len(msg.poses)
@@ -35,16 +30,23 @@ class allPosi_allOrien():
             ]
             self.allPositions[i] = pos
             self.allOrientations[i] = orien
-        rospy.loginfo((self.allOrientations))
-        self.allPosi.publish(self.allPositions)
-        self.allOrien.publish(self.allOrientations)
-            
-if __name__=='__main__':
-    try:
-        allPosi_allOrien()
-        rospy.spin()
-    except rospy.ROSInterruptException:
-        pass
+
+
+    def allPosition(self):
+        return self.allPositions
+    def allOrientation(self):
+        return self.allOrientations
+
+    
+#     def spin(self):
+#         if ready =
+           
+# if __name__=='__main__':
+#     try:
+#         agent=allPosi_allOrien()
+#         agent.allPosition()
+#     except rospy.ROSInterruptException:
+#         pass
 
 
 

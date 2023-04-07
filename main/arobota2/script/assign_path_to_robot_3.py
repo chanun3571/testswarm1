@@ -4,15 +4,19 @@ import actionlib, rospy
 from move_base_msgs.msg import MoveBaseAction, MoveBaseGoal
 from geometry_msgs.msg import PoseWithCovarianceStamped, PoseArray,Pose,Quaternion,Twist,Point
 
-rospy.init_node('custom_waypoints3')
+def listener():
+    rospy.init_node('custom_waypoints3')
+    rospy.Subscriber('/robot3_formation_pos', Point, CustomWayPoints3)
 
-def CustomWayPoints3():
+
+def CustomWayPoints3(msg):
     # Create the dictionary 
     locations = dict()
     # add our waypoint names and values. 
-    locations['waypoint1'] = Pose(Point(0, 0, 0.000), Quaternion(0.000, 0.000, -0.717, 0.697))
-    locations['waypoint2'] = Pose(Point(1.1, -0.827, 0.000),Quaternion(0.000, 0.000, -0.707, 0.708))
-    locations['waypoint3'] = Pose(Point(-1.2, -0.3, 0.000), Quaternion(0.000, 0.000, -0.016, 1.000))
+    # locations['waypoint1'] = Pose(Point(0, 0, 0.000), Quaternion(0.000, 0.000, -0.717, 0.697))
+    # locations['waypoint2'] = Pose(Point(1.1, -0.827, 0.000),Quaternion(0.000, 0.000, -0.707, 0.708))
+    # locations['waypoint3'] = Pose(Point(-1.2, -0.3, 0.000), Quaternion(0.000, 0.000, -0.016, 1.000))   
+    locations['waypoint1'] = Pose(msg, Quaternion(0.000, 0.000, -0.717, 0.697))
     return locations
 
 # create a function that represnt posearray in Rviz so we could visualize the waypoints 
@@ -54,7 +58,8 @@ def sendGoals(waypoints):
         wait = client.wait_for_result()
     rospy.loginfo('The waypoints path is complete')
 
-ss = CustomWayPoints3()
-
-send = sendGoals(ss)
-print(wayPointsRviz(ss))
+if __name__=='__main__':
+    listener()
+    ss = CustomWayPoints3()
+    send = sendGoals(ss)
+    rospy.spin()
