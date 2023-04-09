@@ -1,7 +1,7 @@
 <launch>
     <node pkg="arobota2" type="Publish_STM_joystick.py" name="STM_input" output="screen"/>
     <include file="$(find rplidar_ros)/launch/rplidar.launch"/>    
-    <!--include file="$(find usb_cam_hardware)/example_mjpeg.launch"/-->
+    <include file="$(find usb_cam_hardware)/example_mjpeg.launch"/>
 
 </launch>
 

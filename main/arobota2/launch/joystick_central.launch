@@ -1,5 +1,5 @@
 <launch>
-  <remap from="/robot3/cmd_vel" to="cmd_vel"/>
+  <!-- <remap from="/robot3/cmd_vel" to="cmd_vel"/> -->
   <node pkg="arobota2" type="Joystickteleop.py" name="Joystick_input" output="screen"/>
   <node name="joy" pkg="joy" type="joy_node" output="screen"/> 
   <!--node name="image_view" pkg="image_view" type="image_view" respawn="true" output="screen">
