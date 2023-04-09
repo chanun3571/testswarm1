@@ -13,7 +13,7 @@ class STM_Connect():
         self.center_wheel_speed_ = 0     
         rospy.loginfo("Publish data to STM")
         rospy.Subscriber('wheel_vtarget',String,self.Update_Speed)
-        selflocalize()
+        self.selflocalize()
         
     def Update_Speed(self, msg):
         r = rospy.Rate(10)
@@ -51,11 +51,11 @@ class STM_Connect():
         rospy.loginfo(power_message)
         r.sleep()
 
-    def sendSerial(string):
+    def sendSerial(self,string):
         packet = bytes(string+"\r\n",'ascii')
         ser.write(packet)     
 
-    def selflocalize():
+    def selflocalize(self):
         sendSerial("M0A20B20C20")
         rospy.Rate(0.1).sleep()
         sendSerial("M0A0B0C0")
