@@ -56,9 +56,9 @@ class STM_Connect():
         ser.write(packet)     
 
     def selflocalize(self):
-        sendSerial("M0A20B20C20")
+        self.sendSerial("M0A20B20C20")
         rospy.Rate(0.1).sleep()
-        sendSerial("M0A0B0C0")
+        self.sendSerial("M0A0B0C0")
     
     
         
