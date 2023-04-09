@@ -16,6 +16,7 @@ class centroid():
         self.pubpoint1 = rospy.Publisher('/robot1_formation_pos', Point, queue_size=1)
         self.pubpoint2 = rospy.Publisher('/robot2_formation_pos', Point, queue_size=1)
         self.pubpoint3 = rospy.Publisher('/robot3_formation_pos', Point, queue_size=1)
+        self.pubcentroid = rospy.Publisher('/centroid', Point, queue_size=1)
 
     def find_centroid(self):
         self.centroid_pos = Point()
@@ -23,11 +24,12 @@ class centroid():
         self.y = (self.allPosition[0][1]+self.allPosition[1][1]+self.allPosition[2][1])/3
         self.centroid_pos.x = self.x
         self.centroid_pos.y = self.y  
+        self.pubcentroid.publish(self.centroid_pos)
         self.centroid = to_numpy(self.centroid_pos)
         # print(self.centroid)
         # print(self.allPosition)
 
-    def separate_pos(self,x,y,centroid):
+    def separate_pos(self,x,y,centroid): #triangular
         d1 = np.array([(-0.4)*math.cos(math.pi/6),(-0.4)*math.sin(math.pi/6),0])  
         d2 = np.array([0,0.4,0])
         d3 = np.array([0.4*math.cos(math.pi/6),-0.4*math.sin(math.pi/6),0])
