@@ -5,17 +5,17 @@ from move_base_msgs.msg import MoveBaseAction, MoveBaseGoal
 from geometry_msgs.msg import PoseWithCovarianceStamped, PoseArray,Pose,Quaternion,Twist,Point
 
 rospy.init_node('custom_waypoints2')
-rospy.Subscriber('/robot2_formation_pos', Point, CustomWayPoints2)
+# rospy.Subscriber('/robot2_formation_pos', Point, CustomWayPoints)
 
 
-def CustomWayPoints2(msg):
+def CustomWayPoints():
     # Create the dictionary 
     locations = dict()
     # add our waypoint names and values. 
-    # locations['waypoint1'] = Pose(Point(0, 0, 0.000), Quaternion(0.000, 0.000, -0.717, 0.697))
-    # locations['waypoint2'] = Pose(Point(1.1, -0.827, 0.000),Quaternion(0.000, 0.000, -0.707, 0.708))
-    # locations['waypoint3'] = Pose(Point(-1.2, -0.3, 0.000), Quaternion(0.000, 0.000, -0.016, 1.000))   
-    locations['waypoint1'] = Pose(msg, Quaternion(0.000, 0.000, -0.717, 0.697))
+    locations['waypoint1'] = Pose(Point(0, 0, 0.000), Quaternion(0.000, 0.000, -0.717, 0.697))
+    locations['waypoint2'] = Pose(Point(1.1, -0.827, 0.000),Quaternion(0.000, 0.000, -0.707, 0.708))
+    locations['waypoint3'] = Pose(Point(-1.2, -0.3, 0.000), Quaternion(0.000, 0.000, -0.016, 1.000))   
+    # locations['waypoint1'] = Pose(msg, Quaternion(0.000, 0.000, -0.717, 0.697))
     return locations
     
 # create a function that represnt posearray in Rviz so we could visualize the waypoints 
@@ -34,7 +34,7 @@ def wayPointsRviz(waypointsList):
 
 def sendGoals(waypoints):
     # subscribe to action server 
-    client = actionlib.SimpleActionClient('robot2/move_base', MoveBaseAction)
+    client = actionlib.SimpleActionClient('/move_base', MoveBaseAction)
     # this command to wait for the server to start listening for goals.
     client.wait_for_server()
     
@@ -57,7 +57,7 @@ def sendGoals(waypoints):
         wait = client.wait_for_result()
     rospy.loginfo('The waypoints path is complete')
 
-ss = CustomWayPoints2()
+ss = CustomWayPoints()
 
 send = sendGoals(ss)
 print(wayPointsRviz(ss))
