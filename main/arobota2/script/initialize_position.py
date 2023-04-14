@@ -65,6 +65,7 @@ class Initialize_Pos():
                 # rospy.loginfo(self.time)
                 rospy.loginfo("DONE")
                 self.stoprotate()
+                self.stoprotate()
                 break
             rate.sleep()
             

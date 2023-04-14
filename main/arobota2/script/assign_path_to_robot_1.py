@@ -1,14 +1,16 @@
 #!/usr/bin/env python
 
 import actionlib, rospy
-from move_base_msgs.msg import MoveBaseAction, MoveBaseGoal
+from move_base_msgs.msg import MoveBaseAction, MoveBaseGoal, MoveBaseActionResult
 from geometry_msgs.msg import PoseWithCovarianceStamped, PoseArray,Pose,Quaternion,Twist,Point
 
 class publish_goal_pose_to_robot1():
     def __init__(self):
         rospy.init_node('custom_waypoints1')
         rospy.Subscriber('/robot1_formation_pos', Point, self.CustomWayPoints1)
+        rospy.Subscriber('/robot1/move_base/result',MoveBaseActionResult,self.failcallback1)
         self.locations = dict()
+        self.flag1 = 0
 
     def CustomWayPoints1(self, msg):
         # Create the dictionary 
@@ -37,14 +39,30 @@ class publish_goal_pose_to_robot1():
 
             client.send_goal(goal)
             wait = client.wait_for_result()
-        print(goal)
+        # print(goal)
+
+    def failcallback1(self, msg):
+        # if msg.status.text=="Failed to find a valid plan. Even after executing recovery behaviors.":
+        rospy.loginfo(msg.status.text)
+        if msg.status.text=="Robot is oscillating. Even after executing recovery behaviors." or \
+           msg.status.text=="Failed to find a valid control. Even after executing recovery behaviors." or \
+           msg.status.text=="Failed to find a valid plan. Even after executing recovery behaviors." :
+            self.flag1 = 1
+            rospy.loginfo("robot1")
+            print(self.flag1)
+            
+    def resubmit1(self):
+        if self.flag1 == 1:
+            self.sendGoals(self.locations)
+            rospy.loginfo("resubmit robot #1")
+            self.flag1 = 0
+            print(self.flag1)
 
     def spin(self):
         # initialize message
         self.sendGoals(self.locations)
         while not rospy.is_shutdown():
-            rate = rospy.Rate(10)
-            rate.sleep()
+            self.resubmit1()
 
 if __name__=='__main__':
     try:
