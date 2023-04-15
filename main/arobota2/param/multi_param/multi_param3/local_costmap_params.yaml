@@ -6,13 +6,14 @@ local_costmap:
 
   global_frame: odom
   robot_base_frame: robot3_tf/base_footprint
-  update_frequency: 10
-  publish_frequency: 5.0
+  update_frequency: 5
+  publish_frequency: 5
   transform_tolerance: 0.3
   rolling_window: true
   static_map: false
   width: 1.5
   height: 1.5
-  robot_radius: 0.15
+  robot_radius: 0.1
+  resolution: 0.02
   obstacle_range: 3 #5
   raytrace_range:  3 #5

@@ -29,7 +29,7 @@ global_costmap:
       marking:            true
       clearing:           true
       inf_is_valid:       true
-      observation_persistence: 10 #Secs
+      observation_persistence: 0 #Secs
 
   # Layer 3 - Inflation
   inflation_layer:
