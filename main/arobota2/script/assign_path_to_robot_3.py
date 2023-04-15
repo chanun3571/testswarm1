@@ -51,9 +51,9 @@ class publish_goal_pose_to_robot3():
             rospy.loginfo("robot3")
     def resubmit3(self):
         if self.flag3 == 1:
+            self.flag3 = 0
             self.sendGoals(self.locations)
             rospy.loginfo("resubmit robot #3")
-            self.flag3 = 0
 
     def spin(self):
         # initialize message
