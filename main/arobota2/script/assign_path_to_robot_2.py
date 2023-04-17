@@ -34,8 +34,8 @@ class publish_goal_pose_to_robot2():
             # Goal Orientation
             goal.target_pose.pose.orientation.x = waypoints[key].orientation.x
             goal.target_pose.pose.orientation.y = waypoints[key].orientation.y
-            goal.target_pose.pose.orientation.w = waypoints[key].orientation.z
-            goal.target_pose.pose.orientation.z = waypoints[key].orientation.w
+            goal.target_pose.pose.orientation.z = waypoints[key].orientation.z
+            goal.target_pose.pose.orientation.w = waypoints[key].orientation.w
             client.send_goal(goal)
             wait = client.wait_for_result()
         # print(goal)

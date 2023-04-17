@@ -30,9 +30,9 @@ class centroid():
         # print(self.allPosition)
 
     def separate_pos(self,x,y,centroid): #triangular
-        d1 = np.array([(-0.4)*math.cos(math.pi/6),(-0.4)*math.sin(math.pi/6),0])  
-        d2 = np.array([0,0.4,0])
-        d3 = np.array([0.4*math.cos(math.pi/6),-0.4*math.sin(math.pi/6),0])
+        d1 = np.array([(-0.3)*math.cos(math.pi/6),(-0.3)*math.sin(math.pi/6),0])  
+        d2 = np.array([0,0.3,0])
+        d3 = np.array([0.3*math.cos(math.pi/6),-0.3*math.sin(math.pi/6),0])
         if self.x!=0 and self.y!=0: #at initialize x=y=0
             p_robot1 = self.centroid + d1
             p_robot2 = self.centroid + d2
