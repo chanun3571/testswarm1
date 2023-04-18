@@ -2,9 +2,6 @@
   <!-- Arguments -->
   <arg name="use_map_topic"   default="false"/>
   <arg name="scan_topic"      default="/robot1/scan"/>
-  <!-- <arg name="initial_pose_x"  default="0"/>
-  <arg name="initial_pose_y"  default="0"/>
-  <arg name="initial_pose_a"  default="0"/> -->
   <arg name="initial_pose_x"  default="1.1"/>
   <arg name="initial_pose_y"  default="-0.9"/>
   <arg name="initial_pose_a"  default="1.57"/>
