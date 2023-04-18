@@ -4,21 +4,23 @@ import actionlib, rospy
 from move_base_msgs.msg import MoveBaseAction, MoveBaseGoal, MoveBaseActionResult
 from geometry_msgs.msg import PoseWithCovarianceStamped, PoseArray,Pose,Quaternion,Twist,Point
 
-class publish_goal_pose_to_robot3():
+class publish_goal_pose_to_robot1():
     def __init__(self):
-        rospy.init_node('custom_waypoints3')
-        rospy.Subscriber('/robot3_formation_pos', Point, self.CustomWayPoints3)
-        rospy.Subscriber('/robot3/move_base/result',MoveBaseActionResult,self.failcallback3)
+        rospy.init_node('custom_waypoints1')
+        rospy.loginfo('start robot1')
+        rospy.Subscriber('/robot1_formation_pos', Pose, self.CustomWayPoints1)
+        rospy.Subscriber('/robot1/move_base/result',MoveBaseActionResult,self.failcallback1)
         self.locations = dict()
-        self.flag3 = 0
+        self.flag1 = 0
 
-    def CustomWayPoints3(self, msg):
+    def CustomWayPoints1(self, msg):
         # Create the dictionary 
-        self.locations['waypoint1'] = Pose(msg, Quaternion(0.000, 0.000, -0.717, 0.697))
+        self.locations['robot1'] = msg
+        rospy.loginfo(self.locations)
 
     def sendGoals(self, waypoints):
         # subscribe to action server 
-        client = actionlib.SimpleActionClient('robot3/move_base', MoveBaseAction)
+        client = actionlib.SimpleActionClient('robot1/move_base', MoveBaseAction)
         # this command to wait for the server to start listening for goals.
         client.wait_for_server()
         
@@ -39,31 +41,36 @@ class publish_goal_pose_to_robot3():
 
             client.send_goal(goal)
             wait = client.wait_for_result()
-        # print(goal)
+        # self.locations = dict()
+        
 
-    def failcallback3(self, msg):
-        rospy.loginfo(msg.status.text)
+    def failcallback1(self, msg):
         # if msg.status.text=="Failed to find a valid plan. Even after executing recovery behaviors.":
+        rospy.loginfo(msg.status.text)
         if msg.status.text=="Robot is oscillating. Even after executing recovery behaviors." or \
            msg.status.text=="Failed to find a valid control. Even after executing recovery behaviors." or \
            msg.status.text=="Failed to find a valid plan. Even after executing recovery behaviors." :
-            self.flag3 = 1
-            rospy.loginfo("robot3")
-    def resubmit3(self):
-        if self.flag3 == 1:
-            self.flag3 = 0
+            self.flag1 = 1
+            rospy.loginfo("robot1")
+            print(self.flag1)
+            
+    def resubmit1(self):
+        if self.flag1 == 1:
+            self.flag1 = 0
             self.sendGoals(self.locations)
-            rospy.loginfo("resubmit robot #3")
+            rospy.loginfo("resubmit robot #1")
+            print(self.flag1)
 
     def spin(self):
         # initialize message
-        self.sendGoals(self.locations)
         while not rospy.is_shutdown():
-            self.resubmit3()
+            self.sendGoals(self.locations)
+            self.resubmit1()
+            rospy.Rate(20).sleep()
 
 if __name__=='__main__':
     try:
-        agent=publish_goal_pose_to_robot3()
+        agent=publish_goal_pose_to_robot1()
         agent.spin()
 
     except rospy.ROSInterruptException:
