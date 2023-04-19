@@ -5,7 +5,7 @@
   <arg name="gui" default="true"/>
   <arg name="headless" default="false"/>
   <arg name="debug" default="false"/>
-  <arg name="worldname" default= "$(find arobota2)/world/my_first_world3_no_box.world"/>
+  <arg name="worldname" default= "$(find arobota2)/world/my_first_world3.world"/>
   <arg name="number" default=""/>
   <!--remap from="cmd_vel" to="robot1/cmd_vel"/-->
   

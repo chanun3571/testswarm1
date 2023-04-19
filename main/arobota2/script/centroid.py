@@ -19,7 +19,7 @@ class centroid():
         self.pubcentroid = rospy.Publisher('/centroid', Point, queue_size=1)
         
 
-    def find_centroid(self):
+    def find_initial_centroid(self):
         self.centroid_pos = Point()
         self.x = (self.allPosition[0][0]+self.allPosition[1][0]+self.allPosition[2][0])/3
         self.y = (self.allPosition[0][1]+self.allPosition[1][1]+self.allPosition[2][1])/3
@@ -44,7 +44,7 @@ class centroid():
 
     def spin(self):
         while not rospy.is_shutdown():
-            self.find_centroid()
+            self.find_initial_centroid()
             self.separate_pos(self.x,self.y,self.centroid)
             rospy.Rate(20).sleep()
            
