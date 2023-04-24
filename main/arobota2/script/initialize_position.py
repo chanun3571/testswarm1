@@ -60,7 +60,7 @@ class Initialize_Pos():
             self.time=self.then.secs-self.now.secs
             # rospy.loginfo(self.time)
             self.rotate()
-            if self.time>3:
+            if self.time>2:
                 rospy.Rate(10).sleep()
                 # rospy.loginfo(self.time)
                 rospy.loginfo("DONE")

@@ -2,7 +2,6 @@
   <node pkg="arobota2" type="recieve_STM_omni.py" name="STM_Sub" output="screen"/>
   <node pkg="arobota2" type="publish_STM_omni.py" name="STM_Pub" output="screen"/>
   <!-- <node pkg="arobota2" type="Publish_STM_joystick.py" name="STM_Pub" output="screen"/> -->
-  <!-- <include file="$(find usb_cam_hardware)/example_mjpeg.launch"/> -->
-
-  <include file="$(find rplidar_ros)/launch/rplidar.launch"/>
+  <include file="$(find arobota2)/laucnh/camera.launch"/> 
+  <include file="$(find arobota2)/launch/rplidar.launch"/>
 </launch>
