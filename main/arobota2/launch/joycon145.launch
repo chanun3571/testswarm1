@@ -1,7 +1,7 @@
 <launch>
-  <machine name="scamper201" address="192.168.208.201" env-loader="/home/revast-user/workspace/kinetic/devel/env.sh" user="revast-user" password="temppwd"/>
-  <machine name="scamper204" address="192.168.208.204" env-loader="/home/revast-user/workspace/kinetic/devel/env.sh" user="revast-user" password="temppwd"/>
-  <machine name="scamper205" address="192.168.208.205" env-loader="/home/revast-user/workspace/kinetic/devel/env.sh" user="revast-user" password="temppwd"/>
+  <machine name="robot1" address="192.168.208.80" env-loader="/opt/ros/noetic/env.sh" user="revast-user" password="temppwd"/>
+  <machine name="robot2" address="192.168.208.149" env-loader="/home/revast-user/workspace/kinetic/devel/env.sh" user="revast-user" password="temppwd"/>
+  <machine name="robot3" address="192.168.208.193" env-loader="/home/revast-user/workspace/kinetic/devel/env.sh" user="revast-user" password="temppwd"/>
 <node name="joy" pkg="joy" type="joy_node" output="screen"/> 
 <!-- <node name="jref" pkg="scamper_ota" type="joycon145.py" output="screen"/> 
   <node pkg="vrpn_client_ros" type="vrpn_client_node" name="vrpn_client_node" output="screen">
