@@ -1,6 +1,7 @@
   <launch>
-  <group ns= robot_name>
-  <node machine= robot_name name="rplidarNode" pkg="rplidar_ros"  type="rplidarNode" output="screen">
+  <arg name="robot_name"/>
+
+  <node machine="$(arg robot_name)" name="rplidarNode" pkg="rplidar_ros"  type="rplidarNode" output="screen">
     <param name="serial_port"         type="string" value="/dev/ttyUSB_DEVICE1"/>
     <param name="serial_baudrate"     type="int"    value="115200"/><!--A1/A2 -->
     <!--param name="serial_baudrate"     type="int"    value="256000"--><!--A3 -->
@@ -8,5 +9,4 @@
     <param name="inverted"            type="bool"   value="false"/>
     <param name="angle_compensate"    type="bool"   value="true"/>
     </node>
-    </group>
 </launch>
