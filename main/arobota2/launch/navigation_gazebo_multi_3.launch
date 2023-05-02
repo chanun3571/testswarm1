@@ -1,5 +1,5 @@
 <launch> 
   <include file="$(find arobota2)/launch/amcl_gazebo_multi_3.launch"/> 
-  <!-- <include file="$(find arobota2)/launch/movebase_gazebo_3.launch"/>  -->
+  <include file="$(find arobota2)/launch/movebase_gazebo_3.launch"/> 
   <!--initialize localization-->
 </launch>
