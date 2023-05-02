@@ -22,8 +22,8 @@ class OmniTf:
         self.ticks_meter = (2**15)/(0.048*pi) # The number of wheel encoder ticks per meter of travel # 1 round = 2^15
         self.base_width = 0.250 # The wheel base width in meters
         
-        self.base_frame_id = rospy.get_param('~base_frame_id', "robot1/base_footprint") # the name of the base frame of the robot
-        self.odom_frame_id = rospy.get_param('~odom_frame_id', "robot1/odom") # the name of the odometry reference frame
+        self.base_frame_id = rospy.get_param('~base_frame_id', "robot1_tf/base_footprint") # the name of the base frame of the robot
+        self.odom_frame_id = rospy.get_param('~odom_frame_id', "robot1_tf/odom") # the name of the odometry reference frame
         
         self.encoder_min = rospy.get_param('encoder_min', -2147483648)
         self.encoder_max = rospy.get_param('encoder_max', 2147483648)

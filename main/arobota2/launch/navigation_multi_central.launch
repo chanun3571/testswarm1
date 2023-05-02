@@ -36,7 +36,6 @@
     <!-- <include file="$(find arobota2)/launch/navigation_gazebo_multi_1.launch"/> -->
 
     <!-- rviz -->
-    <node pkg="rosservice" type="rosservice" name="global_loc" args="call --wait /global_localization" />
   </group>
 
   <group ns="robot2">
@@ -62,7 +61,6 @@
     <!-- <include file="$(find arobota2)/launch/navigation_gazebo_multi_2.launch"/> -->
     
     <!-- rviz -->
-    <node pkg="rosservice" type="rosservice" name="global_loc" args="call --wait /global_localization" />
   </group>
 
   <group ns="robot3">
@@ -88,7 +86,6 @@
     <!-- <include file="$(find arobota2)/launch/navigation_gazebo_multi_3.launch"/> -->
 
     <!-- rviz -->
-    <node pkg="rosservice" type="rosservice" name="global_loc" args="call --wait /global_localization" />
   </group>
 
 </launch>
