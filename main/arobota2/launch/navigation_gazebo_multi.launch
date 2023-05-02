@@ -26,9 +26,9 @@
   <!-- <node pkg="arobota2" type="centroid.py" respawn="false" name="centroid" output="screen"/>
   <include file="$(find arobota2)/launch/init_formation.launch"/>  -->
 
-  <!-- with arrow key  -->
-    
-  <node pkg="arobota2" type="centroid_submit3.py" respawn="false" name="centroid1" output="screen"/>
+    <!-- submit centriod with rviz arrow -->
+  <node pkg="arobota2" type="centroid_submit3.py" respawn="false" name="centroid1" output="screen"/> 
+  <!--  -->
   <include file="$(find arobota2)/launch/pose_formation.launch"/> 
 
 
