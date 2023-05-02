@@ -1,0 +1,48 @@
+<launch>
+  <!-- No namespace here as we will share this description. 
+       Access with slash at the beginning -->
+  <param name="robot_description" command="$(find xacro)/xacro $(find urdf_description)/urdf/urdf.xacro"/>
+
+  <!-- BEGIN ROBOT 1-->
+  <arg name="number1" value="1"/>
+  <group ns="robot1">
+    <param name="tf_prefix" value="robot1_tf" />
+    <param name="agentID" value="$(arg number1)"/>
+    <!-- <include file="$(find arobota2)/launch/robot_remote.launch" > -->
+      <!-- <arg name="init_pose" value="-x 1.1 -y -0.7 -z 0 -R 0 -P 0 -Y 1.57" />
+      <arg name="robot_name"  value="ROBOT1" /> -->
+    <!-- </include> -->
+    <node pkg="robot_state_publisher" type="robot_state_publisher" name="robot_state_publisher">
+      <param name="publish_frequency" type="double" value="30.0" />
+    </node>
+  </group>
+
+  <!-- BEGIN ROBOT 2-->
+  <arg name="number2" value="2"/>
+  <group ns="robot2">
+    <param name="tf_prefix" value="robot2_tf" />
+    <param name="agentID" value="$(arg number2)"/>
+    <!-- <include file="$(find arobota2)/launch/robot_remote.launch" > -->
+      <!-- <arg name="init_pose" value="-x -1.2 -y -0 -z 0 -R 0 -P 0 -Y 0" />
+      <arg name="robot_name"  value="ROBOT2" /> -->
+    <!-- </include> -->
+    <node pkg="robot_state_publisher" type="robot_state_publisher" name="robot_state_publisher">
+      <param name="publish_frequency" type="double" value="30.0" />
+    </node>
+  </group>
+
+  <!-- BEGIN ROBOT 3-->
+  <arg name="number3" value="3"/>
+  <group ns="robot3">
+    <param name="tf_prefix" value="robot3_tf" />
+    <param name="agentID" value="$(arg number3)"/>
+    <!-- <include file="$(find arobota2)/launch/robot_remote.launch" > -->
+      <!-- <arg name="init_pose" value="-x -0.6 -y 0.7 -z 0 -R 0 -P 0 -Y 3.14" />
+      <arg name="robot_name"  value="ROBOT3" /> -->
+    <!-- </include> -->
+    <node pkg="robot_state_publisher" type="robot_state_publisher" name="robot_state_publisher">
+      <param name="publish_frequency" type="double" value="30.0" />
+    </node>
+  </group>
+
+</launch>

@@ -1,7 +1,7 @@
 <launch>
-  <arg name="robot_name" value="robot1"/>
-  <arg name="multi_robot_name" default=""/>
-  <arg name="start_position" default="-x 0.0 -y 0.0 -z 0.03 -Y 0"/>
+  <!-- <arg name="robot_name" value="robot1"/>
+  <arg name="multi_robot_name" default=""/> -->
+  <!-- <arg name="start_position" default="-x 0.0 -y 0.0 -z 0.03 -Y 0"/> -->
   <param name="robot_description"
         command="$(find xacro)/xacro '$(find urdf_description)/urdf/urdf.xacro'"/>
   <!-- <node pkg="gazebo_ros" type="spawn_model" name="spawn_$(arg robot_name)"
