@@ -14,9 +14,9 @@
 
   <!-- Nodes -->
   <group ns="robot1">
-    <node pkg="arobota2" type="omni_odom_tf.py" name="Omni_tf" output="screen"/>
-      <param name ="base_frame_id" value= "robot1_tf/base_footprint"/>
-      <param name ="odom_frame_id" value= "robot1_tf/odom"/>
+    <node pkg="arobota2" type="omni_odom_tf_multi_1.py" name="Omni_tf" output="screen"/>
+      <!-- <param name ="base_frame_id" value= "robot1_tf/base_footprint"/>
+      <param name ="odom_frame_id" value= "robot1_tf/odom"/> -->
     <node pkg="arobota2" type="omni_cmdveltf.py" name="cmd_vel_tf" output="screen"/>
 
     <!-- Robot state -->
@@ -40,9 +40,9 @@
   </group>
 
   <group ns="robot2">
-    <node pkg="arobota2" type="omni_odom_tf.py" name="Omni_tf" output="screen"/>
-      <param name ="base_frame_id" value= "robot2_tf/base_footprint"/>
-      <param name ="odom_frame_id" value= "robot2_tf/odom"/>
+    <node pkg="arobota2" type="omni_odom_tf_multi_2.py" name="Omni_tf" output="screen"/>
+      <!-- <param name ="base_frame_id" value= "robot2_tf/base_footprint"/>
+      <param name ="odom_frame_id" value= "robot2_tf/odom"/> -->
     <node pkg="arobota2" type="omni_cmdveltf.py" name="cmd_vel_tf" output="screen"/>
 
     <!-- Robot state -->
@@ -66,9 +66,9 @@
   </group>
 
   <group ns="robot3">
-    <node pkg="arobota2" type="omni_odom_tf.py" name="Omni_tf" output="screen"/>
-      <param name ="base_frame_id" value= "robot3_tf/base_footprint"/>
-      <param name ="odom_frame_id" value= "robot3_tf/odom"/>
+    <node pkg="arobota2" type="omni_odom_tf_multi_3.py" name="Omni_tf" output="screen"/>
+      <!-- <param name ="base_frame_id" value= "robot3_tf/base_footprint"/>
+      <param name ="odom_frame_id" value= "robot3_tf/odom"/> -->
     <node pkg="arobota2" type="omni_cmdveltf.py" name="cmd_vel_tf" output="screen"/>
 
     <!-- Robot state -->
