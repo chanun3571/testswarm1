@@ -12,6 +12,12 @@
     <include file="$(find arobota2)/launch/navigation_gazebo_multi_3.launch"/>
     <include file="$(find arobota2)/launch/multi_robot_des_real.launch"/>
 
+  <!-- <node pkg="tf" type="static_transform_publisher" name="static_amcl_1" args="0 0 0 0 0 0 map robot1_tf/odom 100" />
+  <node pkg="tf" type="static_transform_publisher" name="static_amcl_2" args="0 0 0 0 0 0 map robot2_tf/odom 100" />
+  <node pkg="tf" type="static_transform_publisher" name="static_amcl_3" args="0 0 0 0 0 0 map robot3_tf/odom 100" /> -->
+
+
+
   <!-- Nodes -->
   <group ns="robot1">
     <node pkg="arobota2" type="omni_odom_tf_multi_1.py" name="Omni_tf" output="screen"/>
