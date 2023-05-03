@@ -1,6 +1,8 @@
 <launch>
 <arg name="map_file" default="$(find arobota2)/map/mymap6_1.yaml"/>
 <param name="/use_sim_time" value="false"/>
+ <arg name="node_start_delay" default="35"/>
+
 
 <!--global map-->
   <node name="rviz" pkg="rviz" type="rviz" required="true" args="-d $(find arobota2)/rviz/navigation_multi_new4.rviz"/>
@@ -10,36 +12,40 @@
     <include file="$(find arobota2)/launch/navigation_gazebo_multi_1.launch"/>
     <include file="$(find arobota2)/launch/navigation_gazebo_multi_2.launch"/>
     <include file="$(find arobota2)/launch/navigation_gazebo_multi_3.launch"/>
-    
+    <node pkg="arobota2" type="omni_cmdvel_multi_1.py" name="cmd_vel_tf1" output="screen"/>
+    <node pkg="arobota2" type="omni_cmdvel_multi_3.py" name="cmd_vel_tf2" output="screen"/>
+    <node pkg="arobota2" type="omni_cmdvel_multi_2.py" name="cmd_vel_tf3" output="screen"/>
+
 
   <!-- Nodes -->
   <group ns="robot1">
     <node pkg="arobota2" type="omni_odom_tf_multi_1.py" name="Omni_tf" output="screen"/>
-    <node pkg="arobota2" type="omni_cmdveltf.py" name="cmd_vel_tf" output="screen"/>
+    <!-- <node pkg="arobota2" type="omni_cmdvel_multi_1.py" name="cmd_vel_tf" output="screen"/> -->
   </group>
 
   <group ns="robot2">
     <node pkg="arobota2" type="omni_odom_tf_multi_2.py" name="Omni_tf" output="screen"/>
-    <node pkg="arobota2" type="omni_cmdveltf.py" name="cmd_vel_tf" output="screen"/>
+    <!-- <node pkg="arobota2" type="omni_cmdvel_multi_2.py" name="cmd_vel_tf" output="screen"/> -->
   </group>
 
   <group ns="robot3">
     <node pkg="arobota2" type="omni_odom_tf_multi_3.py" name="Omni_tf" output="screen"/>
-    <node pkg="arobota2" type="omni_cmdveltf.py" name="cmd_vel_tf" output="screen"/>
+    <!-- <node pkg="arobota2" type="omni_cmdvel_multi_3.py" name="cmd_vel_tf" output="screen"/> -->
   </group>
 
-  <!-- <node pkg="arobota2" type="initialize_position.py" name="initialize_localize" output="screen" launch-prefix="bash -c 'sleep $(arg node_start_delay); $0 $@'"/> -->
+  <node pkg="arobota2" type="initialize_position.py" name="initialize_localize" output="screen" launch-prefix="bash -c 'sleep $(arg node_start_delay); $0 $@'"/>
   <!-- <node pkg="arobota2" type="ensure_goal_pos.py" name="ensure_command" output="screen" /> -->
-  <!-- <node pkg="arobota2" type="pose_collector_array.py" name="pose_collector" output="screen" /> -->
+  <node pkg="arobota2" type="pose_collector_array.py" name="pose_collector" output="screen" />
 
 
   <!-- auto initial formation control  -->
   
-  <!-- <node pkg="arobota2" type="centroid.py" respawn="false" name="centroid" output="screen"/>
-  <include file="$(find arobota2)/launch/init_formation.launch"/>  -->
+  <!-- <node pkg="arobota2" type="centroid.py" respawn="false" name="centroid" output="screen"/> -->
+
+  <!-- <include file="$(find arobota2)/launch/init_formation.launch"/>   -->
 
     <!-- submit centriod with rviz arrow -->
-  <!-- <node pkg="arobota2" type="centroid_submit3.py" respawn="false" name="centroid1" output="screen"/>  -->
+  <node pkg="arobota2" type="centroid_submit3.py" respawn="false" name="centroid1" output="screen"/> 
   <!--  -->
-  <!-- <include file="$(find arobota2)/launch/pose_formation.launch"/>  -->
+  <include file="$(find arobota2)/launch/pose_formation.launch"/> 
 </launch>
