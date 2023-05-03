@@ -13,7 +13,7 @@ class STM_Connect():
         self.center_wheel_speed_ = 0     
         rospy.loginfo("Publish data to STM")
         rospy.Subscriber('wheel_vtarget',String,self.Update_Speed)
-        self.reset()
+        self.selfreset()
         
     def Update_Speed(self, msg):
         r = rospy.Rate(10)
