@@ -62,8 +62,9 @@ class STM_Connect():
             
 if __name__ =='__main__':
 	try:
-		STM_Connect() 	
+		agent=STM_Connect()
+        agent 	
 		rospy.spin()
 	except rospy.ROSInterruptException:
-        STM_Connect.sendSerial("M0A0B0C0")
+        agent.sendSerial("M0A0B0C0")
 		rospy.logwarn("Connection Failed")
