@@ -56,7 +56,7 @@ class STM_Connect():
         ser.write(packet)     
 
     def selflocalize(self):
-        self.sendSerial("M0A20B20C20")
+        self.sendSerial("M0A0B0C0")
         rospy.Rate(0.1).sleep()
         self.sendSerial("M0A0B0C0")
     
@@ -67,5 +67,4 @@ if __name__ =='__main__':
 		STM_Connect() 	
 		rospy.spin()
 	except rospy.ROSInterruptException:
-        self.sendSerial("M0A0B0C0")
 		rospy.logwarn("Connection Failed")
