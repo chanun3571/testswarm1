@@ -62,10 +62,7 @@ class STM_Connect():
 
     def stop(self):
         self.sendSerial("M0A0B0C0")
-
-
-        
-    
+   
     
         
 if __name__ =='__main__':
@@ -74,5 +71,4 @@ if __name__ =='__main__':
         rospy.spin()
         rospy.on_shutdown(STM_Connect().stop())
 	except rospy.ROSInterruptException:
-        STM_Connect().sendSerial("M0A0B0C0")
 		rospy.logwarn("Connection Failed")
