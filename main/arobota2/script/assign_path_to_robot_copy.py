@@ -14,7 +14,9 @@ def CustomWayPoints():
     # add our waypoint names and values. 
     locations['waypoint1'] = Pose(Point(0, 0, 0.000), Quaternion(0.000, 0.000, -0.717, 0.697))
     locations['waypoint2'] = Pose(Point(1.1, -0.827, 0.000),Quaternion(0.000, 0.000, -0.707, 0.708))
-    locations['waypoint3'] = Pose(Point(-1.2, -0.3, 0.000), Quaternion(0.000, 0.000, -0.016, 1.000))   
+    locations['waypoint3'] = Pose(Point(-1, 0.5, 0.000), Quaternion(0.000, 0.000, -0.016, 1.000))   
+    locations['waypoint4'] = Pose(Point(0, 0, 0.000), Quaternion(0.000, 0.000, -0.717, 0.697))
+
     # locations['waypoint1'] = Pose(msg, Quaternion(0.000, 0.000, -0.717, 0.697))
     return locations
     
@@ -55,6 +57,7 @@ def sendGoals(waypoints):
 
         client.send_goal(goal)
         wait = client.wait_for_result()
+        rospy.loginfo(goal)
     rospy.loginfo('The waypoints path is complete')
 
 ss = CustomWayPoints()

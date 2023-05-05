@@ -1,4 +1,6 @@
 <launch>
+ <arg name="node_start_delay" default="10"/>
+
   <!-- Nodes -->
   <node pkg="arobota2" type="omni_odom_tf.py" name="Omni_tf" output="screen"/>
   <node pkg="arobota2" type="omni_cmdveltf.py" name="cmd_vel_tf" output="screen"/>
@@ -24,6 +26,7 @@
     <remap from="image" to="/usb_cam/image"/>
     <param name="autosize" value="true" />
   </node> -->
+  <node name="assign" pkg="arobota2" type="assign_path_to_robot_copy.py" output= "screen" launch-prefix="bash -c 'sleep $(arg node_start_delay); $0 $@'"/>
 
 
   <!--add joystick -->
