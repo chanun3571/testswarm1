@@ -3,6 +3,7 @@ import serial
 import rospy
 from geometry_msgs.msg import Twist
 from std_msgs.msg import String, Float32
+from initialize_position import allPosi_allOrien
 
 ser = serial.Serial ("/dev/ttyUSB_DEVICE2", 115200) #Open port with baud rate 
 class STM_Connect():
