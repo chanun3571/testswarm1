@@ -61,7 +61,9 @@ class STM_Connect():
         self.sendSerial("M0A0B0C0")
 
     def stop(self):
+        rospy.loginfo("stop")
         self.sendSerial("M0A0B0C0")
+        pass
    
     
         
