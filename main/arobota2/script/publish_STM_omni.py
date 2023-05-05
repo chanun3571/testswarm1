@@ -68,4 +68,5 @@ if __name__ =='__main__':
 		rospy.spin()
 	except rospy.ROSInterruptException:
         self.sendSerial("M0A0B0C0")
+        self.sendSerial("M0A0B0C0")
 		rospy.logwarn("Connection Failed")
