@@ -62,15 +62,22 @@ class STM_Connect():
         rospy.Rate(0.1).sleep()
         self.sendSerial("M0A0B0C0")
 
+class stop():
+    def __init__(self): 
+        self.stop()
+
+    def sendSerial(self,string):
+        packet = bytes(string+"\r\n",'ascii')
+        ser.write(packet)   
+
     def stop(self):
         rospy.loginfo("stop")
         self.sendSerial("M0A0B0C0")
-        pass
-   
+
 if __name__ =='__main__':
     try:
         STM_Connect() 	
         rospy.spin()
-        rospy.on_shutdown(STM_Connect().stop())
+        rospy.on_shutdown(stop().stop())
     except rospy.ROSInterruptException:
         rospy.logwarn("Connection Failed")
