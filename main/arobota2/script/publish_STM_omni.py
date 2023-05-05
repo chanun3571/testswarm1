@@ -66,9 +66,9 @@ class STM_Connect():
     
         
 if __name__ =='__main__':
-	try:
-		STM_Connect() 	
+    try:
+        STM_Connect() 	
         rospy.spin()
         rospy.on_shutdown(STM_Connect().stop())
-	except rospy.ROSInterruptException:
-		rospy.logwarn("Connection Failed")
+    except rospy.ROSInterruptException:
+        rospy.logwarn("Connection Failed")
