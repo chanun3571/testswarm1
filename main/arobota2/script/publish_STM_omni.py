@@ -23,10 +23,10 @@ class STM_Connect():
         self.left_wheel_power = -int(float(self.wheel[0])*100)
         self.center_wheel_power = -int(float(self.wheel[1])*100)
         self.right_wheel_power = -int(float(self.wheel[2])*100)
-        #dead zone
+       
         if self.left_wheel_power==0 and self.right_wheel_power==0 and self.center_wheel_power==0:
             print("no motion")
-        else:
+        else: #dead zone
             if 0<=abs(self.left_wheel_power)<9 and 0<=abs(self.right_wheel_power)<9 and 0<=abs(self.center_wheel_power)<9:
                 if self.left_wheel_power<0:
                     self.left_wheel_power = self.left_wheel_power - 10
@@ -63,9 +63,6 @@ class STM_Connect():
         self.sendSerial("M0A0B0C0")
 
 class stop():
-    def __init__(self): 
-        self.stop()
-
     def sendSerial(self,string):
         packet = bytes(string+"\r\n",'ascii')
         ser.write(packet)   
