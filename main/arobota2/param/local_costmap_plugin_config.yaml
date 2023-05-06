@@ -17,7 +17,7 @@ local_costmap:
     scan:
       data_type:          LaserScan # From Sensor msgs
       sensor_frame:       laser
-      topic:              /scan
+      topic:              scan
       marking:            true
       clearing:           true
   # Layer 3 - Inflation

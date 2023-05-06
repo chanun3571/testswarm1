@@ -25,7 +25,7 @@ global_costmap:
     scan:
       data_type:          LaserScan # From Sensor msgs
       sensor_frame:       laser
-      topic:              /scan
+      topic:              scan
       marking:            true
       clearing:           true
       inf_is_valid:       true
@@ -35,6 +35,6 @@ global_costmap:
   inflation_layer:
     enabled:              true
     cost_scaling_factor:  5 # exponential rate at which the obstacle cost drops off (default: 10)
-    inflation_radius:     0.1 # max. distance from an obstacle at which costs are incurred for planning paths.
+    inflation_radius:     0.05 # max. distance from an obstacle at which costs are incurred for planning paths.
  
     

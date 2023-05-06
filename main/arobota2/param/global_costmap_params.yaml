@@ -8,11 +8,11 @@ global_costmap:
   global_frame: map
   robot_base_frame: base_footprint
   update_frequency: 3
-  publich_frequency: 0.5
+  publich_frequency: 3
   transform_tolerance: 0.3
   rolling_window: false
   static_map: false #true
-  robot_radius: 0.25
+  robot_radius: 0.15
   resolution: 0.02
   obstacle_range:       3 #5
   raytrace_range:       3 #5
