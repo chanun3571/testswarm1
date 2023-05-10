@@ -7,7 +7,7 @@ import glob
 ################ FIND CHESSBOARD CORNERS - OBJECT POINTS AND IMAGE POINTS #############################
 
 chessboardSize = (5,7)
-frameSize = (360,640)
+frameSize = (640, 360)
 
 
 
@@ -55,7 +55,7 @@ for imgLeft, imgRight in zip(imagesLeft, imagesRight):
         cv.imshow('img left', imgL)
         cv.drawChessboardCorners(imgR, chessboardSize, cornersR, retR)
         cv.imshow('img right', imgR)
-        cv.waitKey(10000)
+        cv.waitKey(1000)
 
 
 cv.destroyAllWindows()

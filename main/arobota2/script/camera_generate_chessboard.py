@@ -11,11 +11,11 @@ num = 0
 while cap.isOpened():
 
     succes1, img = cap.read()
-    img = cv2.flip(img,0)
+    # img = cv2.flip(img,0)
     # left = img[:720,0:1280]
     # right = img[:720,1280:]
-    right = img[:360,0:640]
-    left = img[:360,640:]
+    left = img[:360,0:640]
+    right = img[:360,640:]
     k = cv2.waitKey(5)
 
     if k == 27:
