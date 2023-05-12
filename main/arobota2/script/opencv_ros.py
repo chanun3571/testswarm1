@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 import rospy
-from sensor_msgs.msg import Image
+from sensor_msgs.msg import Image, CompressedImage
 
 # Import OpenCV libraries and tools
 import cv2
@@ -17,7 +17,10 @@ bridge = CvBridge()
 
 # Define a function to show the image in an OpenCV Window
 def show_image(img):
-    cv2.imshow("Image Window", img)
+    left = img[:360,0:640]
+    right = img[:360,640:]
+    cv2.imshow('left cam',left)
+    cv2.imshow('right cam',right)
     cv2.waitKey(3)
 
 # Define a callback for the Image message
@@ -27,9 +30,9 @@ def image_callback(img_msg):
 
     # Try to convert the ROS Image message to a CV2 Image
     try:
-        cv_image = bridge.imgmsg_to_cv2(img_msg, "passthrough")
+        cv_image = bridge.compressed_imgmsg_to_cv2(img_msg, "bgr8")
     except CvBridgeError:
-        rospy.logerr("CvBridge Error: {0}".format(e))
+        rospy.loginfo("Failed")
 
     # Flip the image 90deg
     # cv_image = cv2.transpose(cv_image)
@@ -39,11 +42,9 @@ def image_callback(img_msg):
     show_image(cv_image)
 
 # Initalize a subscriber to the "/camera/rgb/image_raw" topic with the function "image_callback" as a callback
-sub_image = rospy.Subscriber("/usb_cam/image/", Image, image_callback)
-
-# Initialize an OpenCV Window named "Image Window"
-cv2.namedWindow("Image Window", 1)
+sub_image = rospy.Subscriber("/robot1/image/compressed", CompressedImage, image_callback)
 
 # Loop to keep the program from shutting down unless ROS is shut down, or CTRL+C is pressed
 while not rospy.is_shutdown():
     rospy.spin()
+
