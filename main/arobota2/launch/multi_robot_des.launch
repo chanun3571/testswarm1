@@ -10,6 +10,7 @@
     <param name="agentID" value="$(arg number1)"/>
     <include file="$(find arobota2)/launch/one_robot.launch" >
       <arg name="init_pose" value="-x 1.1 -y -0.7 -z 0 -R 0 -P 0 -Y 1.57" />
+    </node>
       <arg name="robot_name"  value="ROBOT1" />
     </include>
     <node pkg="robot_state_publisher" type="robot_state_publisher" name="robot_state_publisher">
