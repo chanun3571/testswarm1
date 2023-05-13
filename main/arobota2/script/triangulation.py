@@ -24,7 +24,7 @@ def find_depth(right_point, left_point, frame_right, frame_left, baseline, alpha
 
     # CALCULATE DEPTH z:
     zDepth = (baseline*f_pixel)/disparity             #Depth in [cm]
-    x=(x_left*zDepth)/f_pixel
+    x= (x_left*zDepth)/f_pixel
     
     print(x)
-    return zDepth
+    return x, zDepth

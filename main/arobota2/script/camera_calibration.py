@@ -1,3 +1,5 @@
+#!/usr/bin/env python3
+
 import numpy as np
 import cv2 as cv
 import glob
@@ -55,7 +57,7 @@ for imgLeft, imgRight in zip(imagesLeft, imagesRight):
         cv.imshow('img left', imgL)
         cv.drawChessboardCorners(imgR, chessboardSize, cornersR, retR)
         cv.imshow('img right', imgR)
-        cv.waitKey(1000)
+        cv.waitKey(10000)
 
 
 cv.destroyAllWindows()
@@ -79,11 +81,6 @@ newCameraMatrixR, roi_R = cv.getOptimalNewCameraMatrix(cameraMatrixR, distR, (wi
 
 flags = 0
 flags |= cv.CALIB_FIX_INTRINSIC
-# flags |= cv.CALIB_ZERO_TANGENT_DIST
-# flags |= cv.CALIB_FIX_K1
-# flags |= cv.CALIB_FIX_K2
-# flags |= cv.CALIB_FIX_K3
-# flags |= cv.CALIB_FIX_K4
 # Here we fix the intrinsic camara matrixes so that only Rot, Trns, Emat and Fmat are calculated.
 # Hence intrinsic parameters are the same 
 

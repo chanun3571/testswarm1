@@ -31,6 +31,7 @@ def image_callback(img_msg):
     # Try to convert the ROS Image message to a CV2 Image
     try:
         cv_image = bridge.compressed_imgmsg_to_cv2(img_msg, "bgr8")
+        print(type(cv_image))
     except CvBridgeError:
         rospy.loginfo("Failed")
 
