@@ -1,25 +1,29 @@
 #!/usr/bin/env python
 
 import actionlib, rospy
-from move_base_msgs.msg import MoveBaseAction, MoveBaseGoal, MoveBaseActionResult
-from geometry_msgs.msg import PoseWithCovarianceStamped, PoseArray,Pose,Quaternion,Twist,Point
+from move_base_msgs.msg import MoveBaseAction, MoveBaseActionGoal, MoveBaseActionResult, MoveBaseGoal
+from geometry_msgs.msg import PoseWithCovarianceStamped, PoseArray,Pose,Quaternion,Twist,Point, PoseStamped
 
 class publish_goal_pose_to_robot1():
     def __init__(self):
         rospy.init_node('custom_waypoints1')
-        rospy.loginfo('start robot1')
-        rospy.Subscriber('/robot1_formation_pos', Pose, self.CustomWayPoints1)
-        rospy.Subscriber('/robot1/move_base/result',MoveBaseActionResult,self.failcallback1)
+        rospy.Subscriber('move_base/goal', MoveBaseActionGoal, self.CustomWayPoints1, queue_size=1)
+        rospy.Subscriber('move_base/result',MoveBaseActionResult,self.failcallback1, queue_size=1)
+
         self.locations = dict()
         self.flag1 = 0
 
     def CustomWayPoints1(self, msg):
         # Create the dictionary 
-        self.locations['robot1'] = msg
+        # self.locations['waypoint1'] = Pose(msg.goal.target_pose.pose.position, msg.goal.target_pose.pose.orientation)
+        self.locations['waypoint1'] = Pose(Point(-1, 0.7, 0.000), Quaternion(0.000, 0.000, -0.717, 0.697))
+        self.locations['waypoint2'] = Pose(Point(-1, -0.2, 0.000),Quaternion(0.000, 0.000, -0.717, 0.697))
+        self.locations['waypoint3'] = Pose(Point(-0.8, -0.2, 0.000), Quaternion(0.000, 0.000, -0.717, 0.697))
+        self.locations['waypoint4'] = Pose(Point(-0.8, 0.2, 0.000), Quaternion(0.000, 0.000, -0.717, 0.697))
 
     def sendGoals(self, waypoints):
         # subscribe to action server 
-        client = actionlib.SimpleActionClient('robot1/move_base', MoveBaseAction)
+        client = actionlib.SimpleActionClient('/move_base', MoveBaseAction)
         # this command to wait for the server to start listening for goals.
         client.wait_for_server()
         
@@ -39,8 +43,11 @@ class publish_goal_pose_to_robot1():
             goal.target_pose.pose.orientation.w = waypoints[key].orientation.w
 
             client.send_goal(goal)
-            wait = client.wait_for_result()
-        # self.locations = dict()
+            client.wait_for_result()
+        # print(goal)
+    
+    def segment(self):
+        
         
 
     def failcallback1(self, msg):
@@ -50,22 +57,29 @@ class publish_goal_pose_to_robot1():
            msg.status.text=="Failed to find a valid control. Even after executing recovery behaviors." or \
            msg.status.text=="Failed to find a valid plan. Even after executing recovery behaviors." :
             self.flag1 = 1
-            rospy.loginfo("robot1")
+            # rospy.loginfo("robot1")
             print(self.flag1)
+        # if msg.status.text== "Goal reached." :
+        #     self.flag1 = 0
             
     def resubmit1(self):
         if self.flag1 == 1:
             self.flag1 = 0
             self.sendGoals(self.locations)
+            rospy.loginfo(self.locations)
             rospy.loginfo("resubmit robot #1")
+            print(self.flag1)
+            # rospy.Rate(0.5).sleep()
+            # self.flag1 = 0
             print(self.flag1)
 
     def spin(self):
         # initialize message
+        rate = rospy.Rate(20)
+        # self.sendGoals(self.locations)
         while not rospy.is_shutdown():
-            self.sendGoals(self.locations)
             self.resubmit1()
-            rospy.Rate(20).sleep()
+            rate.sleep()
 
 if __name__=='__main__':
     try:

@@ -1,0 +1,6 @@
+<launch> 
+ <arg name="node_start_delay" default="18"/>
+  <node pkg="arobota2" type="assign_path_to_robot_1_2.py" name="path1" output="screen" />
+  <node pkg="arobota2" type="assign_path_to_robot_2_2.py" name="path2" output="screen" />
+  <node pkg="arobota2" type="assign_path_to_robot_3_2.py" name="path3" output="screen" />
+</launch>

@@ -60,15 +60,11 @@ class Initialize_Pos():
             self.time=self.then.secs-self.now.secs
             # rospy.loginfo(self.time)
             self.rotate()
-            if self.time>5: #time to rotate
-                rospy.Rate(10).sleep()
-                # rospy.loginfo(self.time)
-                rospy.loginfo("DONE")
+            if self.time>3: #time to rotate
                 self.stoprotate()
                 self.stoprotate()
-                break
-            rate.sleep()
-            
+                print("ROTATION END")
+                break            
 
 if __name__=='__main__':
     try:

@@ -3,6 +3,7 @@
 import actionlib, rospy
 from move_base_msgs.msg import MoveBaseAction, MoveBaseGoal, MoveBaseActionResult
 from geometry_msgs.msg import PoseWithCovarianceStamped, PoseArray,Pose,Quaternion,Twist,Point
+from std_msgs.msg import Int32,String
 
 class publish_goal_pose_to_robot1():
     def __init__(self):
@@ -10,12 +11,20 @@ class publish_goal_pose_to_robot1():
         rospy.loginfo('start robot1')
         rospy.Subscriber('/robot1_formation_pos', Pose, self.CustomWayPoints1)
         rospy.Subscriber('/robot1/move_base/result',MoveBaseActionResult,self.failcallback1)
+        self.flag = rospy.Publisher('/robot1/flag', String, queue_size=1)
+        rospy.Subscriber('/swarm1/done', String, self.donecallback)
+        self.done = "WAIT"
         self.locations = dict()
         self.flag1 = 0
+        
+    def donecallback(self,msg):
+        self.done = msg
 
+        
     def CustomWayPoints1(self, msg):
         # Create the dictionary 
         self.locations['robot1'] = msg
+        # rospy.loginfo(self.locations)
 
     def sendGoals(self, waypoints):
         # subscribe to action server 
@@ -25,6 +34,9 @@ class publish_goal_pose_to_robot1():
         
         # Iterate over all the waypoits, follow the path 
         for key, value in waypoints.items():
+            self.flag_done = "0"
+            self.flag.publish(self.flag_done)
+            
             goal = MoveBaseGoal()
             goal.target_pose.header.frame_id = "map"
             goal.target_pose.header.stamp = rospy.Time.now()
@@ -39,7 +51,18 @@ class publish_goal_pose_to_robot1():
             goal.target_pose.pose.orientation.w = waypoints[key].orientation.w
 
             client.send_goal(goal)
+            rospy.loginfo(goal)
             wait = client.wait_for_result()
+            self.flag_done = "1"
+            self.flag.publish(self.flag_done)
+            rospy.loginfo("robot1 done")
+            while self.done != "DONE":
+                self.x=1
+                # print("waiting..")
+            else:
+                continue
+
+            
         # self.locations = dict()
         
 

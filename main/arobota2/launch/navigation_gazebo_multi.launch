@@ -27,9 +27,9 @@
   <include file="$(find arobota2)/launch/init_formation.launch"/>  -->
 
     <!-- submit centriod with rviz arrow -->
-  <node pkg="arobota2" type="centroid_submit3.py" respawn="false" name="centroid1" output="screen"/> 
+  <!-- <node pkg="arobota2" type="centroid_submit3.py" respawn="false" name="centroid1" output="screen"/>  -->
   <!--  -->
-  <include file="$(find arobota2)/launch/pose_formation.launch"/> 
+  <!-- <include file="$(find arobota2)/launch/pose_formation.launch"/>  -->
 
 
   <!-- <node pkg="arobota2" type="initialize_position_vel.py" respawn="false" name="velocity_control" output="screen" launch-prefix="bash -c 'sleep $(arg node_start_delay1); $0 $@'"/> -->
