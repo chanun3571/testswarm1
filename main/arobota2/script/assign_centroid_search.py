@@ -59,13 +59,13 @@ class publish_goal_pose_to_robot():
         self.totalflag = flag1+flag2+flag3
         if self.totalflag != 3:
             self.flag=False
-            print(self.totalflag)
+            # print(self.totalflag)
             # print("waiting...")
         else:
             self.flag=True
             self.pubsend.publish("DONE")
             print("next goal")
-            time.sleep(3)
+            time.sleep(1)
             self.pubsend.publish("Waiting")
             print("waiting")
             time.sleep(0.5)
@@ -74,10 +74,10 @@ class publish_goal_pose_to_robot():
         # initialize message
         self.CustomWayPoints()
         print(self.locations)
-        self.sendGoals(self.locations)
-        print(self.goal)
-        rate = rospy.Rate(10)
         # self.sendGoals(self.locations)
+        # print(self.goal)
+        rate = rospy.Rate(5)
+        self.sendGoals(self.locations)
         while not rospy.is_shutdown():
             self.sendGoals(self.locations)
             rate.sleep()

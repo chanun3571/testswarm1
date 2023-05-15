@@ -52,7 +52,7 @@ class assign_centroid():
     def spin(self):
         while not rospy.is_shutdown():
             self.findpos()
-            rospy.Rate(10).sleep()
+            rospy.Rate(5).sleep()
 if __name__=='__main__':
     try:
         rospy.sleep(1.0)
