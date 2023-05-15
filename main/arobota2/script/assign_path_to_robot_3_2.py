@@ -14,9 +14,16 @@ class publish_goal_pose_to_robot3():
         rospy.Subscriber('/robot3_formation_pos', Pose, self.CustomWayPoints3)
         rospy.Subscriber('/robot3/move_base/result',MoveBaseActionResult,self.failcallback3)
         self.flag = rospy.Publisher('/robot3/flag', String, queue_size=1)
+        rospy.Subscriber('/swarm1/done', String, self.donecallback)
+
+        self.done = "WAIT"
 
         self.locations = dict()
         self.flag3 = 0
+        
+    def donecallback(self,msg):
+        self.done = msg.data
+        print(self.done)
 
     def CustomWayPoints3(self, msg):
         # Create the dictionary 
@@ -46,14 +53,14 @@ class publish_goal_pose_to_robot3():
             goal.target_pose.pose.orientation.w = waypoints[key].orientation.w
 
             client.send_goal(goal)
-            print(goal)
+            rospy.loginfo(goal)
             wait = client.wait_for_result()
-            rospy.loginfo(wait)
             self.flag_done = "1"
             self.flag.publish(self.flag_done)
             rospy.loginfo("robot3 done")
             while self.done != "DONE":
                 self.x=1
+                self.done = self.done
                 # print("waiting..")
             else:
                 continue
@@ -82,8 +89,7 @@ class publish_goal_pose_to_robot3():
         while not rospy.is_shutdown():
             self.sendGoals(self.locations)
             self.resubmit3()
-            rospy.Rate(20).sleep()
-
+            rospy.Rate(10).sleep()
 
 if __name__=='__main__':
     try:

@@ -18,7 +18,8 @@ class publish_goal_pose_to_robot1():
         self.flag1 = 0
         
     def donecallback(self,msg):
-        self.done = msg
+        self.done = msg.data
+        print(self.done)
 
         
     def CustomWayPoints1(self, msg):
@@ -57,6 +58,7 @@ class publish_goal_pose_to_robot1():
             self.flag.publish(self.flag_done)
             rospy.loginfo("robot1 done")
             while self.done != "DONE":
+                self.done = self.done
                 self.x=1
                 # print("waiting..")
             else:
@@ -64,7 +66,7 @@ class publish_goal_pose_to_robot1():
 
             
         # self.locations = dict()
-        
+    
 
     def failcallback1(self, msg):
         # if msg.status.text=="Failed to find a valid plan. Even after executing recovery behaviors.":
@@ -88,7 +90,7 @@ class publish_goal_pose_to_robot1():
         while not rospy.is_shutdown():
             self.sendGoals(self.locations)
             self.resubmit1()
-            rospy.Rate(20).sleep()
+            rospy.Rate(10).sleep()
 
 if __name__=='__main__':
     try:

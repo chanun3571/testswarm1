@@ -16,7 +16,7 @@ class assign_centroid():
         self.pubpoint1 = rospy.Publisher('/robot1_formation_pos', Pose, queue_size=1)
         self.pubpoint2 = rospy.Publisher('/robot2_formation_pos', Pose, queue_size=1)
         self.pubpoint3 = rospy.Publisher('/robot3_formation_pos', Pose, queue_size=1)
-        self.pubcentroid = rospy.Publisher('/centroid', Pose, queue_size=1)
+        # self.pubcentroid = rospy.Publisher('/centroid', Pose, queue_size=1)
         rospy.Subscriber('/swarm1/move_base_simple/goal', PoseStamped, self.submit_centroid)
         self.centroid_pose = Pose()
 
@@ -25,10 +25,11 @@ class assign_centroid():
         self.centroid_pose.position.y = msg.pose.position.y
         self.centroid_pose.orientation.z = msg.pose.orientation.z
         self.centroid_pose.orientation.w = msg.pose.orientation.w
-        self.pubcentroid.publish(self.centroid_pose)
+        # self.pubcentroid.publish(self.centroid_pose)
+        print(self.centroid_pose.position)
 
     def findpos(self):
-        print(self.centroid_pose.position)
+        # print(self.centroid_pose.position)
         self.centroid = to_numpy(self.centroid_pose.position)
         d1 = np.array([(-0.25)*math.cos(math.pi/6),(-0.25)*math.sin(math.pi/6),0])  
         d2 = np.array([0,0.25,0])
@@ -51,12 +52,12 @@ class assign_centroid():
     def spin(self):
         while not rospy.is_shutdown():
             self.findpos()
-            rospy.Rate(20).sleep()
+            rospy.Rate(10).sleep()
 if __name__=='__main__':
     try:
         rospy.sleep(1.0)
-        assign_centroid()
-        rospy.spin()
+        agent = assign_centroid()
+        agent.spin()
     except rospy.ROSInterruptException:
         pass
 
