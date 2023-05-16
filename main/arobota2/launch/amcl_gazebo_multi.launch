@@ -38,4 +38,6 @@
   <param name="base_frame_id" value="base_footprint"/> 
   <param name="odom_frame_id" value="odom_combined"/>
 </node>
+  <node pkg="rosservice" type="rosservice" name="global_loc_2" args="call --wait /global_localization" launch-prefix="bash -c 'sleep $(arg node_start_delay); $0 $@'"/>
+
 </launch>

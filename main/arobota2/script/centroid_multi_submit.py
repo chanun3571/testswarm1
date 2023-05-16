@@ -16,7 +16,7 @@ class assign_centroid():
         self.pubpoint1 = rospy.Publisher('/robot1_formation_pos', Pose, queue_size=1)
         self.pubpoint2 = rospy.Publisher('/robot2_formation_pos', Pose, queue_size=1)
         self.pubpoint3 = rospy.Publisher('/robot3_formation_pos', Pose, queue_size=1)
-        # self.pubcentroid = rospy.Publisher('/centroid', Pose, queue_size=1)
+        self.pubcentroid = rospy.Publisher('/centroid', Pose, queue_size=1)
         rospy.Subscriber('/swarm1/move_base_simple/goal', PoseStamped, self.submit_centroid)
         self.centroid_pose = Pose()
 
@@ -25,11 +25,13 @@ class assign_centroid():
         self.centroid_pose.position.y = msg.pose.position.y
         self.centroid_pose.orientation.z = msg.pose.orientation.z
         self.centroid_pose.orientation.w = msg.pose.orientation.w
-        # self.pubcentroid.publish(self.centroid_pose)
-        print(self.centroid_pose.position)
+        self.pubcentroid.publish(self.centroid_pose)
+        print(self.centroid_pose.position.x)
+        print(self.centroid_pose.position.y)
+
 
     def findpos(self):
-        # print(self.centroid_pose.position)
+        rospy.loginfo(self.centroid_pose)
         self.centroid = to_numpy(self.centroid_pose.position)
         d1 = np.array([(-0.25)*math.cos(math.pi/6),(-0.25)*math.sin(math.pi/6),0])  
         d2 = np.array([0,0.25,0])
@@ -40,7 +42,6 @@ class assign_centroid():
         q_robot1 = Quaternion(0,0,-0.9659258,0.258819)
         q_robot2 = Quaternion(0,0,-0.7071068,-0.7071068)
         q_robot3 = Quaternion(0,0,-0.258819,0.9659258)
-        print(p_robot1)
         self.pubpoint1.publish(Pose(p_robot1, q_robot1))
         self.pubpoint2.publish(Pose(p_robot2, q_robot2))
         self.pubpoint3.publish(Pose(p_robot3, q_robot3))
@@ -53,9 +54,9 @@ class assign_centroid():
         while not rospy.is_shutdown():
             self.findpos()
             rospy.Rate(5).sleep()
+
 if __name__=='__main__':
     try:
-        rospy.sleep(1.0)
         agent = assign_centroid()
         agent.spin()
     except rospy.ROSInterruptException:

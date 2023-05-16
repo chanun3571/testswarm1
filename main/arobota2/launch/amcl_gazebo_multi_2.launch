@@ -2,9 +2,9 @@
   <!-- Arguments -->
   <arg name="use_map_topic"   default="false"/>
   <arg name="scan_topic"      default="/robot2/scan"/>
-  <arg name="initial_pose_x"  default="-1.2"/>
-  <arg name="initial_pose_y"  default="-0.3"/>
-  <arg name="initial_pose_a"  default="0"/>
+  <arg name="initial_pose_x"  default="-0.75"/>
+  <arg name="initial_pose_y"  default="1"/>
+  <arg name="initial_pose_a"  default="-1.57"/>
   <arg name="global_frame_id" default="map"/>
   <arg name="node_start_delay" default="1"/>
   <!-- AMCL -->
@@ -51,6 +51,5 @@
     <remap from="particlecloud"             to="/robot2/particlecloud"/>
   </node>
 
-  <node pkg="rosservice" type="rosservice" name="global_loc_2" args="call --wait /global_localization" launch-prefix="bash -c 'sleep $(arg node_start_delay); $0 $@'"/>
 
 </launch>
