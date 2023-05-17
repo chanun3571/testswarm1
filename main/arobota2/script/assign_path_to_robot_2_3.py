@@ -49,6 +49,9 @@ class publish_goal_pose_to_robot2():
             while self.done != "DONE":
                 self.done = self.done
                 if self.done == "DONE":
+                    self.flag_done = "0"
+                    self.flag.publish(self.flag_done)
+                    self.done= "WAIT"
                     break
 
     def failcallback2(self, msg):

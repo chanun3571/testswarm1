@@ -26,8 +26,8 @@ class assign_centroid():
         self.centroid_pose.orientation.z = msg.pose.orientation.z
         self.centroid_pose.orientation.w = msg.pose.orientation.w
         self.pubcentroid.publish(self.centroid_pose)
-        print(self.centroid_pose.position.x)
-        print(self.centroid_pose.position.y)
+        # print(self.centroid_pose.position.x)
+        # print(self.centroid_pose.position.y)
 
 
     def findpos(self):

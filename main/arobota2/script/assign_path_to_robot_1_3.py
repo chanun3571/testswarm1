@@ -31,16 +31,11 @@ class publish_goal_pose_to_robot1():
         # this command to wait for the server to start listening for goals.
         client.wait_for_server()
         if self.ready:
-        # Iterate over all the waypoits, follow the path 
-            self.flag_done = "0"
-            self.flag.publish(self.flag_done)
-            
             goal = MoveBaseGoal()
             goal.target_pose.header.frame_id = "map"
             goal.target_pose.header.stamp = rospy.Time.now()
             goal.target_pose.pose = self.pose
             client.send_goal(goal)
-            # rospy.loginfo(goal)
             wait = client.wait_for_result()
             if wait:
                 self.flag_done = "1"
@@ -49,6 +44,9 @@ class publish_goal_pose_to_robot1():
             while self.done != "DONE":
                 self.done = self.done
                 if self.done == "DONE":
+                    self.flag_done = "0"
+                    self.flag.publish(self.flag_done)
+                    self.done= "WAIT"
                     break
 
     def failcallback1(self, msg):

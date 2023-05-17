@@ -20,8 +20,6 @@ class publish_goal_pose_to_robot3():
     def donecallback(self,msg):
         self.done = msg.data
         # print(self.done)
-
-        
     def waypoint(self, msg):
         self.pose = msg
         self.ready = True
@@ -50,6 +48,9 @@ class publish_goal_pose_to_robot3():
             while self.done != "DONE":
                 self.done = self.done
                 if self.done == "DONE":
+                    self.flag_done = "0"
+                    self.flag.publish(self.flag_done)
+                    self.done= "WAIT"
                     break
 
     def failcallback3(self, msg):
