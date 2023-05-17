@@ -71,7 +71,7 @@ class publish_goal_pose_to_robot1():
         while not rospy.is_shutdown():
             self.sendGoals(self.locations)
             self.resubmit1()
-            rospy.Rate(5).sleep()
+            rospy.Rate(10).sleep()
 
 if __name__=='__main__':
     try:

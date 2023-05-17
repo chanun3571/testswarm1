@@ -20,6 +20,7 @@ class publish_goal_pose_to_robot3():
     def donecallback(self,msg):
         self.done = msg.data
         # print(self.done)
+
     def waypoint(self, msg):
         self.pose = msg
         self.ready = True
@@ -29,17 +30,12 @@ class publish_goal_pose_to_robot3():
         client = actionlib.SimpleActionClient('robot3/move_base', MoveBaseAction)
         # this command to wait for the server to start listening for goals.
         client.wait_for_server()
-        
-        # Iterate over all the waypoits, follow the path 
-        self.flag_done = "0"
-        self.flag.publish(self.flag_done)
         if self.ready:
             goal = MoveBaseGoal()
             goal.target_pose.header.frame_id = "map"
             goal.target_pose.header.stamp = rospy.Time.now()
             goal.target_pose.pose = self.pose
             client.send_goal(goal)
-            # rospy.loginfo(goal)
             wait = client.wait_for_result()
             if wait:
                 self.flag_done = "1"

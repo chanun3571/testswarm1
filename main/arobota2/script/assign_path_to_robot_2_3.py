@@ -30,11 +30,7 @@ class publish_goal_pose_to_robot2():
         client = actionlib.SimpleActionClient('robot2/move_base', MoveBaseAction)
         # this command to wait for the server to start listening for goals.
         client.wait_for_server()
-        if self.ready:
-            # Iterate over all the waypoits, follow the path 
-            self.flag_done = "0"
-            self.flag.publish(self.flag_done)
-            
+        if self.ready:           
             goal = MoveBaseGoal()
             goal.target_pose.header.frame_id = "map"
             goal.target_pose.header.stamp = rospy.Time.now()
@@ -76,7 +72,7 @@ class publish_goal_pose_to_robot2():
         while not rospy.is_shutdown():
             self.sendGoals(self.locations)
             self.resubmit2()
-            rospy.Rate(5).sleep()
+            rospy.Rate(10).sleep()
 
 if __name__=='__main__':
     try:
