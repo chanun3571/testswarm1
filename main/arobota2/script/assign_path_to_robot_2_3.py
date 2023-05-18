@@ -30,15 +30,15 @@ class publish_goal_pose_to_robot2():
         client = actionlib.SimpleActionClient('robot2/move_base', MoveBaseAction)
         # this command to wait for the server to start listening for goals.
         client.wait_for_server()
-        if self.ready:           
+        if self.ready:   
+            self.reached = False
             goal = MoveBaseGoal()
             goal.target_pose.header.frame_id = "map"
             goal.target_pose.header.stamp = rospy.Time.now()
             goal.target_pose.pose = self.pose
             client.send_goal(goal)
-            # rospy.loginfo(goal)
             wait = client.wait_for_result()
-            if wait:
+            if wait and self.reached:
                 self.flag_done = "1"
                 self.flag.publish(self.flag_done)
                 rospy.loginfo("robot2 done")
@@ -57,8 +57,11 @@ class publish_goal_pose_to_robot2():
            msg.status.text=="Failed to find a valid control. Even after executing recovery behaviors." or \
            msg.status.text=="Failed to find a valid plan. Even after executing recovery behaviors." :
             self.flag2 = 1
-            rospy.loginfo("robot1")
+            self.sendGoals(self.locations)
+            rospy.loginfo("robot2")
             print(self.flag2)
+        if msg.status.text=="Goal reached.":
+            self.reached = True
             
     def resubmit2(self):
         if self.flag2 == 1:
@@ -71,8 +74,8 @@ class publish_goal_pose_to_robot2():
         # initialize message
         while not rospy.is_shutdown():
             self.sendGoals(self.locations)
-            self.resubmit2()
-            rospy.Rate(10).sleep()
+            # self.resubmit2()
+            rospy.Rate(5).sleep()
 
 if __name__=='__main__':
     try:

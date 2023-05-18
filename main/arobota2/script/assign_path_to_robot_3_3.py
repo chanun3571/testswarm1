@@ -16,7 +16,7 @@ class publish_goal_pose_to_robot3():
         self.done = "WAIT"
         self.locations = dict()
         self.flag3 = 0
-        self.ready =False
+        self.ready = False
     def donecallback(self,msg):
         self.done = msg.data
         # print(self.done)
@@ -37,7 +37,8 @@ class publish_goal_pose_to_robot3():
             goal.target_pose.pose = self.pose
             client.send_goal(goal)
             wait = client.wait_for_result()
-            if wait:
+
+            if wait and self.reached:
                 self.flag_done = "1"
                 self.flag.publish(self.flag_done)
                 rospy.loginfo("robot3 done")
@@ -56,8 +57,11 @@ class publish_goal_pose_to_robot3():
            msg.status.text=="Failed to find a valid control. Even after executing recovery behaviors." or \
            msg.status.text=="Failed to find a valid plan. Even after executing recovery behaviors." :
             self.flag3 = 1
+            self.sendGoals(self.locations)
             rospy.loginfo("robot3")
             print(self.flag3)
+        if msg.status.text=="Goal reached.":
+            self.reached = True
             
     def resubmit3(self):
         if self.flag3 == 1:
@@ -70,7 +74,7 @@ class publish_goal_pose_to_robot3():
         # initialize message
         while not rospy.is_shutdown():
             self.sendGoals(self.locations)
-            self.resubmit3()
+            # self.resubmit3()
             rospy.Rate(5).sleep()
 
 if __name__=='__main__':

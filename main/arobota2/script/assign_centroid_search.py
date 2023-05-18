@@ -34,11 +34,14 @@ class publish_goal_pose_to_robot():
         self.locations['waypoint8'] = Point(-0.9, 0.0, 0.000)
         self.locations['waypoint10'] = Point(-0.8, 0.0, 0.000)
         self.locations['waypoint11'] = Point(-0.7, 0.0, 0.000)
-        self.locations['waypoint12'] = Point(-0.6, 0.0, 0.000)
+        self.locations['waypoint12'] = Point(-0.6, -0.1, 0.000)
         self.locations['waypoint13'] = Point(-0.5, 0.0, 0.000)        
         self.locations['waypoint14'] = Point(-0.5, 0.0, 0.000)
-        self.locations['waypoint15'] = Point(-0.5, 0.0, 0.000)
-        self.locations['waypoint16'] = Point(-0.5, 0.0, 0.000)
+        self.locations['waypoint15'] = Point(-0.5, 0.1, 0.000)
+        self.locations['waypoint16'] = Point(-0.5, 0.2, 0.000)
+        self.locations['waypoint17'] = Point(-0.5, 0.3, 0.000)
+        self.locations['waypoint18'] = Point(-0.5, 0.5, 0.000)
+        
 
     def sendGoals(self, waypoints):
         for key, value in waypoints.items():
