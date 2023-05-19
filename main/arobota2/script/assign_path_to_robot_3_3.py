@@ -37,18 +37,18 @@ class publish_goal_pose_to_robot3():
             goal.target_pose.pose = self.pose
             client.send_goal(goal)
             wait = client.wait_for_result()
-
-            if wait and self.reached:
-                self.flag_done = "1"
-                self.flag.publish(self.flag_done)
-                rospy.loginfo("robot3 done")
             while self.done != "DONE":
-                self.done = self.done
+                if wait and self.reached:
+                    self.flag_done = "1"
+                    self.flag.publish(self.flag_done)
+                    # rospy.loginfo("robot3 done")
+                    self.done = self.done
                 if self.done == "DONE":
                     self.flag_done = "0"
                     self.flag.publish(self.flag_done)
                     self.done= "WAIT"
                     break
+
 
     def failcallback3(self, msg):
         # if msg.status.text=="Failed to find a valid plan. Even after executing recovery behaviors.":
