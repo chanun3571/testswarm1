@@ -1,0 +1,31 @@
+<launch> 
+ <param name="/use_sim_time" value="true"/>
+   <arg name="node_start_delay" default="2"/>
+
+  <!-- Map server -->
+    <node pkg="map_server" name="map_server" type="map_server" args="$(find arobota2)/map/mymap5.yaml">
+    <param name="frame_id" value="map" />
+    </node>
+  <!-- Start amcl and movebase -->
+
+    <include file="$(find arobota2)/launch/navigation_gazebo_multi_1.launch"/> 
+    <include file="$(find arobota2)/launch/navigation_gazebo_multi_2.launch"/>
+    <include file="$(find arobota2)/launch/navigation_gazebo_multi_3.launch"/>  
+
+  <!-- rviz -->
+  <node name="rviz" pkg="rviz" type="rviz" required="true" args="-d $(find arobota2)/rviz/navigation_multi_new4.rviz"/>
+
+  <!--initialize localization-->
+  <node pkg="arobota2" type="initialize_position_auto.py" name="initialize_localize" output="screen" />
+  <!--collect pose-->
+  <node pkg="arobota2" type="pose_collector_array.py" name="pose_collector" output="screen" />
+  
+  <!--publish visual line-->
+  <node pkg="arobota2" type="pointandline.py" name="publish_visual_line" output="screen" />
+
+
+
+  <!-- automatic formation control according to custom waypoints-->
+    <include file="$(find arobota2)/launch/auto_nav.launch"/> 
+
+</launch>
