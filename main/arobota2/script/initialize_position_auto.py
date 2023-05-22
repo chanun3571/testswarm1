@@ -33,7 +33,7 @@ class Initialize_Pos():
         # rospy.loginfo("Current time %i", self.then.secs)
         self.joy_ux = 0
         self.joy_uy = 0
-        self.joy_omega = 4
+        self.joy_omega = 3
         self._uh.linear.x = self.joy_ux #(-1,1)
         self._uh.linear.y = self.joy_uy #(-1,1)
         self._uh.angular.z = self.joy_omega #(-1,1)
@@ -56,19 +56,18 @@ class Initialize_Pos():
 
     def spin(self):
         # initialize message
+        rate = rospy.Rate(5)
         while not rospy.is_shutdown():
-            rate = rospy.Rate(10)
+            rate.sleep()
             self.time=self.then.secs-self.now.secs
             # rospy.loginfo(self.time)
             self.rotate()
-            if self.time>6: #time to rotate
+            if self.time>15: #time to rotate
                 self.stoprotate()
-                print("sleeping..")
-                rospy.sleep(1)
                 self.pubinitdone.publish("DONE")
                 print("ROTATION END")
                 break            
-
+            
 if __name__=='__main__':
     try:
         agent=Initialize_Pos()

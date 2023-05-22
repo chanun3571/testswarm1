@@ -56,7 +56,7 @@ class publish_goal_pose_to_robot():
         # self.locations['20'] = Point(-0.0, 0.4, 0.000)
         # self.locations['21'] = Point(-0.2, 0.4, 0.000)
         # self.locations['22'] = Point(-0.3, 0.3, 0.000)
-        self.locations['23'] = Point(0, 0.4, 0.000)
+        # self.locations['23'] = Point(0, 0.4, 0.000)
         # self.locations['24'] = Point(0, -0, 0.000)
         # self.locations['25'] = Point(0, -0.2, 0.000)
         self.locations['26'] = Point(0, -0.4, 0.000)  
@@ -67,7 +67,7 @@ class publish_goal_pose_to_robot():
         # self.locations['30'] = Point(0.4, -0.6, 0.000)
         self.locations['30'] = Point(0.6, -0.6, 0.000)
         self.locations['30'] = Point(0.8, -0.6, 0.000)
-        # self.locations['30'] = Point(1, -0.7, 0.000)
+        self.locations['30'] = Point(1, -0.7, 0.000)
         self.locations['30'] = Point(1.2, -0.9, 0.000)
 
 
@@ -108,6 +108,7 @@ class publish_goal_pose_to_robot():
         self.totalflag = flag1+flag2+flag3
         if self.totalflag != 3:
             self.flag = False
+            print(self.totalflag)
         if self.totalflag == 3:
             self.pubsend.publish("DONE")
             self.flag= True

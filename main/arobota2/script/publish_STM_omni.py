@@ -67,7 +67,7 @@ class stop():
 
 if __name__ =='__main__':
     try:
-        STM_Connect() 	
+        agent=STM_Connect() 	
         rospy.spin()
         rospy.on_shutdown(stop().stop())
     except rospy.ROSInterruptException:

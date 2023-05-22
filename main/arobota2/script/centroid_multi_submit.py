@@ -35,7 +35,7 @@ class assign_centroid():
 
     def findpos(self):
         if self.ready:
-            rospy.loginfo(self.centroid_pose)
+            # rospy.loginfo(self.centroid_pose)
             self.centroid = to_numpy(self.centroid_pose.position)
             d1 = np.array([(-0.25)*math.cos(math.pi/6),(-0.25)*math.sin(math.pi/6),0])  
             d2 = np.array([0,0.25,0])
