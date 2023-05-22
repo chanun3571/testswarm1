@@ -1,0 +1,48 @@
+<launch>
+  <machine name="robot1" address="192.168.31.80" env-loader="/home/ubuntu/catkin_ws/devel/env.sh" user="ubuntu" password="gusman17"/>
+  <machine name="robot2" address="192.168.31.148" env-loader="/home/ubuntu/catkin_ws/devel/env.sh" user="ubuntu" password="gusman17"/>
+  <machine name="robot3" address="192.168.31.191" env-loader="/home/ubuntu/catkin_ws/devel/env.sh" user="ubuntu" password="gusman17"/>
+ <arg name="node_start_delay1" default="1"/>
+ <arg name="node_start_delay2" default="1.3"/>
+ <arg name="node_start_delay3" default="1.7"/>
+  
+  <group ns="robot1">
+      <node machine="robot1" pkg="arobota2" type="recieve_STM_omni.py" name="STM_Sub" output="screen"/>
+      <node machine= "robot1" pkg="arobota2" type="publish_STM_omni.py" name="STM_Pub" output="screen" launch-prefix="bash -c 'sleep $(arg node_start_delay1); $0 $@'"/>
+
+      <include file="$(find arobota2)/launch/camera_multi.launch">
+        <arg name="robot_name" value="robot1"/>
+      </include>
+      <include file="$(find arobota2)/launch/rplidar_multi.launch">
+        <arg name="robot_name" value="robot1"/>
+        <arg name="robot_tf" value="robot1_tf"/>
+      </include>
+  </group>
+
+  
+ <group ns="robot2">
+      <node machine="robot2" pkg="arobota2" type="recieve_STM_omni.py" name="STM_Sub" output="screen"/>
+      <node machine= "robot2" pkg="arobota2" type="publish_STM_omni.py" name="STM_Pub" output="screen" launch-prefix="bash -c 'sleep $(arg node_start_delay3); $0 $@'"/>
+
+      <include file="$(find arobota2)/launch/camera_multi.launch">
+        <arg name="robot_name" value="robot2"/>
+      </include>
+      <include file="$(find arobota2)/launch/rplidar_multi.launch">
+        <arg name="robot_name" value="robot2"/>
+        <arg name="robot_tf" value="robot2_tf"/>
+      </include>
+  </group>
+
+ <group ns="robot3">
+      <node machine="robot3" pkg="arobota2" type="recieve_STM_omni.py" name="STM_Sub" output="screen"/>
+      <node machine= "robot3" pkg="arobota2" type="publish_STM_omni.py" name="STM_Pub" output="screen" launch-prefix="bash -c 'sleep $(arg node_start_delay2); $0 $@'"/>
+
+      <include file="$(find arobota2)/launch/camera_multi.launch">
+        <arg name="robot_name" value="robot3"/>
+      </include>
+      <include file="$(find arobota2)/launch/rplidar_multi.launch">
+        <arg name="robot_name" value="robot3"/>
+        <arg name="robot_tf" value="robot3_tf"/>
+      </include>
+  </group>
+</launch>
