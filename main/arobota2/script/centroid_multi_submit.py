@@ -18,6 +18,7 @@ class assign_centroid():
         self.pubpoint3 = rospy.Publisher('/robot3_formation_pos', Pose, queue_size=1)
         self.pubcentroid = rospy.Publisher('/centroid', Pose, queue_size=1)
         rospy.Subscriber('/swarm1/move_base_simple/goal', PoseStamped, self.submit_centroid)
+        self.ready = False
         self.centroid_pose = Pose()
 
     def submit_centroid(self, msg):
@@ -26,28 +27,31 @@ class assign_centroid():
         self.centroid_pose.orientation.z = msg.pose.orientation.z
         self.centroid_pose.orientation.w = msg.pose.orientation.w
         self.pubcentroid.publish(self.centroid_pose)
+        self.ready = True
+
         # print(self.centroid_pose.position.x)
         # print(self.centroid_pose.position.y)
 
 
     def findpos(self):
-        rospy.loginfo(self.centroid_pose)
-        self.centroid = to_numpy(self.centroid_pose.position)
-        d1 = np.array([(-0.25)*math.cos(math.pi/6),(-0.25)*math.sin(math.pi/6),0])  
-        d2 = np.array([0,0.25,0])
-        d3 = np.array([0.25*math.cos(math.pi/6),-0.25*math.sin(math.pi/6),0])
-        p_robot1 = to_message(Point,self.centroid + d1)
-        p_robot2 = to_message(Point,self.centroid + d2)
-        p_robot3 = to_message(Point,self.centroid + d3)
-        q_robot1 = Quaternion(0,0,-0.9659258,0.258819)
-        q_robot2 = Quaternion(0,0,-0.7071068,-0.7071068)
-        q_robot3 = Quaternion(0,0,-0.258819,0.9659258)
-        self.pubpoint1.publish(Pose(p_robot1, q_robot1))
-        self.pubpoint2.publish(Pose(p_robot2, q_robot2))
-        self.pubpoint3.publish(Pose(p_robot3, q_robot3))
-        # self.pubpoint1.publish(to_message(Pose, p_robot1))
-        # self.pubpoint2.publish(to_message(Pose, p_robot2))
-        # self.pubpoint3.publish(to_message(Pose, p_robot3))
+        if self.ready:
+            rospy.loginfo(self.centroid_pose)
+            self.centroid = to_numpy(self.centroid_pose.position)
+            d1 = np.array([(-0.25)*math.cos(math.pi/6),(-0.25)*math.sin(math.pi/6),0])  
+            d2 = np.array([0,0.25,0])
+            d3 = np.array([0.25*math.cos(math.pi/6),-0.25*math.sin(math.pi/6),0])
+            p_robot1 = to_message(Point,self.centroid + d1)
+            p_robot2 = to_message(Point,self.centroid + d2)
+            p_robot3 = to_message(Point,self.centroid + d3)
+            q_robot1 = Quaternion(0,0,-0.9659258,0.258819)
+            q_robot2 = Quaternion(0,0,-0.7071068,-0.7071068)
+            q_robot3 = Quaternion(0,0,-0.258819,0.9659258)
+            self.pubpoint1.publish(Pose(p_robot1, q_robot1))
+            self.pubpoint2.publish(Pose(p_robot2, q_robot2))
+            self.pubpoint3.publish(Pose(p_robot3, q_robot3))
+            # self.pubpoint1.publish(to_message(Pose, p_robot1))
+            # self.pubpoint2.publish(to_message(Pose, p_robot2))
+            # self.pubpoint3.publish(to_message(Pose, p_robot3))
     
   
     def spin(self):

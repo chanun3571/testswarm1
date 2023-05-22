@@ -3,7 +3,7 @@
 import rospy
 from visualization_msgs.msg import Marker
 from geometry_msgs.msg import PoseWithCovarianceStamped, PoseArray,Pose,Quaternion,Twist,Point
-
+from std_msgs.msg import String
 class createvisuallinepoint:
     def __init__(self):
         rospy.init_node('create_visual_line',anonymous=True)
@@ -11,10 +11,17 @@ class createvisuallinepoint:
         rospy.Subscriber("/robot1/amcl_pose", PoseWithCovarianceStamped, self.allpose1_callback)
         rospy.Subscriber("/robot2/amcl_pose", PoseWithCovarianceStamped, self.allpose2_callback)
         rospy.Subscriber("/robot3/amcl_pose", PoseWithCovarianceStamped, self.allpose3_callback)
+        rospy.Subscriber('initialize_state', String, self.robotinitdone, queue_size=10)
+
         self.robot1 = Point()
         self.robot2 = Point()
         self.robot3 = Point()
+        self.initdone = "WAIT"
 
+    def robotinitdone(self, msg):
+        self.initdone = msg.data
+
+        print(msg.data)
     def allpose1_callback(self, msg):       
         self.robot1 = msg.pose.pose.position
     def allpose2_callback(self, msg):
@@ -71,7 +78,8 @@ class createvisuallinepoint:
     def spin(self):
         # initialize message
         while not rospy.is_shutdown():
-            self.formation_marker()
+            if self.initdone == "DONE":
+                self.formation_marker()
 
 if __name__=='__main__':
     try:

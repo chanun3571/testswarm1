@@ -1,6 +1,6 @@
 <launch> 
-  <arg name="node_start_delay" default="2"/>
-  <arg name="node_start_delay1" default="5"/>
+  <arg name="node_start_delay" default="0"/>
+  <arg name="node_start_delay1" default="0"/>
   <node pkg="arobota2" type="assign_centroid_search.py" name="search" output="screen" />
   <node pkg="arobota2" type="centroid_multi_submit.py" name="submit" output="screen" launch-prefix="bash -c 'sleep $(arg node_start_delay); $0 $@'" />
   <node pkg="arobota2" type="assign_path_to_robot_1_4.py" name="path1" output="screen" launch-prefix="bash -c 'sleep $(arg node_start_delay1); $0 $@'" />

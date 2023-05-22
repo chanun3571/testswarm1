@@ -13,7 +13,7 @@
     <include file="$(find arobota2)/launch/navigation_gazebo_multi_3.launch"/>  
 
   <!-- rviz -->
-  <node name="rviz" pkg="rviz" type="rviz" required="true" args="-d $(find arobota2)/rviz/navigation_multi_new4.rviz"/>
+  <node name="rviz" pkg="rviz" type="rviz" required="true" args="-d $(find arobota2)/rviz/navigation_multi_new6.rviz"/>
 
   <!--initialize localization-->
   <node pkg="arobota2" type="initialize_position_auto.py" name="initialize_localize" output="screen" />

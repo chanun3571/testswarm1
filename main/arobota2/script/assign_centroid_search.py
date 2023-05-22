@@ -13,7 +13,7 @@ class publish_goal_pose_to_robot():
         rospy.Subscriber('robot1/flag',String,self.robot1flagcallback, queue_size=1)
         rospy.Subscriber('robot2/flag',String,self.robot2flagcallback, queue_size=1)
         rospy.Subscriber('robot3/flag',String,self.robot3flagcallback, queue_size=1)
-        rospy.Subscriber('initialize_state', String, self.robotinitdone, queue_size=1)
+        rospy.Subscriber('initialize_state', String, self.robotinitdone, queue_size=10)
         self.pubgoal = rospy.Publisher('/swarm1/move_base_simple/goal', PoseStamped, queue_size=1)
         self.pubgoalpoint = rospy.Publisher('/swarm1/move_base_simple/point', PointStamped, queue_size=1)
         self.pubsend = rospy.Publisher('/swarm1/done', String, queue_size=10)
@@ -23,9 +23,13 @@ class publish_goal_pose_to_robot():
         self.flag3 = 0
         self.flag = False
         self.initdone = "WAIT"
-        self.goalPoint = PointStamped()
+        self.goalpoint = PointStamped()
+        self.goalpoint.header.frame_id = "map"
+
+
     def robotinitdone(self, msg):
         self.initdone = msg.data
+        print(msg.data)
 
     def CustomWayPoints(self):
         # Create the dictionary 
@@ -112,11 +116,11 @@ class publish_goal_pose_to_robot():
 
     def spin(self):
         # initialize message
-        if self.initdone == "DONE":
-            self.CustomWayPoints()
-            self.sendGoals(self.locations)
-            while not rospy.is_shutdown():
-                pass
+        while not rospy.is_shutdown():
+            if self.initdone == "DONE":
+                self.CustomWayPoints()
+                self.sendGoals(self.locations)
+                break
 
 if __name__=='__main__':
     try:
