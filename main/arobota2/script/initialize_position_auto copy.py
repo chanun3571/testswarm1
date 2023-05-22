@@ -63,8 +63,6 @@ class Initialize_Pos():
             self.rotate()
             if self.time>6: #time to rotate
                 self.stoprotate()
-                print("sleeping..")
-                rospy.sleep(1)
                 self.pubinitdone.publish("DONE")
                 print("ROTATION END")
                 break            

@@ -29,7 +29,7 @@ class publish_goal_pose_to_robot():
 
     def robotinitdone(self, msg):
         self.initdone = msg.data
-        print(msg.data)
+        # print(msg.data)
 
     def CustomWayPoints(self):
         # Create the dictionary 
