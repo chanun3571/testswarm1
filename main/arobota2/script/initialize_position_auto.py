@@ -61,7 +61,7 @@ class Initialize_Pos():
             self.time=self.then.secs-self.now.secs
             # rospy.loginfo(self.time)
             self.rotate()
-            if self.time>3: #time to rotate
+            if self.time>10: #time to rotate
                 self.stoprotate()
                 self.pubinitdone.publish("DONE")
                 print("ROTATION END")

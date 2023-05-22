@@ -89,11 +89,11 @@ class publish_goal_pose_to_robot():
             self.pubgoalpoint.publish(self.goalpoint)
             print(self.goal)
             while not self.flag:
-                print(self.totalflag)
+                # print(self.totalflag)
                 rospy.Rate(5).sleep()
                 self.pubgoal.publish(self.goal)
                 self.checktotalflag(self.flag1, self.flag2,self.flag3) 
-                print(self.flag1,self.flag2,self.flag3)
+                # print(self.flag1,self.flag2,self.flag3)
                 if self.flag:
                     break
 

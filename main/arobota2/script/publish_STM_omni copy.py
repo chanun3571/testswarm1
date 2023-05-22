@@ -15,7 +15,7 @@ class STM_Connect():
         self.center_wheel_speed_ = 0     
         rospy.loginfo("Publish data to STM")
         rospy.Subscriber('wheel_vtarget',String,self.Update_Speed)
-        # self.selflocalize()
+        self.selflocalize()
         
     def Update_Speed(self, msg):
         r = rospy.Rate(10)
@@ -41,7 +41,13 @@ class STM_Connect():
                 if self.center_wheel_power>0:
                     self.center_wheel_power = self.center_wheel_power +10 
                
-       #power command   
+        # print ("M2A"+str(int(float(self.wheel[0])*1000000))+"B"+str(int(float(self.wheel[1])*1000000))+"\r\n")
+        # rospy.loginfo(msg.data)
+        #power_message = "M0"+"A"+str(int(self._right_wheel_power)/500)+"B"+str(int(self._center_wheel_power)/500)+"C"+str(int(self._left_wheel_power)/500)+"\r\n"
+        # self._left_wheel_power = -int(msg.z) 
+        # self._center_wheel_power = -int(msg.x)
+        # self._right_wheel_power= -int(msg.y)
+        #power command   
         power_message = "M0"+"A"+str(self.left_wheel_power)+"B"+str(self.right_wheel_power)+"C"+str(self.center_wheel_power)+"\r\n"
         ser.write(bytes(power_message, 'utf-8'))
         rospy.loginfo(power_message)
@@ -51,10 +57,10 @@ class STM_Connect():
         packet = bytes(string+"\r\n",'ascii')
         ser.write(packet)     
 
-    # def selflocalize(self):
-    #     self.sendSerial("M0A20B20C20")
-    #     rospy.Rate(0.1).sleep()
-    #     self.sendSerial("M0A0B0C0")
+    def selflocalize(self):
+        self.sendSerial("M0A20B20C20")
+        rospy.Rate(0.1).sleep()
+        self.sendSerial("M0A0B0C0")
 
 class stop():
     def sendSerial(self,string):
