@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 import serial
 import rospy
-from geometry_msgs.msg import Twist
+from geometry_msgs.msg import Twist, Vector3
 from std_msgs.msg import String, Float32
 from initialize_position import Initialize_Pos
 
@@ -15,7 +15,21 @@ class STM_Connect():
         self.center_wheel_speed_ = 0     
         rospy.loginfo("Publish data to STM")
         rospy.Subscriber('wheel_vtarget',String,self.Update_Speed)
-        # self.selflocalize()
+        rospy.Subscriber('/joystick', Vector3, self.joystickCallback)
+
+    def joystickCallback(self, msg):
+        r = rospy.Rate(20)
+        #M0 = power command 
+        #M1 = position command
+        #M2 = velocity command
+        self._left_wheel_power = -int(msg.z) 
+        self._center_wheel_power = -int(msg.x)
+        self._right_wheel_power= -int(msg.y)
+        #power command   
+        power_message = "M0"+"A"+str(self._left_wheel_power)+"B"+str(self._right_wheel_power)+"C"+str(self._center_wheel_power)+"\r\n"
+        ser.write(bytes(power_message, 'utf-8'))
+        rospy.loginfo(power_message)
+        r.sleep()
         
     def Update_Speed(self, msg):
         r = rospy.Rate(10)
