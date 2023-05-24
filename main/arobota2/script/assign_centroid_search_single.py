@@ -19,7 +19,7 @@ class publish_goal_pose_to_robot1():
 
     def robotinitdone(self, msg):
         self.initdone = msg.data
-        # print(msg.data)
+        print(msg.data)
 
     def CustomWayPoints1(self):
         # Create the dictionary 
@@ -32,7 +32,7 @@ class publish_goal_pose_to_robot1():
         self.locations['6'] = Pose(Point(-0.2, 0.4, 0.000),Quaternion(0.000, 0.000, -0.717, 0.697))
         self.locations['7'] = Pose(Point(-0.0, -0.4, 0.000), Quaternion(0.000, 0.000, -0.717, 0.697))
         self.locations['8'] = Pose(Point(0.2, -0.2, 0.000), Quaternion(0.000, 0.000, -0.717, 0.697))
-        self.locations['9'] = Pose(Point(-0.3, 0.2, 0.000), Quaternion(0.000, 0.000, -0.717, 0.697))
+        self.locations['9'] = Pose(Point(0.3, 0.2, 0.000), Quaternion(0.000, 0.000, -0.717, 0.697))
         self.locations['10'] = Pose(Point(0.6, -0.6, 0.000),Quaternion(0.000, 0.000, -0.717, 0.697))
         self.locations['11'] = Pose(Point(0.8, -0.6, 0.000), Quaternion(0.000, 0.000, -0.717, 0.697))
         self.locations['12'] = Pose(Point(1, -0.7, 0.000), Quaternion(0.000, 0.000, -0.717, 0.697))
@@ -85,9 +85,11 @@ class publish_goal_pose_to_robot1():
     #         print(self.flag1)
 
     def spin(self):
-        if self.initdone == "DONE":
-            self.CustomWayPoints1()
-            self.sendGoals(self.locations)
+        while not rospy.is_shutdown():
+            if self.initdone == "DONE":
+                self.CustomWayPoints1()
+                self.sendGoals(self.locations)
+                break
 
 
 if __name__=='__main__':

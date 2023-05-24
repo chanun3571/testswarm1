@@ -7,7 +7,7 @@ import time
 def add_HSV_filter(frame, camera):
 
 	# Blurring the frame
-    blur = cv2.GaussianBlur(frame,(49,49),0) 
+    blur = cv2.GaussianBlur(frame,(25,25),0) 
     # blur = cv2.bilateralFilter(frame,9,75,75)
     # Converting RGB to HSV
     hsv = cv2.cvtColor(blur, cv2.COLOR_BGR2HSV)
