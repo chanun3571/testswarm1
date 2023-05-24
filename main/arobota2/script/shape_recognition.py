@@ -19,9 +19,11 @@ def find_circles(frame, mask):
         ((x, y), radius) = cv2.minEnclosingCircle(c)
         M = cv2.moments(c)       #Finds center point
         center = (int(M["m10"] / M["m00"]), int(M["m01"] / M["m00"]))
+        print(radius)
 
         # Only proceed if the radius is greater than a minimum value
-        if radius > 20:
+        if radius > 10 and radius <220:
+            print(radius)
             # Draw the circle and centroid on the frame,
             # then update the list of tracked points
             cv2.circle(frame, (int(x), int(y)), int(radius),

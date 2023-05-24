@@ -31,7 +31,7 @@ class color_shape_detection:
         self.frame_rate = 30    #Camera frame rate (maximum at 120 fps)
         self.B = 6               #Distance between the cameras [cm]
         # f = 150            #Camera lense's focal length [mm]
-        self.alpha = 45        #Camera field of view in the horisontal plane [degrees]
+        self.alpha = 30        #Camera field of view in the horisontal plane [degrees]
         self.cv_image = np.array([])
         self.flag=0
 
