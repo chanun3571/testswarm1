@@ -11,9 +11,8 @@ class publish_goal_pose_to_robot1():
         rospy.init_node('custom_waypoints1')
         rospy.Subscriber('move_base/goal', MoveBaseActionGoal, self.CustomWayPoints1, queue_size=1)
         rospy.Subscriber('move_base/result',MoveBaseActionResult,self.failcallback1, queue_size=1)
-        rospy.Subscriber('depth', String, self.CustomWayPoints1, queue_size=1)
-        rospy.Subscriber('x',MoveBaseActionResult,self.failcallback1, queue_size=1)
-        rospy.Subscriber('',MoveBaseActionResult,self.failcallback1, queue_size=1)
+        rospy.Subscriber('depth', String, self.depthcallback(), queue_size=1)
+        rospy.Subscriber('x',String,self.failcallback1, queue_size=1)
         rospy.Pub
         rospy.Subscriber('/camera_status', String, self.camera_status, queue_size=10)
         self.cancel_pub = rospy.Publisher("/move_base/cancel", GoalID, queue_size=1)
@@ -26,8 +25,6 @@ class publish_goal_pose_to_robot1():
         # self.pubvel3 = rospy.Publisher('robot3/cmd_vel',Twist, queue_size=10)
 
     def moveforward(self):
-        self.then = rospy.Time.now()
-        # rospy.loginfo("Current time %i", self.then.secs)
         self.joy_ux = 3
         self.joy_uy = 0
         self.joy_omega = 0
@@ -35,11 +32,11 @@ class publish_goal_pose_to_robot1():
         self._uh.linear.y = self.joy_uy #(-1,1)
         self._uh.angular.z = self.joy_omega #(-1,1)
         self.pubvel.publish(self._uh)
-        self.pubvel1.publish(self._uh)
-        self.pubvel2.publish(self._uh)
-        self.pubvel3.publish(self._uh)
+        # self.pubvel1.publish(self._uh)
+        # self.pubvel2.publish(self._uh)
+        # self.pubvel3.publish(self._uh)
 
-    def stoprotate(self):
+    def stopmotion(self):
         joy_ux = 0
         joy_uy = 0
         joy_omega = 0
@@ -47,10 +44,9 @@ class publish_goal_pose_to_robot1():
         self._uh.linear.y = joy_uy #(-1,1)
         self._uh.angular.z = joy_omega #(-1,1)
         self.pubvel.publish(self._uh)
-        self.pubvel1.publish(self._uh)
-        self.pubvel2.publish(self._uh)
-        self.pubvel3.publish(self._uh)
-
+        # self.pubvel1.publish(self._uh)
+        # self.pubvel2.publish(self._uh)
+        # self.pubvel3.publish(self._uh)
 
     def allpose_callback(self, msg):       
         self.robot = msg.pose.pose.position
@@ -58,11 +54,12 @@ class publish_goal_pose_to_robot1():
     def camera_status(self,msg):
         self.camstat = msg.data
 
-
     def navtoball(self):
+        self.stopmotion()
+        self.moveforward()
+        if depth
         
-        
-    def spin(self):
+    def spin(self):s
         while not rospy.is_shutdown():
             if self.camstat == "tracking":
                 self.cancel_pub.publish(self.cancel_msg)
