@@ -13,8 +13,8 @@ class publish_goal_pose_to_robot1():
         rospy.Subscriber('move_base/result',MoveBaseActionResult,self.failcallback1, queue_size=1)
         rospy.Subscriber('depth', String, self.depthcallback(), queue_size=1)
         rospy.Subscriber('x',String,self.failcallback1, queue_size=1)
-        rospy.Pub
         rospy.Subscriber('/camera_status', String, self.camera_status, queue_size=10)
+        self.pubinterrupt = rospy.Publisher('interruptsignal', String, queue_size=1)
         self.cancel_pub = rospy.Publisher("/move_base/cancel", GoalID, queue_size=1)
         self.cancel_msg = GoalID()
         self.camstat = ""
@@ -55,17 +55,19 @@ class publish_goal_pose_to_robot1():
         self.camstat = msg.data
 
     def navtoball(self):
-        self.stopmotion()
-        self.moveforward()
-        if depth
+        while self.depth<160:
+            self.moveforward()
+            if self.depth>160:
+                self.stop()
         
-    def spin(self):s
+    def spin(self):
         while not rospy.is_shutdown():
             if self.camstat == "tracking":
+                self.pubinterrupt.publish("STOP")
+                self.stopmotion()
                 self.cancel_pub.publish(self.cancel_msg)
-                self.navtoball(self)
+                self.navtoball()
                 
-
 if __name__=='__main__':
     try:
         agent=publish_goal_pose_to_robot1()

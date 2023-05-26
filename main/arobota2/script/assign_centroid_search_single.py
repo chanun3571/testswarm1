@@ -10,12 +10,15 @@ class publish_goal_pose_to_robot1():
         rospy.init_node('custom_waypoints1')
         # rospy.Subscriber('move_base/goal', MoveBaseActionGoal, self.CustomWayPoints1, queue_size=1)
         # rospy.Subscriber('move_base/result',MoveBaseActionResult,self.failcallback1, queue_size=1)
-        # rospy.Subscriber('interruptsignal')
+        rospy.Subscriber('interruptsignal', String, self.robotinterrupt,queue_size=10)
         rospy.Subscriber('initialize_state', String, self.robotinitdone, queue_size=10)
         self.initdone = "WAIT"
-
+        self.interrupt = "FALSE"
         self.locations = dict()
         self.flag1 = 0
+
+    def robotinterrupt(self, msg):
+        self.interrupt = msg.data
 
     def robotinitdone(self, msg):
         self.initdone = msg.data
@@ -59,7 +62,8 @@ class publish_goal_pose_to_robot1():
             print(goal)
             client.send_goal(goal)
             client.wait_for_result()
-        # print(goal)
+            if self.interrupt == "TRUE":
+                break
 
     # def failcallback1(self, msg):
     #     # if msg.status.text=="Failed to find a valid plan. Even after executing recovery behaviors.":

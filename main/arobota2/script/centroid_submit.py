@@ -16,7 +16,6 @@ class centroid():
         self.pubpoint1 = rospy.Publisher('/robot1_formation_pos', Point, queue_size=1)
         self.pubpoint2 = rospy.Publisher('/robot2_formation_pos', Point, queue_size=1)
         self.pubpoint3 = rospy.Publisher('/robot3_formation_pos', Point, queue_size=1)
-        self.
         self.pubcentroid = rospy.Publisher('/centroid', Point, queue_size=1)
         rospy.Subscriber('/swarm/move_base_simple/goal',PoseStamped,self.resubmitcallback1)
         # self.pubrobot1 = rospy.Publisher('/robot1/move_base_simple/goal',PoseStamped, queue_size=10)
