@@ -38,7 +38,6 @@ class color_shape_detection:
     def image_callback(self, img_msg):
         try:
             self.cv_image = self.bridge.compressed_imgmsg_to_cv2(img_msg, "bgr8")
-            # print(self.cv_image)
         except CvBridgeError:
             rospy.loginfo("img_Failed")
 
@@ -80,15 +79,15 @@ class color_shape_detection:
                     cv2.putText(self.frame_left, "Distance: " + str(round(depth,2)), (300,50), cv2.FONT_HERSHEY_SIMPLEX, 0.7, (124,252,0),2)
                     cv2.putText(self.frame_right, "X: " + str(round(x,2)), (500,50), cv2.FONT_HERSHEY_SIMPLEX, 0.7, (124,252,0),2)
                     cv2.putText(self.frame_left, "X: " + str(round(x,2)), (500,50), cv2.FONT_HERSHEY_SIMPLEX, 0.7, (124,252,0),2)
-                    self.pubx.publish(x)
-                    self.pubz.publish(depth)
+                    # self.pubx.publish(x)
+                    # self.pubz.publish(depth)
                     self.pubimgstatus.publish("tracking")
                 else:
                     cv2.putText(self.frame_right, "DETECTED: NOT TRACKING", (75,50), cv2.FONT_HERSHEY_SIMPLEX, 0.7, (0,0,255),2)
                     cv2.putText(self.frame_left, "DETECTED: NOT TRACKING", (75,50), cv2.FONT_HERSHEY_SIMPLEX, 0.7, (0,0,255),2)
                     self.pubimgstatus.publish("not_tracking")
-                    self.pubx.publish(x)
-                    self.pubz.publish(depth)
+                    # self.pubx.publish(x)
+                    # self.pubz.publish(depth)
                     
             cv2.imshow("frame right", self.frame_right) 
             cv2.imshow("frame left", self.frame_left)

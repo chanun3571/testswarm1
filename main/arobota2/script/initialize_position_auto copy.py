@@ -43,12 +43,12 @@ class Initialize_Pos():
         self.pubvel3.publish(self._uh)
 
     def stoprotate(self):
-        joy_ux = 0
-        joy_uy = 0
-        joy_omega = 0
-        self._uh.linear.x = joy_ux #(-1,1)
-        self._uh.linear.y = joy_uy #(-1,1)
-        self._uh.angular.z = joy_omega #(-1,1)
+        self.joy_ux = 0
+        self.joy_uy = 0
+        self.joy_omega = 0
+        self._uh.linear.x = self.joy_ux #(-1,1)
+        self._uh.linear.y = self.joy_uy #(-1,1)
+        self._uh.angular.z = self.joy_omega #(-1,1)
         self.pubvel.publish(self._uh)
         self.pubvel1.publish(self._uh)
         self.pubvel2.publish(self._uh)
