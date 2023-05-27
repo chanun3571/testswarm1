@@ -7,11 +7,13 @@ from std_msgs.msg import String, Int32
 
 class publish_goal_pose_to_robot1():
     def __init__(self):
-        rospy.init_node('custom_waypoints1')
+        rospy.init_node('search')
         # rospy.Subscriber('move_base/goal', MoveBaseActionGoal, self.CustomWayPoints1, queue_size=1)
-        # rospy.Subscriber('move_base/result',MoveBaseActionResult,self.failcallback1, queue_size=1)
+        rospy.Subscriber('move_base/result',MoveBaseActionResult,self.failcallback1, queue_size=1)
         rospy.Subscriber('interruptsignal', String, self.robotinterrupt,queue_size=10)
         rospy.Subscriber('initialize_state', String, self.robotinitdone, queue_size=10)
+        # self.cancel_pub = rospy.Publisher("/move_base/cancel", GoalID, queue_size=1)
+        self.msg1 = "WAIT"
         self.initdone = "WAIT"
         self.interrupt = "FALSE"
         self.locations = dict()
@@ -34,11 +36,12 @@ class publish_goal_pose_to_robot1():
         self.locations['5'] = Pose(Point(-0.3, 0.2, 0.000), Quaternion(0.000, 0.000, -0.717, 0.697))
         self.locations['6'] = Pose(Point(-0.2, 0.4, 0.000),Quaternion(0.000, 0.000, -0.717, 0.697))
         self.locations['7'] = Pose(Point(0.0, -0.4, 0.000), Quaternion(0.000, 0.000, -0.717, 0.697))
-        self.locations['8'] = Pose(Point(-0.2, -0.2, 0.000), Quaternion(0.000, 0.000, -0.717, 0.697))
-        self.locations['9'] = Pose(Point(-0.3, 0.2, 0.000), Quaternion(0.000, 0.000, -0.717, 0.697))
-        self.locations['10'] = Pose(Point(-0.6, -0.6, 0.000),Quaternion(0.000, 0.000, -0.717, 0.697))
-        self.locations['11'] = Pose(Point(-0.8, -0.6, 0.000), Quaternion(0.000, 0.000, -0.717, 0.697))
-        self.locations['12'] = Pose(Point(-1, -0.7, 0.000), Quaternion(0.000, 0.000, -0.717, 0.697))
+        self.locations['8'] = Pose(Point(0.2, -0.2, 0.000), Quaternion(0.000, 0.000, -0.717, 0.697))
+        self.locations['9'] = Pose(Point(0.3, -0.2, 0.000), Quaternion(0.000, 0.000, -0.717, 0.697))
+        self.locations['10'] = Pose(Point(0.6, -0.6, 0.000),Quaternion(0.000, 0.000, -0.717, 0.697))
+        self.locations['11'] = Pose(Point(0.8, -0.6, 0.000), Quaternion(0.000, 0.000, -0.717, 0.697))
+        self.locations['12'] = Pose(Point(1, -0.7, 0.000), Quaternion(0.000, 0.000, -0.717, 0.697))
+    
     def sendGoals(self, waypoints):
         # subscribe to action server 
         client = actionlib.SimpleActionClient('/move_base', MoveBaseAction)
@@ -47,6 +50,7 @@ class publish_goal_pose_to_robot1():
         
         # Iterate over all the waypoits, follow the path 
         for key, value in waypoints.items():
+            self.msg1 = "WAIT"
             goal = MoveBaseGoal()
             goal.target_pose.header.frame_id = "map"
             goal.target_pose.header.stamp = rospy.Time.now()
@@ -61,32 +65,39 @@ class publish_goal_pose_to_robot1():
             goal.target_pose.pose.orientation.w = waypoints[key].orientation.w
             print(goal)
             client.send_goal(goal)
-            client.wait_for_result()
-            if self.interrupt == "TRUE":
-                break
+            while self.msg1 != "Goal reached.":
+                if self.interrupt == "STOP":
+                    client.cancel_goal()
+                    client.cancel_all_goals()
+                    print("STOP")
+                    break
+                
 
-    # def failcallback1(self, msg):
-    #     # if msg.status.text=="Failed to find a valid plan. Even after executing recovery behaviors.":
-    #     rospy.loginfo(msg.status.text)
-    #     if msg.status.text=="Robot is oscillating. Even after executing recovery behaviors." or \
-    #        msg.status.text=="Failed to find a valid control. Even after executing recovery behaviors." or \
-    #        msg.status.text=="Failed to find a valid plan. Even after executing recovery behaviors." :
-    #         self.flag1 = 1
-    #         # rospy.loginfo("robot1")
-    #         print(self.flag1)
-    #     # if msg.status.text== "Goal reached." :
-    #     #     self.flag1 = 0
             
-    # def resubmit1(self):
-    #     if self.flag1 == 1:
-    #         self.flag1 = 0
-    #         self.sendGoals(self.locations)
-    #         rospy.loginfo(self.locations)
-    #         rospy.loginfo("resubmit robot #1")
-    #         print(self.flag1)
-    #         # rospy.Rate(0.5).sleep()
-    #         # self.flag1 = 0
-    #         print(self.flag1)
+
+
+    def failcallback1(self, msg):
+        rospy.loginfo(msg.status.text)
+        self.msg1 =msg.status.text
+        if msg.status.text=="Robot is oscillating. Even after executing recovery behaviors." or \
+           msg.status.text=="Failed to find a valid control. Even after executing recovery behaviors." or \
+           msg.status.text=="Failed to find a valid plan. Even after executing recovery behaviors." :
+            self.flag1 = 1
+            # rospy.loginfo("robot1")
+            print(self.flag1)
+        # if msg.status.text== "Goal reached." :
+        #     self.flag1 = 0
+            
+    def resubmit1(self):
+        if self.flag1 == 1:
+            self.flag1 = 0
+            self.sendGoals(self.locations)
+            rospy.loginfo(self.locations)
+            rospy.loginfo("resubmit robot #1")
+            print(self.flag1)
+            # rospy.Rate(0.5).sleep()
+            self.flag1 = 0
+            print(self.flag1)
 
     def spin(self):
         while not rospy.is_shutdown():
