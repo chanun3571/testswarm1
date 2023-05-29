@@ -5,7 +5,7 @@ from geometry_msgs.msg import Twist, Vector3
 from std_msgs.msg import String, Float32
 from initialize_position import Initialize_Pos
 
-
+#
 ser = serial.Serial ("/dev/ttyUSB_DEVICE2", 115200) #Open port with baud rate 
 class STM_Connect():
     def __init__(self): 
