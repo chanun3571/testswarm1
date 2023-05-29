@@ -1,4 +1,4 @@
-#!/usr/bin/env python3
+#!/usr/bin/env python
 import serial
 import rospy
 from geometry_msgs.msg import Twist, Vector3
