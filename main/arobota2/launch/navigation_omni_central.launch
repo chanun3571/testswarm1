@@ -9,7 +9,7 @@
   <include file="$(find arobota2)/launch/robot_remote.launch"/>
 
   <!-- Map server -->
-  <arg name="map_file" default="$(find arobota2)/map/mymap5_1.yaml"/>
+  <arg name="map_file" default="$(find arobota2)/map/final_map.yaml"/>
   <node pkg="map_server" name="map_server" type="map_server" args="$(arg map_file)"/>
 
   <!-- AMCL -->
