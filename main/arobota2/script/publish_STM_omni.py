@@ -54,7 +54,7 @@ class STM_Connect():
                     self.right_wheel_power = self.right_wheel_power +10 
                 if self.center_wheel_power>0:
                     self.center_wheel_power = self.center_wheel_power +10 
-            if sum(abs(self.left_wheel_power)+abs(self.right_wheel_power)+abs(self.center_wheel_power))<30:
+            if abs(self.left_wheel_power)+abs(self.right_wheel_power)+abs(self.center_wheel_power)<30:
                 self.center_wheel_power = float(self.center_wheel_power) * 1.5
                 self.left_wheel_power = float(self.left_wheel_power) * 1.5
                 self.right_wheel_power = float(self.right_wheel_power) * 1.5           
