@@ -6,7 +6,9 @@
   <arg name="initial_pose_y"  default="1"/>
   <arg name="initial_pose_a"  default="-1.57"/>
   <arg name="global_frame_id" default="map"/>
-  <arg name="node_start_delay" default="2"/>
+  <arg name="node_start_delay" default="3"/>
+  <arg name="node_start_delay1" default="3.2"/>
+
   <!-- AMCL -->
   <node pkg="amcl" type="amcl" name="amcl_robot3" launch-prefix="bash -c 'sleep $(arg node_start_delay); $0 $@' ">
 
@@ -21,9 +23,9 @@
     <param name="transform_tolerance"       value="0.5"/>
     <param name="recovery_alpha_slow"       value="0.00"/>
     <param name="recovery_alpha_fast"       value="0.00"/>
-    <param name="initial_pose_x"            value="$(arg initial_pose_x)"/>
+    <!-- <param name="initial_pose_x"            value="$(arg initial_pose_x)"/>
     <param name="initial_pose_y"            value="$(arg initial_pose_y)"/>
-    <param name="initial_pose_a"            value="$(arg initial_pose_a)"/>
+    <param name="initial_pose_a"            value="$(arg initial_pose_a)"/> -->
     <param name="gui_publish_rate"          value="50.0"/>
 
     <param name="laser_max_range"           value="3.5"/>
@@ -37,7 +39,7 @@
     <param name="laser_likelihood_max_dist" value="2.0"/>
     <param name="laser_model_type"          value="likelihood_field"/>
 
-    <param name="odom_model_type"           value="omni"/>
+    <param name="odom_model_type"           value="omni-corrected"/>
     <param name="odom_alpha1"               value="0.1"/>
     <param name="odom_alpha2"               value="0.1"/>
     <param name="odom_alpha3"               value="0.1"/>
@@ -50,7 +52,7 @@
     <remap from="particlecloud"             to="/robot3/particlecloud"/>
   </node>
 
-  <node pkg="rosservice" type="rosservice" name="global_loc_3" args="call --wait /global_localization" launch-prefix="bash -c 'sleep $(arg node_start_delay); $0 $@'"/>
+  <node pkg="rosservice" type="rosservice" name="global_loc_3" args="call --wait /global_localization" launch-prefix="bash -c 'sleep $(arg node_start_delay1); $0 $@'"/>
 
 
 </launch>

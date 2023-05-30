@@ -9,7 +9,7 @@ class publish_goal_pose_to_robot1():
         rospy.init_node('custom_waypoints1')
         rospy.loginfo('start robot1')
         rospy.Subscriber('/robot1_formation_pos', Pose, self.CustomWayPoints1)
-        rospy.Subscriber('/robot1/move_base/result',MoveBaseActionResult,self.failcallback1)
+        # rospy.Subscriber('/robot1/move_base/result',MoveBaseActionResult,self.failcallback1)
         self.locations = dict()
         self.flag1 = 0
 
@@ -43,28 +43,28 @@ class publish_goal_pose_to_robot1():
         # self.locations = dict()
         
 
-    def failcallback1(self, msg):
-        # if msg.status.text=="Failed to find a valid plan. Even after executing recovery behaviors.":
-        rospy.loginfo(msg.status.text)
-        if msg.status.text=="Robot is oscillating. Even after executing recovery behaviors." or \
-           msg.status.text=="Failed to find a valid control. Even after executing recovery behaviors." or \
-           msg.status.text=="Failed to find a valid plan. Even after executing recovery behaviors." :
-            self.flag1 = 1
-            rospy.loginfo("robot1")
-            print(self.flag1)
+    # def failcallback1(self, msg):
+    #     # if msg.status.text=="Failed to find a valid plan. Even after executing recovery behaviors.":
+    #     rospy.loginfo(msg.status.text)
+    #     if msg.status.text=="Robot is oscillating. Even after executing recovery behaviors." or \
+    #        msg.status.text=="Failed to find a valid control. Even after executing recovery behaviors." or \
+    #        msg.status.text=="Failed to find a valid plan. Even after executing recovery behaviors." :
+    #         self.flag1 = 1
+    #         rospy.loginfo("robot1")
+    #         print(self.flag1)
             
-    def resubmit1(self):
-        if self.flag1 == 1:
-            self.flag1 = 0
-            self.sendGoals(self.locations)
-            rospy.loginfo("resubmit robot #1")
-            print(self.flag1)
+    # def resubmit1(self):
+    #     if self.flag1 == 1:
+    #         self.flag1 = 0
+    #         self.sendGoals(self.locations)
+    #         rospy.loginfo("resubmit robot #1")
+    #         print(self.flag1)
 
     def spin(self):
         # initialize message
         while not rospy.is_shutdown():
             self.sendGoals(self.locations)
-            self.resubmit1()
+            # self.resubmit1()
             rospy.Rate(20).sleep()
 
 if __name__=='__main__':
