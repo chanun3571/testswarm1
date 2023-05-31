@@ -25,7 +25,7 @@ class cancel_goal():
         # self.pubvel2 = rospy.Publisher('robot2/cmd_vel',Twist, queue_size=10)
         # self.pubvel3 = rospy.Publisher('robot3/cmd_vel',Twist, queue_size=10)
     def moveforward(self):
-        self.joy_ux = 0.25
+        self.joy_ux = 0.3
         self.joy_uy = 0
         self.joy_omega = 0
         self._uh.linear.x = self.joy_ux #(-1,1)
@@ -47,6 +47,28 @@ class cancel_goal():
         # self.pubvel1.publish(self._uh)
         # self.pubvel2.publish(self._uh)
         # self.pubvel3.publish(self._uh)
+    def counterrotate(self):
+        self.joy_ux = 0
+        self.joy_uy = 0
+        self.joy_omega = 3
+        self._uh.linear.x = self.joy_ux #(-1,1)
+        self._uh.linear.y = self.joy_uy #(-1,1)
+        self._uh.angular.z = self.joy_omega #(-1,1)
+        self.pubvel.publish(self._uh)
+        # self.pubvel1.publish(self._uh)
+        # self.pubvel2.publish(self._uh)
+        # self.pubvel3.publish(self._uh)
+    def rotate(self):
+        self.joy_ux = 0
+        self.joy_uy = 0
+        self.joy_omega = -3
+        self._uh.linear.x = self.joy_ux #(-1,1)
+        self._uh.linear.y = self.joy_uy #(-1,1)
+        self._uh.angular.z = self.joy_omega #(-1,1)
+        self.pubvel.publish(self._uh)
+        # self.pubvel1.publish(self._uh)
+        # self.pubvel2.publish(self._uh)
+        # self.pubvel3.publish(self._uh)
 
     def allpose_callback(self, msg):       
         self.robot = msg.pose.pose.position
@@ -61,18 +83,24 @@ class cancel_goal():
         self.camstat = msg.data
 
     def navtoball(self):
-            rate = rospy.Rate(10)
+            # rate = rospy.Rate()
             print(self.camstat)
             self.stopmotion()
             # print(self.depth)
             while self.camstat == "tracking":
-                rate.sleep()
-                if float(self.depth)>55:
-                    self.moveforward()
-                elif float(self.depth)<55:
+                # rate.sleep()
+                # if self.camstat == "not_found":
+                #     self.stopmotion()
+                #     break
+                # if self.camstat == "not_tracking":
+                #     if self.x < 10:
+                #         self.rotate()
+                #     if self.x > 18:
+                #         self.counterrotate()
+                if float(self.depth)<45:
                     self.stopmotion()
                     break
-                elif self.camstat != "tracking":
+                if float(self.depth)>45:
                     self.stopmotion()
                     break
 
@@ -80,15 +108,11 @@ class cancel_goal():
         rate = rospy.Rate(10)
         while not rospy.is_shutdown():
             if self.camstat == "tracking":
-                client = actionlib.SimpleActionClient('/move_base', MoveBaseAction)
-                client.wait_for_server()
-                client.cancel_goal()
-                client.cancel_all_goals()
+                self.pubinterrupt.publish("STOP")
                 print("canceled goal")
                 # self.cancel_pub.publish(self.cancel_msg)
                 self.navtoball()
                 rate.sleep()
-                self.pubinterrupt.publish("STOP")
                 break
                 
 if __name__=='__main__':

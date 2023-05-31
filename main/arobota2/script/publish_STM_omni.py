@@ -9,7 +9,7 @@ from initialize_position import Initialize_Pos
 ser = serial.Serial ("/dev/ttyUSB_DEVICE2", 115200) #Open port with baud rate 
 class STM_Connect():
     def __init__(self): 
-        rospy.init_node('STM_Pub',anonymous=True)
+        rospy.init_node('STM_Pub', anonymous=True)
         self.left_wheel_speed_ = 0
         self.right_wheel_speed_ = 0
         self.center_wheel_speed_ = 0     
@@ -55,9 +55,9 @@ class STM_Connect():
                 if self.center_wheel_power>0:
                     self.center_wheel_power = self.center_wheel_power +10 
             if abs(self.left_wheel_power)+abs(self.right_wheel_power)+abs(self.center_wheel_power)<30:
-                self.center_wheel_power = float(self.center_wheel_power) * 1.5
-                self.left_wheel_power = float(self.left_wheel_power) * 1.5
-                self.right_wheel_power = float(self.right_wheel_power) * 1.5           
+                self.center_wheel_power = float(self.center_wheel_power) * 1.2
+                self.left_wheel_power = float(self.left_wheel_power) * 1.2
+                self.right_wheel_power = float(self.right_wheel_power) * 1.2           
        #power command   
         power_message = "M0"+"A"+str(self.left_wheel_power)+"B"+str(self.right_wheel_power)+"C"+str(self.center_wheel_power)+"\r\n"
         ser.write(bytes(power_message, 'utf-8'))

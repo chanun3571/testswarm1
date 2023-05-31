@@ -29,19 +29,24 @@ class publish_goal_pose_to_robot1():
     def CustomWayPoints1(self):
         # Create the dictionary 
         # self.locations['waypoint1'] = Pose(msg.goal.target_pose.pose.position, msg.goal.target_pose.pose.orientation)
-        self.locations['1'] = Pose(Point(-0.8, 0.7, 0.000), Quaternion(0.000, 0.000, -0.717, 0.697))
-        self.locations['2'] = Pose(Point(-0.8, 0.3, 0.000),Quaternion(0.000, 0.000, -0.717, 0.697))
-        self.locations['3'] = Pose(Point(-0.7, 0.0, 0.000), Quaternion(0.000, 0.000, -0.717, 0.697))
-        self.locations['4'] = Pose(Point(-0.45, -0.0, 0.000), Quaternion(0.000, 0.000, -0.717, 0.697))
-        self.locations['5'] = Pose(Point(-0.3, 0.2, 0.000), Quaternion(0.000, 0.000, -0.717, 0.697))
-        self.locations['6'] = Pose(Point(-0.2, 0.4, 0.000),Quaternion(0.000, 0.000, -0.717, 0.697))
-        self.locations['7'] = Pose(Point(0.0, -0.4, 0.000), Quaternion(0.000, 0.000, -0.717, 0.697))
-        self.locations['8'] = Pose(Point(0.2, -0.2, 0.000), Quaternion(0.000, 0.000, -0.717, 0.697))
-        self.locations['9'] = Pose(Point(0.3, -0.2, 0.000), Quaternion(0.000, 0.000, -0.717, 0.697))
-        self.locations['10'] = Pose(Point(0.6, -0.6, 0.000),Quaternion(0.000, 0.000, -0.717, 0.697))
-        self.locations['11'] = Pose(Point(0.8, -0.6, 0.000), Quaternion(0.000, 0.000, -0.717, 0.697))
-        self.locations['12'] = Pose(Point(1, -0.7, 0.000), Quaternion(0.000, 0.000, -0.717, 0.697))
-    
+        self.locations = dict()
+        self.locations['1'] = Pose(Point(-0.7, 0.7, 0.000), Quaternion(0.000, 0.000, -0.717, 0.697))
+        self.locations['2'] = Pose(Point(-0.7, 0.3, 0.000), Quaternion(0.000, 0.000, -0.717, 0.697))
+        self.locations['3'] = Pose(Point(-0.6, 0.0, 0.000), Quaternion(0.000, 0.000, -0.717, 0.697))
+        self.locations['4'] = Pose(Point(-0.45, -0.0, 0.000), Quaternion(0.000, 0.000, -0.717, 0.697))      
+        self.locations['5'] = Pose(Point(-0.3, 0.0, 0.000), Quaternion(0.000, 0.000, -0.717, 0.697))
+        self.locations['6'] = Pose(Point(-0.3, -0.4, 0.000), Quaternion(0.000, 0.000, -0.717, 0.697))  
+        self.locations['7'] = Pose(Point(0, -0.5, 0.000), Quaternion(0.000, 0.000, -0.717, 0.697))
+        self.locations['8'] = Pose(Point(0, -0.2, 0.000), Quaternion(0.000, 0.000, -0.717, 0.697))
+        self.locations['9'] = Pose(Point(0.4, -0.8, 0.000), Quaternion(0.000, 0.000, -0.717, 0.697))
+        self.locations['10'] = Pose(Point(0.6, -0.6, 0.000), Quaternion(0.000, 0.000, -0.717, 0.697))
+        self.locations['11'] = Pose(Point(0.8, -0.8, 0.000), Quaternion(0.000, 0.000, -0.717, 0.697))
+        self.locations['12'] = Pose(Point(1, -0.8, 0.000), Quaternion(0.000, 0.000, -0.717, 0.697))
+        self.locations['13'] = Pose(Point(1.2, -1, 0.000), Quaternion(0.000, 0.000, -0.717, 0.697))
+        self.locations['14'] = Pose(Point(1.2, -1.3, 0.000), Quaternion(0.000, 0.000, -0.717, 0.697))
+        self.locations['15'] = Pose(Point(1.2, -1.5, 0.000), Quaternion(0.000, 0.000, -0.717, 0.697))
+        self.locations['16'] = Pose(Point(1.2, -1.8, 0.000), Quaternion(0.000, 0.000, -0.717, 0.697))
+        self.locations['17'] = Pose(Point(1.3, -2, 0.000), Quaternion(0.000, 0.000, -0.717, 0.697))
     def sendGoals(self, waypoints):
         # subscribe to action server 
         client = actionlib.SimpleActionClient('/move_base', MoveBaseAction)
@@ -68,9 +73,13 @@ class publish_goal_pose_to_robot1():
             while self.msg1 != "Goal reached.":
                 if self.interrupt == "STOP":
                     client.cancel_goal()
-                    client.cancel_all_goals()
-                    print("STOP")
+                    print("cancel_goal")
                     break
+            if self.interrupt == "STOP":
+                client.cancel_all_goals()
+                print("cancel_all_goals")
+                break
+
                 
     def failcallback1(self, msg):
         rospy.loginfo(msg.status.text)
