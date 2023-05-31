@@ -72,10 +72,6 @@ class publish_goal_pose_to_robot1():
                     print("STOP")
                     break
                 
-
-            
-
-
     def failcallback1(self, msg):
         rospy.loginfo(msg.status.text)
         self.msg1 =msg.status.text
