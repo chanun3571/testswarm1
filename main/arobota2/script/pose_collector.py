@@ -7,6 +7,8 @@ from geometry_msgs.msg import PoseArray
 
 class PoseCollector:
     def __init__(self):
+        rospy.init_node("poseCollector", anonymous=True)
+
         # ROS Initialize
         # Number of Agents = 3
         rospy.Subscriber("/robot1/amcl_pose", PoseWithCovarianceStamped, self.allpose1_callback)
@@ -43,7 +45,6 @@ class PoseCollector:
             self.Rate(10).sleep()
 
 if __name__ == "__main__":
-    rospy.init_node("poseCollector", anonymous=True)
     try:
         posecollector = PoseCollector()
         posecollector.spin()
