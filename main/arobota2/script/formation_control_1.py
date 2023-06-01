@@ -29,7 +29,7 @@ class AgentManagerExample:
         self.pubvel3 = rospy.Publisher('robot3/cmd_vel',Twist, queue_size=10)
         rospy.Subscriber('/joy',Joy,self.joy_callback) #joy
 
-    def joycallback(self,msg):
+    def joy_callback(self,msg):
         joy_ux = msg.axes[XBoxButton.LX]
         joy_uy = msg.axes[XBoxButton.LY]
         joy_omega = msg.axes[XBoxButton.RX]
