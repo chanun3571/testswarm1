@@ -64,7 +64,7 @@ class AgentManagerExample:
             angle = angle[2]  # angle about the z-axis
             self.positions[i]=pos
             self.zetas[i]= angle
-            print(self.positions)
+            # print(self.positions)
             
     def main_control(self):
         ### you can use drone's position to design the input ###
