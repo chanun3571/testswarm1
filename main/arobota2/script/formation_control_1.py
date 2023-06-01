@@ -92,7 +92,7 @@ class AgentManagerExample:
 
         self.velocity_x, self.velocity_y = self.velocity[0]+self._uh.linear.x,self.velocity[1]+self._uh.linear.y
         
-        self.finalvelo.linear.x = self.velocity_x
+        self.finalvelo.linear.x = float(self.velocity_x)
         self.finalvelo.linear.x = self.velocity_y
         self.finalvelo.linear.x = self._uh.angular.z,
         if self.myid==1:

@@ -1,5 +1,5 @@
 <launch> 
-  <node name="joy" pkg="joy" type="joy_node" output="screen"/> 
+  <!-- <node name="joy" pkg="joy" type="joy_node" output="screen"/>  -->
   <node pkg="arobota2" type="formation_control_1.py" name="robot1" output="screen" />
   <node pkg="arobota2" type="formation_control_2.py" name="robot2" output="screen" />
   <node pkg="arobota2" type="formation_control_3.py" name="robot3" output="screen" />
