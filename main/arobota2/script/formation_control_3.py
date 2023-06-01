@@ -12,6 +12,8 @@ from geometry_msgs.msg import Pose, PoseStamped, PoseArray, Twist
 class AgentManagerExample:
     def __init__(self):
         rospy.init_node("robot3_formation_velocity")
+        self._main_start = False
+
         self.myid = 3
         self.rate = rospy.Rate(10)
         self._uh = Twist()
@@ -30,6 +32,9 @@ class AgentManagerExample:
         rospy.Subscriber('/joy',Joy,self.joy_callback) #joy
 
     def joy_callback(self,msg):
+        if msg.buttons[XBoxButton.X]: # X button
+            rospy.loginfo("main start")
+            self._main_start = True
         joy_ux = msg.axes[XBoxButton.LX]
         joy_uy = msg.axes[XBoxButton.LY]
         joy_omega = msg.axes[XBoxButton.RX]
@@ -59,7 +64,8 @@ class AgentManagerExample:
             angle = angle[2]  # angle about the z-axis
             self.positions[i]=pos
             self.zetas[i]= angle
-
+            print(self.positions)
+            
     def main_control(self):
         ### you can use drone's position to design the input ###
         all_positions = self.positions
@@ -99,7 +105,9 @@ class AgentManagerExample:
     def spin(self):
         # initialize message
         while not rospy.is_shutdown():
-            self.main_control()
+            if self._main_start:
+                self.main_control()
+                self.rate.sleep()
 
 if __name__=='__main__':
     try:
