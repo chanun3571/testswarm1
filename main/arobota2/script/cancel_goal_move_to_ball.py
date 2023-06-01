@@ -103,6 +103,8 @@ class cancel_goal():
                 if float(self.depth)>45:
                     self.stopmotion()
                     break
+                if self.camstat != "tracking":
+                    self.stopmotion()
 
     def spin(self):
         rate = rospy.Rate(10)
